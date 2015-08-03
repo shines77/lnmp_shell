@@ -131,7 +131,6 @@ LNAMP_Stack()
     Check_LNAMP_Install
 }
 
-
 LNMP_Stack()
 {
     Init_Install
@@ -191,6 +190,6 @@ case "${Stack}" in
         LAMP_Stack 2>&1 | tee -a /root/lnamp-install.log
         ;;
     *)
-        Echo_Red "Usage: $0 {lnamp|lnmp|lamp}"
+        Echo_Red "Usage: $0 {lnmp|lamp|lnamp}"
         ;;
 esac

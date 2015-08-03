@@ -7,7 +7,7 @@ Dispaly_Selection()
 #   // set mysql root password
 
     MysqlRootDefaultPWD = "root2015"
-    MysqlRootPWD = MysqlRootDefaultPWD
+    MysqlRootPWD = ""
     Echo_Yellow "Please setup root password of MySQL. (Default password: ${MysqlRootDefaultPWD})"
     read -p "Please enter: " MysqlRootPWD
     if [ "${MysqlRootPWD}" = "" ]; then
@@ -404,7 +404,7 @@ Verify_DB_Password()
     if [ $? -eq 0 ]; then
         echo "MySQL root password correct."
     else
-        echo "MySQL root password incorrect!Please check!"
+        echo "MySQL root password incorrect! Please check!"
         Verify_DB_Password
     fi
     if [ "${DB_Root_Password}" = "" ]; then
