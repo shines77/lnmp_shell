@@ -39,13 +39,15 @@ fi
 
 clear
 echo "+------------------------------------------------------------------------+"
-echo "|            LNAMP Ver ${LNAMP_Ver} for ${DISTRO} Linux Server            "
-echo "|                            Written by Licess                           |"
+echo "|              LNMP/LAMP/LNAMP Shell Script for Linux Server             |"
+echo "|                        Version: ${LNAMP_Ver}                                    |"
+echo "|                     Host OS Name: ${DISTRO}                             "
+echo "|                           Written by Licess                            |"
 echo "|                          Modified by shines77                          |"
 echo "+------------------------------------------------------------------------+"
 echo "|        A tool to auto-compile & install LNMP/LAMP/LNAMP on Linux       |"
 echo "+------------------------------------------------------------------------+"
-echo "|          For more information please visit http://www.lnmp.org         |"
+echo "|     For more information please visit http://lnamp.cloudbuses.com      |"
 echo "+------------------------------------------------------------------------+"
 
 Init_Install()
