@@ -28,7 +28,7 @@ Install_ionCube()
     rm -rf ioncube
     rm -rf ioncube_loaders_lin_x8*.tar.gz
     if grep -Eqi "xcache.so" /usr/local/php/etc/php.ini; then
-        if [ "${Is_64bit}" = "y" ] ; then
+        if [ "${Is_64bit}" = "y" ]; then
             Download_Files ${Download_Mirror}/web/ioncube/4.7.5/ioncube_loaders_lin_x86-64.tar.gz ioncube_loaders_lin_x86-64.tar.gz
             tar zxf ioncube_loaders_lin_x86-64.tar.gz
         else
@@ -37,7 +37,7 @@ Install_ionCube()
             tar zxf ioncube_loaders_lin_x86.tar.gz
         fi
     else
-        if [ "${Is_64bit}" = "y" ] ; then
+        if [ "${Is_64bit}" = "y" ]; then
             Download_Files http://downloads3.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.tar.gz ioncube_loaders_lin_x86-64.tar.gz
             tar zxf ioncube_loaders_lin_x86-64.tar.gz
         else
@@ -48,7 +48,7 @@ Install_ionCube()
     fi
     mv ioncube /usr/local/
 
-    echo "Writing ionCube Loader to configure files..."
+    echo "Writing ionCube Loader to configure files ..."
     cat >ionCube.ini<<EOF
 [ionCube Loader]
 zend_extension="${zend_ext}"
@@ -70,15 +70,15 @@ r ionCube.ini
         sed -i '/ioncube_loader_lin/d' /usr/local/php/etc/php.ini
         echo "ionCube install failed!"
     fi
- }
+}
 
- Uninstall_ionCube()
- {
-    echo "You will uninstall ionCube..."
+Uninstall_ionCube()
+{
+    echo "You will uninstall ionCube ..."
     Press_Start
     sed -ni '1,/;ionCube/p;/\[Zend/,$ p' /usr/local/php/etc/php.ini
-    echo "Delete ionCube files..."
+    echo "Delete ionCube files ..."
     rm -rf /usr/local/ioncube/
     Restart_PHP
     echo "Uninstall ionCube completed."
- }
+}

@@ -42,10 +42,10 @@ Install_ImageMagic()
 
 Uninstall_ImageMagick()
 {
-    echo "You will uninstall ImageMagick..."
+    echo "You will uninstall ImageMagick ..."
     Press_Start
     sed -i '/imagick.so/d' /usr/local/php/etc/php.ini
-    echo "Delete ImageMagick directory..."
+    echo "Delete ImageMagick directory ..."
     rm -rf /usr/local/imagemagick
     Restart_PHP
     echo "Uninstall ImageMagick completed."

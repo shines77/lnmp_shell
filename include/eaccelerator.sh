@@ -8,7 +8,7 @@ Install_Old_eA()
     fi
 
     if echo "${Cur_PHP_Version}" | grep -Eqi '^5.[345].';then
-        echo "PHP 5.3.* and higher version Can't install eaccelerator 0.9.5.3!"
+        echo "PHP 5.3.* and higher version Can't install eaccelerator 0.9.5.3 !"
         echo "PHP 5.3.* please enter 2 or 3 !"
         echo "PHP 5.4.* please enter 3 !"
         exit 1 
@@ -32,7 +32,7 @@ Install_New_eA()
     fi
 
     if echo "${Cur_PHP_Version}" | grep -Eqi '^5.[456].';then
-        echo "PHP 5.4.* and higher version Can't install eaccelerator 0.9.6.1!"
+        echo "PHP 5.4.* and higher version Can't install eaccelerator 0.9.6.1 !"
         exit 1 
     fi
 
@@ -103,7 +103,7 @@ Install_eAccelerator()
     fi
     if echo "${Cur_PHP_Version}" | grep -vEqi '^5.[2345].';then
         echo "Error: Current PHP Version can't install eAccelerator."
-        echo "Maybe php was didn't install or php configuration file has errors.Please check."
+        echo "Maybe php was didn't install or php configuration file has errors. Please check."
         sleep 3
         exit 1
     fi
