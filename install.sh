@@ -40,7 +40,7 @@ fi
 clear
 echo "+------------------------------------------------------------------------+"
 echo "|              LNMP/LAMP/LNAMP Shell Script for Linux Server             |"
-echo "|                        Version: ${LNAMP_Ver}                                    |"
+echo "|                          Version: ${LNAMP_Ver}                                  |"
 echo "|                     Host OS Name: ${DISTRO}                             "
 echo "|                           Written by Licess                            |"
 echo "|                          Modified by shines77                          |"
