@@ -27,18 +27,24 @@ Dispaly_Selection()
     MysqlRootPWD=""
     MysqlRootConfirmPWD=""
     Echo_Yellow "Please setup root password of MySQL. (Default password: ${MysqlRootDefaultPWD})"
+    echo ""
 
     Input_Mysql_RootPWD
+    echo ""
     echo "MySQL root password is: ${MysqlRootPWD}"
+    echo ""
 
 #   // do you want to enable or disable the InnoDB Storage Engine?
 
-    echo "==========================="
+    echo "=========================================================="
 
     InstallInnodb="y"
+    echo ""
     Echo_Yellow "Do you want to enable or disable the InnoDB Storage Engine?"
+    echo ""
     read -p "Default enable, Enter your choice [Y/n]: " InstallInnodb
 
+    echo ""
     case "${InstallInnodb}" in
         [yY][eE][sS]|[yY])
             echo "You will enable the InnoDB Storage Engine"
@@ -50,13 +56,16 @@ Dispaly_Selection()
             echo "No input, The InnoDB Storage Engine will enable."
             InstallInnodb="y"
     esac
+    echo ""
 
 #   // which MySQL Version do you want to install?
 
-    echo "==========================="
+    echo "=========================================================="
 
     DBSelect="2"
+    echo ""
     Echo_Yellow "You have 5 options for your DataBase install:"
+    echo ""
     echo "1: Install MySQL 5.1.73"
     echo "2: Install MySQL 5.5.42 (Default)"
     echo "3: Install MySQL 5.6.23"
@@ -64,6 +73,7 @@ Dispaly_Selection()
     echo "5: Install MariaDB 10.0.17"
     read -p "Enter your choice (1, 2, 3, 4 or 5): " DBSelect
 
+    echo ""
     case "${DBSelect}" in
         1)
             echo "You will install MySQL 5.1.73"
@@ -84,6 +94,7 @@ Dispaly_Selection()
             echo "No input, You will install MySQL 5.5.42 (Default)."
             DBSelect="2"
     esac
+    echo ""
 
     if [ "${DBSelect}"="4" ] || [ "${DBSelect}"="5" ]; then
         MySQL_Bin="/usr/local/mariadb/bin/mysql"
@@ -97,10 +108,12 @@ Dispaly_Selection()
 
 #   // which PHP Version do you want to install?
 
-    echo "==========================="
+    echo "=========================================================="
 
     PHPSelect="3"
+    echo ""
     Echo_Yellow "You have 5 options for your PHP install:"
+    echo ""
     echo "1: Install PHP 5.2.17"
     echo "2: Install PHP 5.3.29"
     echo "3: Install PHP 5.4.41 (Default)"
@@ -108,6 +121,7 @@ Dispaly_Selection()
     echo "5: Install PHP 5.6.9"
     read -p "Enter your choice (1, 2, 3, 4 or 5): " PHPSelect
 
+    echo ""
     case "${PHPSelect}" in
         1)
             echo "You will install PHP 5.2.17"
@@ -128,18 +142,22 @@ Dispaly_Selection()
             echo "No input, You will install PHP 5.4.41 (Default)."
             PHPSelect="3"
     esac
+    echo ""
 
 #   // which Memory Allocator do you want to install?
 
-    echo "==========================="
+    echo "=========================================================="
 
     SelectMalloc="1"
+    echo ""
     Echo_Yellow "You have 3 options for your Memory Allocator install:"
+    echo ""
     echo "1: Don't install Memory Allocator. (Default)"
     echo "2: Install Jemalloc"
     echo "3: Install TCMalloc"
     read -p "Enter your choice (1, 2 or 3): " SelectMalloc
 
+    echo ""
     case "${SelectMalloc}" in
         1)
             echo "You will install not install Memory Allocator."
@@ -154,6 +172,7 @@ Dispaly_Selection()
             echo "No input, You will not install Memory Allocator."
             SelectMalloc="1"
     esac
+    echo ""
 
     if [ "${SelectMalloc}" = "1" ]; then
         MySQL51MAOpt=''
@@ -176,28 +195,34 @@ Dispaly_Selection()
 Apache_Selection()
 {
 #   // set Server Administrator Email Address    
-    echo "==========================="
+    echo "=========================================================="
 
     ServerAdmin=""
+    echo ""
     read -p "Please enter Administrator Email Address:" ServerAdmin
+    echo ""
     if [ "${ServerAdmin}" == "" ]; then
         echo "Administrator Email Address will set to webmaster@example.com!"
         ServerAdmin="webmaster@example.com"
     else
-        echo "==========================="
+        echo "============================================"
         echo Server Administrator Email: "${ServerAdmin}"
-        echo "==========================="
+        echo "============================================"
     fi
+    echo ""
 
 #   // which Apache Version do you want to install?
-    echo "==========================="
+    echo "=========================================================="
 
     ApacheSelect="1"
+    echo ""
     Echo_Yellow "You have 2 options for your Apache install:"
+    echo ""
     echo "1: Install Apache 2.2.29 (Default)"
     echo "2: Install Apache 2.4.10"
     read -p "Enter your choice (1 or 2): " ApacheSelect
 
+    echo ""
     if [ "${ApacheSelect}" = "1" ]; then
         echo "You will install Apache 2.2.29"
     elif [ "${ApacheSelect}" = "2" ]; then
@@ -206,6 +231,7 @@ Apache_Selection()
         echo "No input, You will install Apache 2.2.29 (Default)."
         ApacheSelect="1"
     fi
+    echo ""
 }
 
 Press_Install()
