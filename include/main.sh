@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. common.sh
+. include/common.sh
 
 Input_Mysql_RootPWD()
 {
