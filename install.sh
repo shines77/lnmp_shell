@@ -179,11 +179,7 @@ LAMP_Stack()
     Check_LAMP_Install
 }
 
-case "${Stack}" in
-    lnamp)
-        Dispaly_Selection
-        LNAMP_Stack 2>&1 | tee -a /root/lnamp-install.log
-        ;;    
+case "${Stack}" in   
     lnmp)
         Dispaly_Selection
         LNMP_Stack 2>&1 | tee -a /root/lnamp-install.log
@@ -192,6 +188,13 @@ case "${Stack}" in
         Dispaly_Selection
         LAMP_Stack 2>&1 | tee -a /root/lnamp-install.log
         ;;
+    lnamp)
+        Dispaly_Selection
+        LNAMP_Stack 2>&1 | tee -a /root/lnamp-install.log
+        ;;         
+    test)
+        Dispaly_Selection
+        ;;        
     *)
         Echo_Red "Usage: $0 {lnmp|lamp|lnamp}"
         ;;
