@@ -1,13 +1,13 @@
 #!/bin/bash
 
-#Install eaccelerator 0.9.5.3
+# Install eaccelerator 0.9.5.3
 Install_Old_eA()
 {
     if [ -s eaccelerator-0.9.5.3 ]; then
         rm -rf eaccelerator-0.9.5.3/
     fi
 
-    if echo "${Cur_PHP_Version}" | grep -Eqi '^5.[345].';then
+    if echo "${Cur_PHP_Version}" | grep -Eqi '^5.[345].'; then
         echo "PHP 5.3.* and higher version Can't install eaccelerator 0.9.5.3 !"
         echo "PHP 5.3.* please enter 2 or 3 !"
         echo "PHP 5.4.* please enter 3 !"
@@ -24,14 +24,14 @@ Install_Old_eA()
     cd ../
 }
 
-#Install eaccelerator 0.9.6.1
+# Install eaccelerator 0.9.6.1
 Install_New_eA()
 {
     if [ -s eaccelerator-0.9.6.1 ]; then
         rm -rf eaccelerator-0.9.6.1/
     fi
 
-    if echo "${Cur_PHP_Version}" | grep -Eqi '^5.[456].';then
+    if echo "${Cur_PHP_Version}" | grep -Eqi '^5.[456].'; then
         echo "PHP 5.4.* and higher version Can't install eaccelerator 0.9.6.1 !"
         exit 1 
     fi
@@ -46,14 +46,14 @@ Install_New_eA()
     cd ../
 }
 
-#Install eaccelerator git master branch 42067ac
+# sInstall eaccelerator git master branch 42067ac
 Install_Dev_eA()
 {
     if [ -s eaccelerator-eaccelerator-42067ac ]; then
         rm -rf eaccelerator-eaccelerator-42067ac/
     fi
 
-    if echo "${Cur_PHP_Version}" | grep -Eqi '^5.[56].';then
+    if echo "${Cur_PHP_Version}" | grep -Eqi '^5.[56].'; then
         echo "PHP 5.5.* and higher version do not support eaccelerator!"
         exit 1 
     fi
@@ -72,14 +72,17 @@ Install_eAccelerator()
 {
     ver="3"
     echo "Which version do you want to install:"
+    echo ""
     echo "Install eaccelerator 0.9.5.3 please enter: 1"
     echo "Install eaccelerator 0.9.6.1 please enter: 2"
     echo "Install eaccelerator 1.0-dev please enter: 3"
+    echo ""
     read -p "Enter 1, 2 or 3 (Default version 3): " ver
     if [ "${ver}" = "" ]; then
         ver="3"
     fi
 
+    echo ""
     if [ "${ver}" = "1" ]; then
         echo "You will install eaccelerator 0.9.5.3"
     elif  [ "${ver}" = "2" ]; then
@@ -91,6 +94,7 @@ Install_eAccelerator()
         echo "Please Rerun $0"
         exit 1
     fi
+    echo ""
 
     echo "====== Installing eAccelerator ======"
     Press_Install
@@ -101,7 +105,7 @@ Install_eAccelerator()
     if [ -s "${zend_ext}" ]; then
         rm -f "${zend_ext}"
     fi
-    if echo "${Cur_PHP_Version}" | grep -vEqi '^5.[2345].';then
+    if echo "${Cur_PHP_Version}" | grep -vEqi '^5.[2345].'; then
         echo "Error: Current PHP Version can't install eAccelerator."
         echo "Maybe php was didn't install or php configuration file has errors. Please check."
         sleep 3
