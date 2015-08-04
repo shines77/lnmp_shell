@@ -2,44 +2,58 @@
 
 . common.sh
 
+Input_Mysql_RootPWD()
+{
+    MysqlRootDefaultPWD="root2015"
+    MysqlRootPWD=""
+    MysqlRootConfirmPWD=""
+    Echo_Yellow "Please setup root password of MySQL. (Default password: ${MysqlRootDefaultPWD})"
+    read -p "Please enter the password: " MysqlRootPWD
+    if [ "${MysqlRootPWD}" = "" ]; then
+        MysqlRootPWD = MysqlRootDefaultPWD
+    fi
+    read -p "Please confirm the password: " MysqlRootConfirmPWD
+    if [ "${MysqlRootConfirmPWD}" = "" ]; then
+        MysqlRootConfirmPWD = MysqlRootDefaultPWD
+    fi
+    if [ "${MysqlRootPWD}" -ne "${MysqlRootConfirmPWD}" ]; then
+        Echo_Red "Error: two times passwords are not equal."
+        Input_Mysql_RootPWD
+    fi
+}
+
 Dispaly_Selection()
 {
 #   // set mysql root password
 
-    MysqlRootDefaultPWD = "root2015"
-    MysqlRootPWD = ""
-    Echo_Yellow "Please setup root password of MySQL. (Default password: ${MysqlRootDefaultPWD})"
-    read -p "Please enter: " MysqlRootPWD
-    if [ "${MysqlRootPWD}" = "" ]; then
-        MysqlRootPWD = MysqlRootDefaultPWD
-    fi
-    echo "MySQL root password: ${MysqlRootPWD}"
+    Input_Mysql_RootPWD
+    echo "MySQL root password is: ${MysqlRootPWD}"
 
 #   // do you want to enable or disable the InnoDB Storage Engine?
 
     echo "==========================="
 
-    InstallInnodb = "y"
+    InstallInnodb="y"
     Echo_Yellow "Do you want to enable or disable the InnoDB Storage Engine?"
     read -p "Default enable, Enter your choice [Y/n]: " InstallInnodb
 
     case "${InstallInnodb}" in
-    [yY][eE][sS]|[yY])
-        echo "You will enable the InnoDB Storage Engine"
-    ;;
-    [nN][oO]|[nN])
-        echo "You will disable the InnoDB Storage Engine!"
-    ;;
-    *)
-        echo "No input, The InnoDB Storage Engine will enable."
-        InstallInnodb = "y"
+        [yY][eE][sS]|[yY])
+            echo "You will enable the InnoDB Storage Engine"
+        ;;
+        [nN][oO]|[nN])
+            echo "You will disable the InnoDB Storage Engine!"
+        ;;
+        *)
+            echo "No input, The InnoDB Storage Engine will enable."
+            InstallInnodb="y"
     esac
 
 #   // which MySQL Version do you want to install?
 
     echo "==========================="
 
-    DBSelect = "2"
+    DBSelect="2"
     Echo_Yellow "You have 5 options for your DataBase install:"
     echo "1: Install MySQL 5.1.73"
     echo "2: Install MySQL 5.5.42 (Default)"
@@ -49,27 +63,27 @@ Dispaly_Selection()
     read -p "Enter your choice (1, 2, 3, 4 or 5): " DBSelect
 
     case "${DBSelect}" in
-    1)
-        echo "You will install MySQL 5.1.73"
-    ;;
-    2)
-        echo "You will install MySQL 5.5.42"
-    ;;
-    3)
-        echo "You will Install MySQL 5.6.23"
-    ;;
-    4)
-        echo "You will install MariaDB 5.5.42"
-    ;;
-    5)
-        echo "You will install MariaDB 10.0.17"
-    ;;
-    *)
-        echo "No input, You will install MySQL 5.5.42 (Default)."
-        DBSelect = "2"
+        1)
+            echo "You will install MySQL 5.1.73"
+        ;;
+        2)
+            echo "You will install MySQL 5.5.42"
+        ;;
+        3)
+            echo "You will Install MySQL 5.6.23"
+        ;;
+        4)
+            echo "You will install MariaDB 5.5.42"
+        ;;
+        5)
+            echo "You will install MariaDB 10.0.17"
+        ;;
+        *)
+            echo "No input, You will install MySQL 5.5.42 (Default)."
+            DBSelect="2"
     esac
 
-    if [ "${DBSelect}" = "4" ] || [ "${DBSelect}" = "5" ]; then
+    if [ "${DBSelect}"="4" ] || [ "${DBSelect}"="5" ]; then
         MySQL_Bin="/usr/local/mariadb/bin/mysql"
         MySQL_Config="/usr/local/mariadb/bin/mysql_config"
         MySQL_Dir="/usr/local/mariadb"
@@ -83,7 +97,7 @@ Dispaly_Selection()
 
     echo "==========================="
 
-    PHPSelect = "3"
+    PHPSelect="3"
     Echo_Yellow "You have 5 options for your PHP install:"
     echo "1: Install PHP 5.2.17"
     echo "2: Install PHP 5.3.29"
@@ -93,31 +107,31 @@ Dispaly_Selection()
     read -p "Enter your choice (1, 2, 3, 4 or 5): " PHPSelect
 
     case "${PHPSelect}" in
-    1)
-        echo "You will install PHP 5.2.17"
-    ;;
-    2)
-        echo "You will install PHP 5.3.29"
-    ;;
-    3)
-        echo "You will Install PHP 5.4.41"
-    ;;
-    4)
-        echo "You will install PHP 5.5.25"
-    ;;
-    5)
-        echo "You will install PHP 5.6.9"
-    ;;
-    *)
-        echo "No input, You will install PHP 5.4.41 (Default)."
-        PHPSelect = "3"
+        1)
+            echo "You will install PHP 5.2.17"
+        ;;
+        2)
+            echo "You will install PHP 5.3.29"
+        ;;
+        3)
+            echo "You will Install PHP 5.4.41"
+        ;;
+        4)
+            echo "You will install PHP 5.5.25"
+        ;;
+        5)
+            echo "You will install PHP 5.6.9"
+        ;;
+        *)
+            echo "No input, You will install PHP 5.4.41 (Default)."
+            PHPSelect="3"
     esac
 
 #   // which Memory Allocator do you want to install?
 
     echo "==========================="
 
-    SelectMalloc = "1"
+    SelectMalloc="1"
     Echo_Yellow "You have 3 options for your Memory Allocator install:"
     echo "1: Don't install Memory Allocator. (Default)"
     echo "2: Install Jemalloc"
@@ -125,18 +139,18 @@ Dispaly_Selection()
     read -p "Enter your choice (1, 2 or 3): " SelectMalloc
 
     case "${SelectMalloc}" in
-    1)
-        echo "You will install not install Memory Allocator."
-    ;;
-    2)
-        echo "You will install JeMalloc"
-    ;;
-    3)
-        echo "You will Install TCMalloc"
-    ;;
-    *)
-        echo "No input, You will not install Memory Allocator."
-        SelectMalloc = "1"
+        1)
+            echo "You will install not install Memory Allocator."
+        ;;
+        2)
+            echo "You will install JeMalloc"
+        ;;
+        3)
+            echo "You will Install TCMalloc"
+        ;;
+        *)
+            echo "No input, You will not install Memory Allocator."
+            SelectMalloc="1"
     esac
 
     if [ "${SelectMalloc}" = "1" ]; then
@@ -144,12 +158,12 @@ Dispaly_Selection()
         MySQL55MAOpt=''
         MariaDBMAOpt=''
         NginxMAOpt=''
-    elif [ "${SelectMalloc}" = "2" ]; then
+    elif [ "${SelectMalloc}"="2" ]; then
         MySQL51MAOpt='--with-mysqld-ldflags=-ljemalloc'
         MySQL55MAOpt="-DCMAKE_EXE_LINKER_FLAGS='-ljemalloc' -DWITH_SAFEMALLOC=OFF"
         MariaDBMAOpt=''
         NginxMAOpt="--with-ld-opt='-ljemalloc'"
-    elif [ "${SelectMalloc}" = "3" ]; then
+    elif [ "${SelectMalloc}"="3" ]; then
         MySQL51MAOpt='--with-mysqld-ldflags=-ltcmalloc'
         MySQL55MAOpt="-DCMAKE_EXE_LINKER_FLAGS='-ltcmalloc' -DWITH_SAFEMALLOC=OFF"
         MariaDBMAOpt="-DCMAKE_EXE_LINKER_FLAGS='-ltcmalloc' -DWITH_SAFEMALLOC=OFF"
@@ -168,9 +182,9 @@ Apache_Selection()
         echo "Administrator Email Address will set to webmaster@example.com!"
         ServerAdmin="webmaster@example.com"
     else
-    echo "==========================="
-    echo Server Administrator Email: "${ServerAdmin}"
-    echo "==========================="
+        echo "==========================="
+        echo Server Administrator Email: "${ServerAdmin}"
+        echo "==========================="
     fi
 
 #   // which Apache Version do you want to install?
@@ -288,7 +302,7 @@ Get_RHEL_Version()
 
 Check_OS_Is_64Bit()
 {
-    if [[ `getconf WORD_BIT` = '32' && `getconf LONG_BIT` = '64' ]] ; then
+    if [[ `getconf WORD_BIT` = '32' && `getconf LONG_BIT` = '64' ]]; then
         Is_64bit='y'
     else
         Is_64bit='n'
