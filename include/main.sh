@@ -202,15 +202,15 @@ Apache_Selection()
 
     ServerAdmin=""
     echo ""
-    read -p "Please enter Administrator Email Address:" ServerAdmin
+    read -p "Please enter Administrator Email Address: " ServerAdmin
     echo ""
     if [ "${ServerAdmin}" == "" ]; then
         echo "Administrator Email Address will set to webmaster@example.com!"
         ServerAdmin="webmaster@example.com"
     else
-        echo "============================================"
+        echo "========================================================"
         echo Server Administrator Email: "${ServerAdmin}"
-        echo "============================================"
+        echo "========================================================"
     fi
     echo ""
 
