@@ -38,18 +38,22 @@ if [ "${DISTRO}" = "unknow" ]; then
 fi
 
 clear
+echo ""
 echo "+------------------------------------------------------------------------+"
 echo "|              LNMP/LAMP/LNAMP Shell Script for Linux Server             |"
 echo "|                          Version: ${LNAMP_Ver}                                  |"
 echo "|                          Host OS: ${DISTRO}                             "
+echo "|                                                                        |"
 echo "|                        Author by: Licess                               |"
 echo "|                      Modified by: shines77                             |"
 echo "|                    Last Modified: 2015-08-04                           |"
+echo "|                                                                        |"
 echo "+------------------------------------------------------------------------+"
 echo "|        A tool to auto-compile & install LNMP/LAMP/LNAMP on Linux       |"
 echo "+------------------------------------------------------------------------+"
 echo "|     For more information please visit http://lnamp.cloudbuses.com      |"
 echo "+------------------------------------------------------------------------+"
+echo ""
 
 Init_Install()
 {

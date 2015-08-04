@@ -4,10 +4,6 @@
 
 Input_Mysql_RootPWD()
 {
-    MysqlRootDefaultPWD="root2015"
-    MysqlRootPWD=""
-    MysqlRootConfirmPWD=""
-    Echo_Yellow "Please setup root password of MySQL. (Default password: ${MysqlRootDefaultPWD})"
     read -p "Please enter the password: " MysqlRootPWD
     if [ "${MysqlRootPWD}" = "" ]; then
         MysqlRootPWD = MysqlRootDefaultPWD
@@ -16,8 +12,9 @@ Input_Mysql_RootPWD()
     if [ "${MysqlRootConfirmPWD}" = "" ]; then
         MysqlRootConfirmPWD = MysqlRootDefaultPWD
     fi
-    if [ "${MysqlRootPWD}" -ne "${MysqlRootConfirmPWD}" ]; then
-        Echo_Red "Error: two times passwords are not equal."
+    if [ "${MysqlRootPWD}" != "${MysqlRootConfirmPWD}" ]; then
+        Echo_Red "Error: two time passwords are not equal."
+        echo ""
         Input_Mysql_RootPWD
     fi
 }
@@ -25,6 +22,11 @@ Input_Mysql_RootPWD()
 Dispaly_Selection()
 {
 #   // set mysql root password
+
+    MysqlRootDefaultPWD="root2015"
+    MysqlRootPWD=""
+    MysqlRootConfirmPWD=""
+    Echo_Yellow "Please setup root password of MySQL. (Default password: ${MysqlRootDefaultPWD})"
 
     Input_Mysql_RootPWD
     echo "MySQL root password is: ${MysqlRootPWD}"
