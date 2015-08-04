@@ -19,8 +19,8 @@ Set_Timezone()
     echo "2: Asia      - HongKong"
     echo "3: Asia      - Singapore"
     echo "4: Asia      - Japan"
-    echo "5: Amemrican - New York (East US)"
-    echo "6: Amemrican - Los Angeles (West US)"
+    echo "5: America   - New York (East US)"
+    echo "6: America   - Los Angeles (West US)"
     echo "7: Europe    - London (United Kingdom)"
     echo "8: Europe    - Paris (France)"
     echo "9: No change - Keep use now timezone setting (Default)."
@@ -33,37 +33,45 @@ Set_Timezone()
     case "${TimeZoneSelect}" in
     1)
         echo "You choice Asia - Shanghai, Chongqing timezone."
-        ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+#       ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+        cp -f -v /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
     ;;
     2)
         echo "You choice Asia - HongKong timezone."
-        ln -s /usr/share/zoneinfo/Asia/Hong_Kong /etc/localtime
+#       ln -s /usr/share/zoneinfo/Asia/Hong_Kong /etc/localtime
+        cp -f -v /usr/share/zoneinfo/Asia/Hong_Kong /etc/localtime
     ;;    
     3)
         echo "You choice Asia - Singapore timezone."
-        ln -s /usr/share/zoneinfo/Asia/Singapore /etc/localtime
+#       ln -s /usr/share/zoneinfo/Asia/Singapore /etc/localtime
+        cp -f -v /usr/share/zoneinfo/Asia/Singapore /etc/localtime
     ;;
     4)
         echo "You choice Asia - Japan timezone."
-        ln -s /usr/share/zoneinfo/Japan /etc/localtime
+#       ln -s /usr/share/zoneinfo/Japan /etc/localtime
+        cp -f -v /usr/share/zoneinfo/Japan /etc/localtime
     ;;
     5)
         echo "You choice Amemrican - New York (East US) timezone."
-#        ln -s /usr/share/zoneinfo/US/Eastern /etc/localtime
-        ln -s /usr/share/zoneinfo/Amemrica/New_York /etc/localtime
+#       ln -s /usr/share/zoneinfo/US/Eastern /etc/localtime
+#       ln -s /usr/share/zoneinfo/America/New_York /etc/localtime
+        cp -f -v /usr/share/zoneinfo/America/New_York /etc/localtime
     ;;
     6)
         echo "You choice Amemrican - Los Angeles (West US) timezone."
 #       ln -s /usr/share/zoneinfo/US/Pacific /etc/localtime
-        ln -s /usr/share/zoneinfo/Amemrica/Los_Angeles /etc/localtime
+#       ln -s /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
+        cp -f -v /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
     ;;
     7)
         echo "You choice Europe - London (United Kingdom) timezone."
-        ln -s /usr/share/zoneinfo/Europe/London /etc/localtime
+#        ln -s /usr/share/zoneinfo/Europe/London /etc/localtime
+        cp -f -v /usr/share/zoneinfo/Europe/London /etc/localtime
     ;;
     8)
         echo "You choice Europe - Paris (France) timezone."
-        ln -s /usr/share/zoneinfo/Europe/Paris /etc/localtime
+ #      ln -s /usr/share/zoneinfo/Europe/Paris /etc/localtime
+        cp -f -v /usr/share/zoneinfo/Europe/Paris /etc/localtime
     ;;
     9)
         echo "You choice No change - Keep use now timezone setting."
