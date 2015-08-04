@@ -199,6 +199,7 @@ case "${Stack}" in
         ;;
     test)
         Dispaly_Selection
+        Apache_Selection
         ;;
     timezone)
         Set_Timezone

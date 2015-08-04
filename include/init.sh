@@ -4,9 +4,9 @@ Set_Timezone()
 {
 #   // Choice your server's timezone.
 
-    echo "==============================="
-    Echo_Blue " Setting timezone ..."
-    echo "==============================="
+    echo "========================================"
+    Echo_Blue " Setting server's timezone ..."
+    echo "========================================"
 
 #    rm -rf /etc/localtime
 #    ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
