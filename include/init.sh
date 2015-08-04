@@ -11,19 +11,19 @@ Set_Timezone()
 #    rm -rf /etc/localtime
 #    ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
-    TimeZoneSelect="1"
+    TimeZoneSelect="9"
     echo ""
     Echo_Yellow "You have 9 options for your timezone setting:"
     echo ""
-    echo "1: Asia - Shanghai, Chongqing (Default)"
-    echo "2: Asia - HongKong"
-    echo "3: Asia - Singapore"
-    echo "4: Asia - Japan"
+    echo "1: Asia      - Shanghai, Chongqing"
+    echo "2: Asia      - HongKong"
+    echo "3: Asia      - Singapore"
+    echo "4: Asia      - Japan"
     echo "5: Amemrican - New York (East US)"
     echo "6: Amemrican - Los Angeles (West US)"
-    echo "7: Europe - London (United Kingdom)"
-    echo "8: Europe - Paris (France)"
-    echo "9: No change - Keep use now timezone setting."
+    echo "7: Europe    - London (United Kingdom)"
+    echo "8: Europe    - Paris (France)"
+    echo "9: No change - Keep use now timezone setting (Default)."
     echo ""
     read -p "Enter your choice (1 - 9): " TimeZoneSelect
 
@@ -32,7 +32,7 @@ Set_Timezone()
     echo ""
     case "${TimeZoneSelect}" in
     1)
-        echo "You choice Asia - Shanghai, Chongqing, HongKong timezone."
+        echo "You choice Asia - Shanghai, Chongqing timezone."
         ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
     ;;
     2)
@@ -69,9 +69,8 @@ Set_Timezone()
         echo "You choice No change - Keep use now timezone setting."
     ;;    
     *)
-        echo "No input, you choice Asia - Shanghai, Chongqing timezone (Default)."
-        ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-        TimeZoneSelect="1"
+        echo "No input, you choice No change - Keep use now timezone setting (Default)."
+        TimeZoneSelect="9"
     esac
     echo ""
 }
