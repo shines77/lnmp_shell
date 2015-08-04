@@ -11,8 +11,10 @@ Set_Timezone()
 #    rm -rf /etc/localtime
 #    ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
-    TimeZoneSelect = "1"
-    Echo_Yellow "You have 8 options for your timezone setting:"
+    TimeZoneSelect="1"
+    echo ""
+    Echo_Yellow "You have 9 options for your timezone setting:"
+    echo ""
     echo "1: Asia - Shanghai, Chongqing (Default)"
     echo "2: Asia - HongKong"
     echo "3: Asia - Singapore"
@@ -21,10 +23,13 @@ Set_Timezone()
     echo "6: Amemrican - Los Angeles (West US)"
     echo "7: Europe - London (United Kingdom)"
     echo "8: Europe - Paris (France)"
-    read -p "Enter your choice (1 - 8): " TimeZoneSelect
+    echo "9: No change - Keep use now timezone setting."
+    echo ""
+    read -p "Enter your choice (1 - 9): " TimeZoneSelect
 
     rm -rf /etc/localtime
 
+    echo ""
     case "${TimeZoneSelect}" in
     1)
         echo "You choice Asia - Shanghai, Chongqing, HongKong timezone."
@@ -63,8 +68,9 @@ Set_Timezone()
     *)
         echo "No input, you choice Asia - Shanghai, Chongqing timezone (Default)."
         ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-        TimeZoneSelect = "1"
-    esac   
+        TimeZoneSelect="1"
+    esac
+    echo ""
 }
 
 CentOS_InstallNTP()
