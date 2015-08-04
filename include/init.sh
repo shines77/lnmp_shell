@@ -1,7 +1,5 @@
 #!/bin/bash
 
-. common.sh
-
 Set_Timezone()
 {
 #   // Choice your server's timezone.
