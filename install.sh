@@ -196,10 +196,13 @@ case "${Stack}" in
     lnamp)
         Dispaly_Selection
         LNAMP_Stack 2>&1 | tee -a /root/lnamp-install.log
-        ;;         
+        ;;
     test)
         Dispaly_Selection
-        ;;        
+        ;;
+    timezone)
+        Set_Timezone
+        ;;
     *)
         Echo_Red "Usage: $0 {lnmp|lamp|lnamp}"
         ;;
