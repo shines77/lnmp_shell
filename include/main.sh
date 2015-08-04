@@ -42,7 +42,7 @@ Dispaly_Selection()
     echo ""
     Echo_Yellow "Do you want to enable or disable the InnoDB Storage Engine?"
     echo ""
-    read -p "Default enable, Enter your choice [Y/n]: " InstallInnodb
+    read -p "Default enable, Enter your choice [y/N]: " InstallInnodb
 
     echo ""
     case "${InstallInnodb}" in

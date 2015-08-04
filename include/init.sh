@@ -8,9 +8,6 @@ Set_Timezone()
     Echo_Blue " Setting server's timezone ..."
     echo "========================================"
 
-#    rm -rf /etc/localtime
-#    ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-
     TimeZoneSelect="9"
     echo ""
     Echo_Yellow "You have 9 options for your timezone setting:"
