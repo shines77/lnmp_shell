@@ -4,7 +4,7 @@
 
 Input_Mysql_RootPWD()
 {
-    read -p "Please enter the password: " MysqlRootPWD
+    read -p "Please enter the password:   " MysqlRootPWD
     if [ "${MysqlRootPWD}" = "" ]; then
         MysqlRootPWD = MysqlRootDefaultPWD
     fi
@@ -31,7 +31,7 @@ Dispaly_Selection()
 
     Input_Mysql_RootPWD
     echo ""
-    echo "MySQL root password is: ${MysqlRootPWD}"
+    Echo_Yellow "MySQL root password is: ${MysqlRootPWD}"
     echo ""
 
 #   // do you want to enable or disable the InnoDB Storage Engine?
@@ -47,7 +47,7 @@ Dispaly_Selection()
     echo ""
     case "${InstallInnodb}" in
         [yY][eE][sS]|[yY])
-            echo "You will enable the InnoDB Storage Engine"
+            echo "You will enable the InnoDB Storage Engine."
         ;;
         [nN][oO]|[nN])
             echo "You will disable the InnoDB Storage Engine!"
@@ -71,24 +71,25 @@ Dispaly_Selection()
     echo "3: Install MySQL 5.6.23"
     echo "4: Install MariaDB 5.5.42"
     echo "5: Install MariaDB 10.0.17"
+    echo ""
     read -p "Enter your choice (1, 2, 3, 4 or 5): " DBSelect
 
     echo ""
     case "${DBSelect}" in
         1)
-            echo "You will install MySQL 5.1.73"
+            echo "You will install MySQL 5.1.73."
         ;;
         2)
-            echo "You will install MySQL 5.5.42"
+            echo "You will install MySQL 5.5.42."
         ;;
         3)
-            echo "You will Install MySQL 5.6.23"
+            echo "You will Install MySQL 5.6.23."
         ;;
         4)
-            echo "You will install MariaDB 5.5.42"
+            echo "You will install MariaDB 5.5.42."
         ;;
         5)
-            echo "You will install MariaDB 10.0.17"
+            echo "You will install MariaDB 10.0.17."
         ;;
         *)
             echo "No input, You will install MySQL 5.5.42 (Default)."
@@ -119,24 +120,25 @@ Dispaly_Selection()
     echo "3: Install PHP 5.4.41 (Default)"
     echo "4: Install PHP 5.5.25"
     echo "5: Install PHP 5.6.9"
+    echo ""
     read -p "Enter your choice (1, 2, 3, 4 or 5): " PHPSelect
 
     echo ""
     case "${PHPSelect}" in
         1)
-            echo "You will install PHP 5.2.17"
+            echo "You will install PHP 5.2.17."
         ;;
         2)
-            echo "You will install PHP 5.3.29"
+            echo "You will install PHP 5.3.29."
         ;;
         3)
-            echo "You will Install PHP 5.4.41"
+            echo "You will Install PHP 5.4.41."
         ;;
         4)
-            echo "You will install PHP 5.5.25"
+            echo "You will install PHP 5.5.25."
         ;;
         5)
-            echo "You will install PHP 5.6.9"
+            echo "You will install PHP 5.6.9."
         ;;
         *)
             echo "No input, You will install PHP 5.4.41 (Default)."
@@ -155,6 +157,7 @@ Dispaly_Selection()
     echo "1: Don't install Memory Allocator. (Default)"
     echo "2: Install Jemalloc"
     echo "3: Install TCMalloc"
+    echo ""
     read -p "Enter your choice (1, 2 or 3): " SelectMalloc
 
     echo ""
@@ -163,10 +166,10 @@ Dispaly_Selection()
             echo "You will install not install Memory Allocator."
         ;;
         2)
-            echo "You will install JeMalloc"
+            echo "You will install JeMalloc."
         ;;
         3)
-            echo "You will Install TCMalloc"
+            echo "You will Install TCMalloc."
         ;;
         *)
             echo "No input, You will not install Memory Allocator."
@@ -220,13 +223,14 @@ Apache_Selection()
     echo ""
     echo "1: Install Apache 2.2.29 (Default)"
     echo "2: Install Apache 2.4.10"
+    echo ""
     read -p "Enter your choice (1 or 2): " ApacheSelect
 
     echo ""
     if [ "${ApacheSelect}" = "1" ]; then
-        echo "You will install Apache 2.2.29"
+        echo "You will install Apache 2.2.29."
     elif [ "${ApacheSelect}" = "2" ]; then
-        echo "You will install Apache 2.4.10"
+        echo "You will install Apache 2.4.10."
     else
         echo "No input, You will install Apache 2.2.29 (Default)."
         ApacheSelect="1"
