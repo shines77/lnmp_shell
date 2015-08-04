@@ -65,6 +65,9 @@ Set_Timezone()
         echo "You choice Europe - Paris (France) timezone."
         ln -s /usr/share/zoneinfo/Europe/Paris /etc/localtime
     ;;
+    9)
+        echo "You choice No change - Keep use now timezone setting."
+    ;;    
     *)
         echo "No input, you choice Asia - Shanghai, Chongqing timezone (Default)."
         ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
