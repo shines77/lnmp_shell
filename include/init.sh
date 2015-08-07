@@ -172,7 +172,7 @@ Ubuntu_Modify_Source()
     elif grep -Eqi "10.04" /etc/*-release || echo "${Ubuntu_Version}" | grep -Eqi '^10.04'; then
         CodeName='lucid'
     elif grep -Eqi "14.04" /etc/*-release || echo "${Ubuntu_Version}" | grep -Eqi '^14.04'; then
-        Ubuntu_Deadline        
+#       Ubuntu_Deadline
     elif grep -Eqi "14.10" /etc/*-release || echo "${Ubuntu_Version}" | grep -Eqi '^14.10'; then
         Ubuntu_Deadline
     elif grep -Eqi "15.04" /etc/*-release || echo "${Ubuntu_Version}" | grep -Eqi '^15.04'; then
@@ -409,12 +409,12 @@ CentOS_Lib_Opt()
 
     if [ `grep -L '/usr/lib'    '/etc/ld.so.conf'` ]; then
         echo "/usr/lib" >> /etc/ld.so.conf
-        #echo "/usr/lib/openssl/engines" >> /etc/ld.so.conf
+        # echo "/usr/lib/openssl/engines" >> /etc/ld.so.conf
     fi
 
     if [ -d "/usr/lib64" ] && [ `grep -L '/usr/lib64'    '/etc/ld.so.conf'` ]; then
         echo "/usr/lib64" >> /etc/ld.so.conf
-        #echo "/usr/lib64/openssl/engines" >> /etc/ld.so.conf
+        # echo "/usr/lib64/openssl/engines" >> /etc/ld.so.conf
     fi
 
     if [ `grep -L '/usr/local/lib'    '/etc/ld.so.conf'` ]; then
