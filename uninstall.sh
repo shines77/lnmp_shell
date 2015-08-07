@@ -4,7 +4,7 @@ export PATH
 
 . include/common.sh
 
-# Check whether the login user is a root account?
+# Check whether the logon user is a root account?
 Check_Is_Root_Account
 
 cur_dir=$(pwd)
@@ -31,17 +31,17 @@ clear
 echo ""
 echo "+------------------------------------------------------------------------+"
 echo "|                                                                        |"
-echo "|              LNMP/LAMP/LNAMP Shell Script for Linux Server             |"
+Echo_Blue_Ex "|" "              LNMP/LAMP/LNAMP Shell Script for Linux Server             " "|"
 echo "|                                                                        |"
-echo "|                          Version: ${LNAMP_Ver}                                  |"
-echo "|                          Host OS: ${DISTRO}                             "
+echo "|                           Version: ${LNAMP_Ver}                                 |"
+echo "|                           Host OS: ${DISTRO}                            "
 echo "|                                                                        |"
-echo "|                        Author by: Licess                               |"
-echo "|                      Modified by: shines77                             |"
-echo "|                    Last Modified: ${LNAMP_LastModified}                           |"
+echo "|                         Author by: Licess                              |"
+echo "|                       Modified by: shines77                            |"
+echo "|                     Last Modified: ${LNAMP_LastModified}                          |"
 echo "|                                                                        |"
 echo "+------------------------------------------------------------------------+"
-echo "|        A tool to auto-compile & install LNMP/LAMP/LNAMP on Linux       |"
+echo "|       A tool to auto-compile & install LNMP/LAMP/LNAMP on Linux        |"
 echo "+------------------------------------------------------------------------+"
 echo "|     For more information please visit http://lnamp.cloudbuses.com      |"
 echo "+------------------------------------------------------------------------+"
