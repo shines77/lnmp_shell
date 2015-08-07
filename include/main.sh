@@ -5,7 +5,7 @@ Input_Mysql_RootPWD()
     read -p "Please enter the password:   " MysqlRootPWD
     if [ "${MysqlRootPWD}" = "" ]; then
         echo ""
-        Echo_Yellow "You have no input, Mysql root password will be use the default value."
+        Echo_Blue "You have no input, Mysql root password will be use the default value."
         echo ""
         read -p "Are you sure use the default password: '${MysqlRootDefaultPWD}' ? [y/N]: " MysqlRootUseDefaultPWD
 
@@ -174,7 +174,7 @@ Dispaly_Selection()
     MysqlRootDefaultPWD="mysql2015"
     MysqlRootPWD=""
     MysqlRootConfirmPWD=""
-    Echo_Yellow "Please setup root password of MySQL. (Default password: ${MysqlRootDefaultPWD})"
+    Echo_Yellow "Please setup the root password of MySQL. (Default password is: ${MysqlRootDefaultPWD})"
     echo ""
 
     Input_Mysql_RootPWD
