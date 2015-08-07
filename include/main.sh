@@ -5,26 +5,26 @@ Input_Mysql_RootPWD()
     read -p "Please enter the password:   " MysqlRootPWD
     if [ "${MysqlRootPWD}" = "" ]; then
         echo ""
-        Echo_Yellow "You have no input, Mysql root password will be use default value."
+        Echo_Yellow "You have no input, Mysql root password will be use the default value."
         echo ""
         read -p "Are you sure use the default password: '${MysqlRootDefaultPWD}' ? [y/N]: " MysqlRootUseDefaultPWD
 
         echo ""
         case "${MysqlRootUseDefaultPWD}" in
             [yY][eE][sS]|[yY])
-                echo "You will use default Mysql root password '${MysqlRootDefaultPWD}'."
+                echo "You agree to use the default Mysql root password '${MysqlRootDefaultPWD}'."
                 MysqlRootUseDefaultPWD='y'
                 MysqlRootPWD="${MysqlRootDefaultPWD}"
                 MysqlRootConfirmPWD="${MysqlRootDefaultPWD}"
             ;;
             [nN][oO]|[nN])
-                Echo_Yellow "You have not choose the default Mysql root password, please input again."
+                Echo_Red "Info: You do not agree to use the default Mysql root password, please try again."
                 MysqlRootUseDefaultPWD='n'
                 echo ""
                 Input_Mysql_RootPWD
             ;;
             *)
-                echo "No input, You will use default Mysql root password '${MysqlRootDefaultPWD}'."
+                echo "No input, You agree to use the default Mysql root password '${MysqlRootDefaultPWD}'."
                 MysqlRootUseDefaultPWD="y"
                 MysqlRootPWD="${MysqlRootDefaultPWD}"
                 MysqlRootConfirmPWD="${MysqlRootDefaultPWD}"
