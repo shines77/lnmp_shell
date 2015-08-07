@@ -19,42 +19,54 @@ Input_Mysql_RootPWD()
 
 Dispaly_Selection()
 {
-#   // set mysql root password
-
-    MysqlRootDefaultPWD="root2015"
-    MysqlRootPWD=""
-    MysqlRootConfirmPWD=""
-    Echo_Yellow "Please setup root password of MySQL. (Default password: ${MysqlRootDefaultPWD})"
-    echo ""
-
-    Input_Mysql_RootPWD
-    echo ""
-    Echo_Yellow "MySQL root password is: ${MysqlRootPWD}"
-    echo ""
-
-#   // do you want to enable or disable the InnoDB Storage Engine?
+#   // which Memory Allocator do you want to install?
 
     echo "=========================================================="
 
-    InstallInnodb="y"
+    SelectMalloc="1"
     echo ""
-    Echo_Yellow "Do you want to enable or disable the InnoDB Storage Engine?"
+    Echo_Yellow "You have 3 options for your Memory Allocator install:"
     echo ""
-    read -p "Default enable, Enter your choice [y/N]: " InstallInnodb
+    echo "1: Don't install Memory Allocator. (Default)"
+    echo "2: Install Jemalloc"
+    echo "3: Install TCMalloc"
+    echo ""
+    read -p "Enter your choice (1, 2 or 3): " SelectMalloc
 
     echo ""
-    case "${InstallInnodb}" in
-        [yY][eE][sS]|[yY])
-            echo "You will enable the InnoDB Storage Engine."
+    case "${SelectMalloc}" in
+        1)
+            echo "You will install not install Memory Allocator."
         ;;
-        [nN][oO]|[nN])
-            echo "You will disable the InnoDB Storage Engine!"
+        2)
+            echo "You will install JeMalloc."
+        ;;
+        3)
+            echo "You will Install TCMalloc."
         ;;
         *)
-            echo "No input, The InnoDB Storage Engine will enable."
-            InstallInnodb="y"
+            echo "No input, You will not install Memory Allocator."
+            SelectMalloc="1"
+        ;;
     esac
     echo ""
+
+    if [ "${SelectMalloc}" = "1" ]; then
+        MySQL51MAOpt=''
+        MySQL55MAOpt=''
+        MariaDBMAOpt=''
+        NginxMAOpt=''
+    elif [ "${SelectMalloc}"="2" ]; then
+        MySQL51MAOpt='--with-mysqld-ldflags=-ljemalloc'
+        MySQL55MAOpt="-DCMAKE_EXE_LINKER_FLAGS='-ljemalloc' -DWITH_SAFEMALLOC=OFF"
+        MariaDBMAOpt=''
+        NginxMAOpt="--with-ld-opt='-ljemalloc'"
+    elif [ "${SelectMalloc}"="3" ]; then
+        MySQL51MAOpt='--with-mysqld-ldflags=-ltcmalloc'
+        MySQL55MAOpt="-DCMAKE_EXE_LINKER_FLAGS='-ltcmalloc' -DWITH_SAFEMALLOC=OFF"
+        MariaDBMAOpt="-DCMAKE_EXE_LINKER_FLAGS='-ltcmalloc' -DWITH_SAFEMALLOC=OFF"
+        NginxMAOpt='--with-google_perftools_module'
+    fi
 
 #   // which MySQL Version do you want to install?
 
@@ -106,6 +118,43 @@ Dispaly_Selection()
         MySQL_Dir="/usr/local/mysql"
     fi
 
+#   // do you want to enable or disable the InnoDB Storage Engine?
+
+    echo "=========================================================="
+
+    InstallInnodb="y"
+    echo ""
+    Echo_Yellow "Do you want to enable or disable the InnoDB Storage Engine?"
+    echo ""
+    read -p "Default enable, Enter your choice [y/N]: " InstallInnodb
+
+    echo ""
+    case "${InstallInnodb}" in
+        [yY][eE][sS]|[yY])
+            echo "You will enable the InnoDB Storage Engine."
+        ;;
+        [nN][oO]|[nN])
+            echo "You will disable the InnoDB Storage Engine!"
+        ;;
+        *)
+            echo "No input, The InnoDB Storage Engine will enable."
+            InstallInnodb="y"
+    esac
+    echo ""
+
+#   // set mysql root password
+
+    MysqlRootDefaultPWD="root2015"
+    MysqlRootPWD=""
+    MysqlRootConfirmPWD=""
+    Echo_Yellow "Please setup root password of MySQL. (Default password: ${MysqlRootDefaultPWD})"
+    echo ""
+
+    Input_Mysql_RootPWD
+    echo ""
+    Echo_Yellow "MySQL root password is: ${MysqlRootPWD}"
+    echo ""
+
 #   // which PHP Version do you want to install?
 
     echo "=========================================================="
@@ -145,77 +194,10 @@ Dispaly_Selection()
         ;;
     esac
     echo ""
-
-#   // which Memory Allocator do you want to install?
-
-    echo "=========================================================="
-
-    SelectMalloc="1"
-    echo ""
-    Echo_Yellow "You have 3 options for your Memory Allocator install:"
-    echo ""
-    echo "1: Don't install Memory Allocator. (Default)"
-    echo "2: Install Jemalloc"
-    echo "3: Install TCMalloc"
-    echo ""
-    read -p "Enter your choice (1, 2 or 3): " SelectMalloc
-
-    echo ""
-    case "${SelectMalloc}" in
-        1)
-            echo "You will install not install Memory Allocator."
-        ;;
-        2)
-            echo "You will install JeMalloc."
-        ;;
-        3)
-            echo "You will Install TCMalloc."
-        ;;
-        *)
-            echo "No input, You will not install Memory Allocator."
-            SelectMalloc="1"
-        ;;
-    esac
-    echo ""
-
-    if [ "${SelectMalloc}" = "1" ]; then
-        MySQL51MAOpt=''
-        MySQL55MAOpt=''
-        MariaDBMAOpt=''
-        NginxMAOpt=''
-    elif [ "${SelectMalloc}"="2" ]; then
-        MySQL51MAOpt='--with-mysqld-ldflags=-ljemalloc'
-        MySQL55MAOpt="-DCMAKE_EXE_LINKER_FLAGS='-ljemalloc' -DWITH_SAFEMALLOC=OFF"
-        MariaDBMAOpt=''
-        NginxMAOpt="--with-ld-opt='-ljemalloc'"
-    elif [ "${SelectMalloc}"="3" ]; then
-        MySQL51MAOpt='--with-mysqld-ldflags=-ltcmalloc'
-        MySQL55MAOpt="-DCMAKE_EXE_LINKER_FLAGS='-ltcmalloc' -DWITH_SAFEMALLOC=OFF"
-        MariaDBMAOpt="-DCMAKE_EXE_LINKER_FLAGS='-ltcmalloc' -DWITH_SAFEMALLOC=OFF"
-        NginxMAOpt='--with-google_perftools_module'
-    fi
 }
 
 Apache_Selection()
 {
-#   // set Server Administrator Email Address
-
-    echo "=========================================================="
-
-    ServerAdmin=""
-    echo ""
-    read -p "Please enter Administrator Email Address: " ServerAdmin
-    echo ""
-    if [ "${ServerAdmin}" == "" ]; then
-        echo "Administrator Email Address will set to webmaster@example.com!"
-        ServerAdmin="webmaster@example.com"
-    else
-        echo "========================================================"
-        echo Server Administrator Email: "${ServerAdmin}"
-        echo "========================================================"
-    fi
-    echo ""
-
 #   // which Apache Version do you want to install?
 
     echo "=========================================================="
@@ -237,6 +219,24 @@ Apache_Selection()
     else
         echo "No input, You will install Apache 2.2.29 (Default)."
         ApacheSelect="1"
+    fi
+    echo ""
+
+#   // set Server Administrator Email Address
+
+    echo "=========================================================="
+
+    ServerAdmin=""
+    echo ""
+    read -p "Please enter Administrator Email Address: " ServerAdmin
+    echo ""
+    if [ "${ServerAdmin}" == "" ]; then
+        echo "Administrator Email Address will set to webmaster@example.com!"
+        ServerAdmin="webmaster@example.com"
+    else
+        echo "========================================================"
+        echo Server Administrator Email: "${ServerAdmin}"
+        echo "========================================================"
     fi
     echo ""
 }
@@ -267,7 +267,7 @@ Print_Sys_Info()
     cat /etc/issue
     cat /etc/*-release
     uname -a
-    MemTotal=`free -m | grep Mem | awk '{print  $2}'`  
+    MemTotal=`free -m | grep Mem | awk '{print  $2}'`
     echo "Memory is: ${MemTotal} MB "
     df -h
 }
@@ -418,7 +418,7 @@ Get_PHP_Ext_Dir()
 Check_Stack()
 {
     if [[ -s /usr/local/nginx/sbin/nginx && -s /usr/local/apache/bin/httpd && -s /usr/local/apache/conf/httpd.conf && -s /etc/init.d/httpd && ! -s /usr/local/php/sbin/php-fpm ]]; then
-        Get_Stack="lnamp"      
+        Get_Stack="lnamp"
     elif [[ -s /usr/local/php/bin/php-cgi || -s /usr/local/php/sbin/php-fpm ]] && [[ -s /usr/local/php/etc/php-fpm.conf && -s /etc/init.d/php-fpm && -s /usr/local/nginx/sbin/nginx ]]; then
         Get_Stack="lnmp"
     elif [[ -s /usr/local/apache/bin/httpd && -s /usr/local/apache/conf/httpd.conf && -s /etc/init.d/httpd && ! -s /usr/local/php/sbin/php-fpm ]]; then
