@@ -36,8 +36,8 @@ Install_PHP()
     elif [ "${PHPSelect}" = "5" ]; then
         Install_PHP_56
     else
-#       // Default choice is PHP 5.4.41
-        Install_PHP_54
+#       // Default choice is PHP 5.5.25
+        Install_PHP_55
     fi
 }
 
