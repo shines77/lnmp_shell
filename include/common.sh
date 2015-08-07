@@ -53,12 +53,12 @@ Echo_Red_Ex()
 
 Echo_Green_Ex()
 {
-    echo -e $(Color_Text_Ex "$1" "$2" "$3" "32")
+    Color_Text_Ex "$1" "$2" "$3" "32"
 }
 
 Echo_Yellow_Ex()
 {
-    echo -e $(Color_Text_Ex "$1" "$2" "$3" "33")
+    Color_Text_Ex "$1" "$2" "$3" "33"
 }
 
 Echo_Blue_Ex()
