@@ -110,34 +110,10 @@ Init_Install()
         Install_MariaDB_5
     elif [ "${DBSelect}" = "5" ]; then
         Install_MariaDB_10
+    else
+        Install_MySQL_55
     fi
     Export_PHP_Autoconf
-}
-
-LNAMP_Stack()
-{
-    Apache_Selection
-    Init_Install
-    if [ "${ApacheSelect}" = "1" ]; then
-        Install_Apache_22
-    else
-        Install_Apache_24
-    fi
-    if [ "${PHPSelect}" = "1" ]; then
-        Install_PHP_52
-    elif [ "${PHPSelect}" = "2" ]; then
-        Install_PHP_53
-    elif [ "${PHPSelect}" = "3" ]; then
-        Install_PHP_54
-    elif [ "${PHPSelect}" = "4" ]; then
-        Install_PHP_55
-    elif [ "${PHPSelect}" = "5" ]; then
-        Install_PHP_56
-    fi
-    Install_Nginx
-    Creat_PHP_Tools
-    Add_LNAMP_Startup
-    Check_LNAMP_Install
 }
 
 LNMP_Stack()
@@ -153,6 +129,8 @@ LNMP_Stack()
         Install_PHP_55
     elif [ "${PHPSelect}" = "5" ]; then
         Install_PHP_56
+    else
+        Install_PHP_54
     fi
     Install_Nginx
     Creat_PHP_Tools
@@ -179,10 +157,40 @@ LAMP_Stack()
         Install_PHP_55
     elif [ "${PHPSelect}" = "5" ]; then
         Install_PHP_56
+    else
+        Install_PHP_54
     fi
     Creat_PHP_Tools
     Add_LAMP_Startup
     Check_LAMP_Install
+}
+
+LNAMP_Stack()
+{
+    Apache_Selection
+    Init_Install
+    if [ "${ApacheSelect}" = "1" ]; then
+        Install_Apache_22
+    else
+        Install_Apache_24
+    fi
+    if [ "${PHPSelect}" = "1" ]; then
+        Install_PHP_52
+    elif [ "${PHPSelect}" = "2" ]; then
+        Install_PHP_53
+    elif [ "${PHPSelect}" = "3" ]; then
+        Install_PHP_54
+    elif [ "${PHPSelect}" = "4" ]; then
+        Install_PHP_55
+    elif [ "${PHPSelect}" = "5" ]; then
+        Install_PHP_56
+    else
+        Install_PHP_54
+    fi
+    Install_Nginx
+    Creat_PHP_Tools
+    Add_LNAMP_Startup
+    Check_LNAMP_Install
 }
 
 case "${Stack}" in   

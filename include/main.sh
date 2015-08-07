@@ -94,6 +94,7 @@ Dispaly_Selection()
         *)
             echo "No input, You will install MySQL 5.5.42 (Default)."
             DBSelect="2"
+        ;;
     esac
     echo ""
 
@@ -143,6 +144,7 @@ Dispaly_Selection()
         *)
             echo "No input, You will install PHP 5.4.41 (Default)."
             PHPSelect="3"
+        ;;
     esac
     echo ""
 
@@ -174,6 +176,7 @@ Dispaly_Selection()
         *)
             echo "No input, You will not install Memory Allocator."
             SelectMalloc="1"
+        ;;
     esac
     echo ""
 
@@ -269,6 +272,39 @@ Print_Sys_Info()
     df -h
 }
 
+Check_OS_Is_64Bit()
+{
+    if [[ `getconf WORD_BIT` = '32' && `getconf LONG_BIT` = '64' ]]; then
+        Is_64bit='y'
+    else
+        Is_64bit='n'
+    fi
+}
+
+Check_Is_ARM()
+{
+    if uname -m | grep -Eqi "arm"; then
+        Is_ARM='y'
+    fi
+}
+
+Install_LSB()
+{
+    if [ "$PM" = "yum" ]; then
+        yum -y install redhat-lsb
+    elif [ "$PM" = "apt" ]; then
+        apt-get update
+        apt-get install -y lsb-release
+    fi
+}
+
+Get_Linux_Distribution_Version()
+{
+    Install_LSB
+    eval ${DISTRO}_Version=`lsb_release -rs`
+    eval echo "${DISTRO} \${${DISTRO}_Version}"
+}
+
 Get_Linux_Distribution_Name()
 {
     if grep -Eqi "CentOS" /etc/issue || grep -Eq "CentOS" /etc/*-release; then
@@ -298,26 +334,9 @@ Get_Linux_Distribution_Name()
     Check_OS_Is_64Bit
 }
 
-Install_LSB()
-{
-    if [ "$PM" = "yum" ]; then
-        yum -y install redhat-lsb
-    elif [ "$PM" = "apt" ]; then
-        apt-get update
-        apt-get install -y lsb-release
-    fi
-}
-
-Get_Linux_Distribution_Version()
-{
-    Install_LSB
-    eval ${DISTRO}_Version=`lsb_release -rs`
-    eval echo "${DISTRO} \${${DISTRO}_Version}"
-}
-
 Get_RHEL_Version()
 {
-    Get_Dist_Name
+    Get_Linux_Distribution_Name
     if [ "${DISTRO}" = "RHEL" ]; then
         if grep -Eqi "release 5." /etc/redhat-release; then
             echo "Current Version: RHEL Ver 5"
@@ -329,22 +348,6 @@ Get_RHEL_Version()
             echo "Current Version: RHEL Ver 7"
             RHEL_Ver='7'
         fi
-    fi
-}
-
-Check_OS_Is_64Bit()
-{
-    if [[ `getconf WORD_BIT` = '32' && `getconf LONG_BIT` = '64' ]]; then
-        Is_64bit='y'
-    else
-        Is_64bit='n'
-    fi
-}
-
-Check_Is_ARM()
-{
-    if uname -m | grep -Eqi "arm"; then
-        Is_ARM='y'
     fi
 }
 
