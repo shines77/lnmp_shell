@@ -55,6 +55,7 @@ echo "+------------------------------------------------------------------------+
 echo ""
 
 Echo_Color_Test
+Echo_Color_Ex_Test
 
 Init_Install()
 {

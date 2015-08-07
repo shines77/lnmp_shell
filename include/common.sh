@@ -229,33 +229,71 @@ Echo_Color_Test()
 {
     echo ""
     Echo_Red "This is Red color."
-    Echo_Red_Blod "This is Red blod color."
     Echo_Red_HL "This is Red HL color."
+    Echo_Red_Blod "This is Red blod color."
     echo ""
 
     Echo_Green "This is Green color."
-    Echo_Green_Blod "This is Green blod color."
     Echo_Green_HL "This is Green HL color."
+    Echo_Green_Blod "This is Green blod color."
     echo ""
 
     Echo_Blue "This is Blue color."
-    Echo_Blue_Blod "This is Blue blod color."
     Echo_Blue_HL "This is Blue HL color."
+    Echo_Blue_Blod "This is Blue blod color."
     echo ""
 
     Echo_Yellow "This is Yellow color."
-    Echo_Yellow_Blod "This is Yellow blod color."
     Echo_Yellow_HL "This is Yellow HL color."
+    Echo_Yellow_Blod "This is Yellow blod color."
     echo ""
 
     Echo_Magenta "This is Magenta color."
-    Echo_Magenta_Blod "This is Magenta blod color."
     Echo_Magenta_HL "This is Magenta HL color."
+    Echo_Magenta_Blod "This is Magenta blod color."
     echo ""
 
     Echo_Cyan "This is Cyan color."
-    Echo_Cyan_Blod "This is Cyan blod color."
     Echo_Cyan_HL "This is Cyan HL color."
+    Echo_Cyan_Blod "This is Cyan blod color."
+    echo ""
+}
+
+# This is a echo color extend mode test
+
+Echo_Color_Ex_Test()
+{
+    local prefix_text="|  <<<      "
+    local suffix_text="      >>>  |"
+    echo ""
+    Echo_Red_Ex "${prefix_text}" " This is Red color." "${suffix_text}"
+    Echo_Red_HL_Ex "${prefix_text}" "This is Red HL color." "${suffix_text}"
+    Echo_Red_Blod_Ex "${prefix_text}" "This is Red blod color." "${suffix_text}"
+    echo ""
+
+    Echo_Green_Ex "${prefix_text}" "This is Green color." "${suffix_text}"
+    Echo_Green_HL_Ex "${prefix_text}" "This is Green HL color." "${suffix_text}"
+    Echo_Green_Blod_Ex "${prefix_text}" "This is Green blod color." "${suffix_text}"
+    echo ""
+
+    Echo_Blue_Ex "${prefix_text}" "This is Blue color." "${suffix_text}"
+    Echo_Blue_HL_Ex "${prefix_text}" "This is Blue HL color." "${suffix_text}"
+    Echo_Blue_Blod_Ex "${prefix_text}" "This is Blue blod color." "${suffix_text}"
+    echo ""
+
+    Echo_Yellow_Ex "${prefix_text}" "This is Yellow color." "${suffix_text}"
+    Echo_Yellow_HL_Ex "${prefix_text}" "This is Yellow HL color." "${suffix_text}"
+    Echo_Yellow_Blod_Ex "${prefix_text}" "This is Yellow blod color." "${suffix_text}"
+    echo ""
+
+    Echo_Magenta_Ex "${prefix_text}" "This is Magenta color." "${suffix_text}"
+    Echo_Magenta_HL_Ex "${prefix_text}" "This is Magenta HL color." "${suffix_text}"
+    Echo_Magenta_Blod_Ex "${prefix_text}" "This is Magenta blod color." "${suffix_text}"
+    echo ""
+
+    Echo_Cyan_Ex "${prefix_text}" "This is Cyan color." "${suffix_text}"
+    Echo_Cyan_HL_Ex "${prefix_text}" "This is Cyan HL color." "${suffix_text}"
+    Echo_Cyan_Blod_Ex "${prefix_text}" "This is Cyan blod color." "${suffix_text}"
     echo ""
 }
 
