@@ -5,7 +5,9 @@ Input_Mysql_RootPWD()
     read -p "Please enter the password:   " MysqlRootPWD
     if [ "${MysqlRootPWD}" = "" ]; then
         echo ""
-        read -p "Are you sure use Mysql root default password '${MysqlRootDefaultPWD}'? [y/N]: " MysqlRootUseDefaultPWD
+        Echo_Yellow "You have no input, Mysql root password will be use default value."
+        echo ""
+        read -p "Are you sure use the default password: '${MysqlRootDefaultPWD}' ? [y/N]: " MysqlRootUseDefaultPWD
 
         echo ""
         case "${MysqlRootUseDefaultPWD}" in
