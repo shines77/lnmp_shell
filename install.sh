@@ -33,7 +33,7 @@ fi
 Get_Linux_Distribution_Name
 
 if [ "${DISTRO}" = "unknow" ]; then
-    Echo_Red "Error: Unable to get Linux distribution name, or do NOT support the current distribution."
+    Echo_Red "Error: Unable to get the Linux distribution name, or do NOT support the current distribution."
     exit 1
 fi
 
@@ -119,19 +119,9 @@ Init_Install()
 LNMP_Stack()
 {
     Init_Install
-    if [ "${PHPSelect}" = "1" ]; then
-        Install_PHP_52
-    elif [ "${PHPSelect}" = "2" ]; then
-        Install_PHP_53
-    elif [ "${PHPSelect}" = "3" ]; then
-        Install_PHP_54
-    elif [ "${PHPSelect}" = "4" ]; then
-        Install_PHP_55
-    elif [ "${PHPSelect}" = "5" ]; then
-        Install_PHP_56
-    else
-        Install_PHP_54
-    fi
+
+    Install_PHP
+
     Install_Nginx
     Creat_PHP_Tools
     Add_LNMP_Startup
@@ -142,24 +132,10 @@ LAMP_Stack()
 {
     Apache_Selection
     Init_Install
-    if [ "${ApacheSelect}" = "1" ]; then
-        Install_Apache_22
-    else
-        Install_Apache_24
-    fi    
-    if [ "${PHPSelect}" = "1" ]; then
-        Install_PHP_52
-    elif [ "${PHPSelect}" = "2" ]; then
-        Install_PHP_53
-    elif [ "${PHPSelect}" = "3" ]; then
-        Install_PHP_54
-    elif [ "${PHPSelect}" = "4" ]; then
-        Install_PHP_55
-    elif [ "${PHPSelect}" = "5" ]; then
-        Install_PHP_56
-    else
-        Install_PHP_54
-    fi
+
+    Install_Apache
+    Install_PHP
+
     Creat_PHP_Tools
     Add_LAMP_Startup
     Check_LAMP_Install
@@ -169,24 +145,10 @@ LNAMP_Stack()
 {
     Apache_Selection
     Init_Install
-    if [ "${ApacheSelect}" = "1" ]; then
-        Install_Apache_22
-    else
-        Install_Apache_24
-    fi
-    if [ "${PHPSelect}" = "1" ]; then
-        Install_PHP_52
-    elif [ "${PHPSelect}" = "2" ]; then
-        Install_PHP_53
-    elif [ "${PHPSelect}" = "3" ]; then
-        Install_PHP_54
-    elif [ "${PHPSelect}" = "4" ]; then
-        Install_PHP_55
-    elif [ "${PHPSelect}" = "5" ]; then
-        Install_PHP_56
-    else
-        Install_PHP_54
-    fi
+
+    Install_Apache
+    Install_PHP
+
     Install_Nginx
     Creat_PHP_Tools
     Add_LNAMP_Startup

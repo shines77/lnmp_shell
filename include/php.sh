@@ -23,6 +23,24 @@ Pear_Pecl_Set()
     pecl config-set php_ini /usr/local/php/etc/php.ini
 }
 
+Install_PHP()
+{
+    if [ "${PHPSelect}" = "1" ]; then
+        Install_PHP_52
+    elif [ "${PHPSelect}" = "2" ]; then
+        Install_PHP_53
+    elif [ "${PHPSelect}" = "3" ]; then
+        Install_PHP_54
+    elif [ "${PHPSelect}" = "4" ]; then
+        Install_PHP_55
+    elif [ "${PHPSelect}" = "5" ]; then
+        Install_PHP_56
+    else
+#       // Default choice is PHP 5.4.41
+        Install_PHP_54
+    fi
+}
+
 Install_PHP_52()
 {
     Echo_Blue "[+] Installing ${Php_Ver} ..."

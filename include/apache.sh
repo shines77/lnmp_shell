@@ -1,5 +1,15 @@
 #!/bin/bash
 
+Install_Apache()
+{
+    if [ "${ApacheSelect}" = "1" ]; then
+        Install_Apache_22
+    else
+#       // Default choice is Apache 2.4.10
+        Install_Apache_24
+    fi  
+}
+
 Install_Apache_22()
 {
     Echo_Blue "[+] Installing ${Apache_Version} ..."
