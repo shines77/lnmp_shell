@@ -200,7 +200,8 @@ Dispaly_Selection()
 
 Apache_Selection()
 {
-#   // set Server Administrator Email Address    
+#   // set Server Administrator Email Address
+
     echo "=========================================================="
 
     ServerAdmin=""
@@ -218,6 +219,7 @@ Apache_Selection()
     echo ""
 
 #   // which Apache Version do you want to install?
+
     echo "=========================================================="
 
     ApacheSelect="1"

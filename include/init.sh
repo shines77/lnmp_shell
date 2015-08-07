@@ -28,54 +28,55 @@ Set_Timezone()
 
     echo ""
     case "${TimeZoneSelect}" in
-    1)
-        echo "You choice Asia - Shanghai, Chongqing timezone."
-#       ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-        cp -f /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-    ;;
-    2)
-        echo "You choice Asia - HongKong timezone."
-#       ln -s /usr/share/zoneinfo/Asia/Hong_Kong /etc/localtime
-        cp -f /usr/share/zoneinfo/Asia/Hong_Kong /etc/localtime
-    ;;    
-    3)
-        echo "You choice Asia - Singapore timezone."
-#       ln -s /usr/share/zoneinfo/Asia/Singapore /etc/localtime
-        cp -f /usr/share/zoneinfo/Asia/Singapore /etc/localtime
-    ;;
-    4)
-        echo "You choice Asia - Japan timezone."
-#       ln -s /usr/share/zoneinfo/Japan /etc/localtime
-        cp -f /usr/share/zoneinfo/Japan /etc/localtime
-    ;;
-    5)
-        echo "You choice Amemrican - New York (East US) timezone."
-#       ln -s /usr/share/zoneinfo/US/Eastern /etc/localtime
-#       ln -s /usr/share/zoneinfo/America/New_York /etc/localtime
-        cp -f /usr/share/zoneinfo/America/New_York /etc/localtime
-    ;;
-    6)
-        echo "You choice Amemrican - Los Angeles (West US) timezone."
-#       ln -s /usr/share/zoneinfo/US/Pacific /etc/localtime
-#       ln -s /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
-        cp -f /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
-    ;;
-    7)
-        echo "You choice Europe - London (United Kingdom) timezone."
-#        ln -s /usr/share/zoneinfo/Europe/London /etc/localtime
-        cp -f /usr/share/zoneinfo/Europe/London /etc/localtime
-    ;;
-    8)
-        echo "You choice Europe - Paris (France) timezone."
- #      ln -s /usr/share/zoneinfo/Europe/Paris /etc/localtime
-        cp -f /usr/share/zoneinfo/Europe/Paris /etc/localtime
-    ;;
-    9)
-        echo "You choice No change - Keep use now timezone setting."
-    ;;    
-    *)
-        echo "No input, you choice No change - Keep use now timezone setting (Default)."
-        TimeZoneSelect="9"
+        1)
+            echo "You choice Asia - Shanghai, Chongqing timezone."
+#           ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+            cp -f /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+        ;;
+        2)
+            echo "You choice Asia - HongKong timezone."
+#           ln -s /usr/share/zoneinfo/Asia/Hong_Kong /etc/localtime
+            cp -f /usr/share/zoneinfo/Asia/Hong_Kong /etc/localtime
+        ;;    
+        3)
+            echo "You choice Asia - Singapore timezone."
+#           ln -s /usr/share/zoneinfo/Asia/Singapore /etc/localtime
+            cp -f /usr/share/zoneinfo/Asia/Singapore /etc/localtime
+        ;;
+        4)
+            echo "You choice Asia - Japan timezone."
+#           ln -s /usr/share/zoneinfo/Japan /etc/localtime
+            cp -f /usr/share/zoneinfo/Japan /etc/localtime
+        ;;
+        5)
+            echo "You choice Amemrican - New York (East US) timezone."
+#           ln -s /usr/share/zoneinfo/US/Eastern /etc/localtime
+#           ln -s /usr/share/zoneinfo/America/New_York /etc/localtime
+            cp -f /usr/share/zoneinfo/America/New_York /etc/localtime
+        ;;
+        6)
+            echo "You choice Amemrican - Los Angeles (West US) timezone."
+#           ln -s /usr/share/zoneinfo/US/Pacific /etc/localtime
+#           ln -s /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
+            cp -f /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
+        ;;
+        7)
+            echo "You choice Europe - London (United Kingdom) timezone."
+#           ln -s /usr/share/zoneinfo/Europe/London /etc/localtime
+            cp -f /usr/share/zoneinfo/Europe/London /etc/localtime
+        ;;
+        8)
+            echo "You choice Europe - Paris (France) timezone."
+#           ln -s /usr/share/zoneinfo/Europe/Paris /etc/localtime
+            cp -f /usr/share/zoneinfo/Europe/Paris /etc/localtime
+        ;;
+        9)
+            echo "You choice No change - Keep use now timezone setting."
+        ;;    
+        *)
+            echo "No input, you choice No change - Keep use now timezone setting (Default)."
+            TimeZoneSelect="9"
+        ;;
     esac
     echo ""
 }
@@ -377,14 +378,14 @@ Install_Jemalloc()
 Install_TCMalloc()
 {
     Echo_Blue "[+] Installing ${TCMalloc_Ver} ..."
-    if [ "${Is_64bit}" = "y" ] ; then
+    if [ "${Is_64bit}" = "y" ]; then
         Tar_Cd ${Libunwind_Ver}.tar.gz ${Libunwind_Ver}
         CFLAGS=-fPIC ./configure
         make CFLAGS=-fPIC
         make CFLAGS=-fPIC install
     fi
     Tar_Cd ${TCMalloc_Ver}.tar.gz ${TCMalloc_Ver}
-    if [ "${Is_64bit}" = "y" ] ; then
+    if [ "${Is_64bit}" = "y" ]; then
         ./configure
     else
         ./configure --enable-frame-pointers
@@ -395,7 +396,7 @@ Install_TCMalloc()
 
 CentOS_Lib_Opt()
 {
-    if [ "${Is_64bit}" = "y" ] ; then
+    if [ "${Is_64bit}" = "y" ]; then
         ln -s /usr/lib64/libpng.* /usr/lib/
         ln -s /usr/lib64/libjpeg.* /usr/lib/
     fi
@@ -434,7 +435,7 @@ eof
 
 Debian_Lib_Opt()
 {
-    if [ "${Is_64bit}" = "y" ] ; then
+    if [ "${Is_64bit}" = "y" ]; then
         ln -s /usr/lib/x86_64-linux-gnu/libpng* /usr/lib/
         ln -s /usr/lib/x86_64-linux-gnu/libjpeg* /usr/lib/
     else
