@@ -4,11 +4,11 @@ Input_Mysql_RootPWD()
 {
     read -p "Please enter the password:   " MysqlRootPWD
     if [ "${MysqlRootPWD}" = "" ]; then
-        MysqlRootPWD = MysqlRootDefaultPWD
+        MysqlRootPWD=MysqlRootDefaultPWD
     fi
     read -p "Please confirm the password: " MysqlRootConfirmPWD
     if [ "${MysqlRootConfirmPWD}" = "" ]; then
-        MysqlRootConfirmPWD = MysqlRootDefaultPWD
+        MysqlRootConfirmPWD=MysqlRootDefaultPWD
     fi
     if [ "${MysqlRootPWD}" != "${MysqlRootConfirmPWD}" ]; then
         Echo_Red "Error: two time passwords are not equal."
