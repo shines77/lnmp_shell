@@ -47,17 +47,18 @@ Color_Text_Ex()
 
 Echo_Red_Ex()
 {
-    echo $(Color_Text_Ex "$1" "$2" "$3" "31")
+#    echo $(Color_Text_Ex "$1" "$2" "$3" "31")
+    echo -e "$1\e[0;31m$2\e[0m$3"
 }
 
 Echo_Green_Ex()
 {
-    echo $(Color_Text_Ex "$1" "$2" "$3" "32")
+    echo -e $(Color_Text_Ex "$1" "$2" "$3" "32")
 }
 
 Echo_Yellow_Ex()
 {
-    echo $(Color_Text_Ex "$1" "$2" "$3" "33")
+    echo -e $(Color_Text_Ex "$1" "$2" "$3" "33")
 }
 
 Echo_Blue_Ex()
