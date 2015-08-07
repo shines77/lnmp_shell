@@ -180,7 +180,7 @@ Dispaly_Selection()
 
     Input_Mysql_RootPWD
     echo ""
-    Echo_Blue "MySQL root password is: ${MysqlRootPWD}"
+    Echo_Blue "Your MySQL root password is: ${MysqlRootPWD}"
     echo ""
 
 #   // which PHP Version do you want to install?
