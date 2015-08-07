@@ -30,7 +30,7 @@ action=$1
 . include/init.sh
 
 Check_OS_Is_64Bit
-Get_Linux_Distribution_Name
+Get_Linux_Dist_Name
 Check_DB
 
 Check_Pureftpd()

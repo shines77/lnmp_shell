@@ -57,15 +57,24 @@ Restart_PHP()
 }
 
 clear
+echo ""
 echo "+------------------------------------------------------------------------+"
-echo "|    Addons script @ LNAMP Ver ${LNAMP_Ver} for ${DISTRO} Linux Server    "
-echo "|                            Written by Licess                           |"
-echo "|                          Modified by shines77                          |"
+echo "|                                                                        |"
+echo "|              LNMP/LAMP/LNAMP Addons Script for Linux Server            |"
+echo "|                                                                        |"
+echo "|                          Version: ${LNAMP_Ver}                                  |"
+echo "|                          Host OS: ${DISTRO}                             "
+echo "|                                                                        |"
+echo "|                        Author by: Licess                               |"
+echo "|                      Modified by: shines77                             |"
+echo "|                    Last Modified: ${LNAMP_LastModified}                           |"
+echo "|                                                                        |"
 echo "+------------------------------------------------------------------------+"
-echo "|   A tool to Install cache, optimizer, accelerator ... addons for LNMP  |"
+echo "|  A tool to Install cache, optimizer, accelerator ... addons for LNAMP  |"
 echo "+------------------------------------------------------------------------+"
-echo "|         For more information please visit http://www.lnmp.org          |"
+echo "|     For more information please visit http://lnamp.cloudbuses.com      |"
 echo "+------------------------------------------------------------------------+"
+echo ""
 
 if [[ "${action}" == "" || "${action2}" == "" ]]; then
     action='install'
@@ -73,7 +82,7 @@ if [[ "${action}" == "" || "${action2}" == "" ]]; then
 fi
 
 Check_OS_Is_64Bit
-Get_Linux_Distribution_Name
+Get_Linux_Dist_Name
 
 case "${action}" in
 install)
@@ -81,22 +90,22 @@ install)
         1|e[aA]ccelerator)
             Install_eAccelerator
             ;;
-        2|[xX]cache)
+        2|[xX][cC]ache)
             Install_XCache
             ;;
-        3|[mM]emcached)
+        3|[mM]em[cC]ached)
             Install_Memcached
             ;;
-        4|opcache)
+        4|[oO]pcache)
             Install_Opcache
             ;;
         5|[rR]edis)
             Install_Redis
             ;;
-        6|image[mM]agick)
+        6|[iI]mage[mM]agick)
             Install_ImageMagic
             ;;
-        7|ion[cC]ube)
+        7|[iI]on[cC]ube)
             Install_ionCube
             ;;
         [eE][xX][iI][tT])
@@ -112,22 +121,22 @@ uninstall)
         e[aA]ccelerator)
             Uninstall_eAccelerator
             ;;
-        [xX]cache)
+        [xX][cC]ache)
             Uninstall_XCache
             ;;
-        [mM]emcached)
+        [mM]em[cC]ached)
             Uninstall_Memcached
             ;;
-        opcache)
+        [oO]pcache)
             Uninstall_Opcache
             ;;
         [rR]edis)
             Uninstall_Redis
             ;;
-        image[mM]agick)
+        [iI]mage[mM]agick)
             Uninstall_ImageMagick
             ;;
-        ion[cC]ube)
+        [iI]on[cC]ube)
             Uninstall_ionCube
             ;;
         *)

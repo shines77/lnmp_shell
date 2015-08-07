@@ -30,7 +30,7 @@ fi
 . include/apache.sh
 . include/end.sh
 
-Get_Linux_Distribution_Name
+Get_Linux_Dist_Name
 
 if [ "${DISTRO}" = "unknow" ]; then
     Echo_Red "Error: Unable to get the Linux distribution name, or do NOT support the current distribution."
@@ -48,7 +48,7 @@ echo "|                          Host OS: ${DISTRO}                             
 echo "|                                                                        |"
 echo "|                        Author by: Licess                               |"
 echo "|                      Modified by: shines77                             |"
-echo "|                    Last Modified: 2015-08-04                           |"
+echo "|                    Last Modified: ${LNAMP_LastModified}                           |"
 echo "|                                                                        |"
 echo "+------------------------------------------------------------------------+"
 echo "|        A tool to auto-compile & install LNMP/LAMP/LNAMP on Linux       |"
@@ -64,7 +64,7 @@ Init_Install()
     if [ "${DISTRO}" = "RHEL" ]; then
         RHEL_Modify_Source
     fi
-    Get_Linux_Distribution_Version
+    Get_Linux_Dist_Version
     if [ "${DISTRO}" = "Ubuntu" ]; then
         Ubuntu_Modify_Source
     fi

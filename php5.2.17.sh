@@ -28,7 +28,7 @@ echo "+-----------------------------------------------------------------------+"
 
 cur_dir=$(pwd)
 Check_OS_Is_64Bit
-Get_Linux_Distribution_Name
+Get_Linux_Dist_Name
 Check_DB
 
 Get_PHP_Ext_Dir

@@ -27,18 +27,27 @@ shopt -s extglob
 
 Check_DB
 Check_OS_Is_64Bit
-Get_Linux_Distribution_Name
+Get_Linux_Dist_Name
 
 clear
+echo ""
 echo "+------------------------------------------------------------------------+"
-echo "|            LNAMP Ver ${LNAMP_Ver} for ${DISTRO} Linux Server            "
-echo "|                            Written by Licess                           |"
-echo "|                          Modified by shines77                          |"
+echo "|                                                                        |"
+echo "|              LNMP/LAMP/LNAMP Shell Script for Linux Server             |"
+echo "|                                                                        |"
+echo "|                          Version: ${LNAMP_Ver}                                  |"
+echo "|                          Host OS: ${DISTRO}                             "
+echo "|                                                                        |"
+echo "|                        Author by: Licess                               |"
+echo "|                      Modified by: shines77                             |"
+echo "|                    Last Modified: ${LNAMP_LastModified}                           |"
+echo "|                                                                        |"
 echo "+------------------------------------------------------------------------+"
 echo "|        A tool to auto-compile & install LNMP/LAMP/LNAMP on Linux       |"
 echo "+------------------------------------------------------------------------+"
-echo "|          For more information please visit http://www.lnmp.org         |"
+echo "|     For more information please visit http://lnamp.cloudbuses.com      |"
 echo "+------------------------------------------------------------------------+"
+echo ""
 
 Uninstall_LNMP()
 {
@@ -60,6 +69,26 @@ Uninstall_LNMP()
     rm -f /etc/init.d/php-fpm
     rm -f /bin/lnmp
     echo "LNMP Uninstall completed."
+}
+
+Uninstall_LAMP()
+{
+    echo "Stoping LAMP ..."
+    lnmp stop
+
+    Remove_StartUp httpd
+    Remove_StartUp ${DB_Name}
+    echo "Deleting LAMP files ..."
+    rm -rf /usr/local/apache
+    rm -rf /usr/local/php
+    rm -rf /usr/local/${DB_Name}/!(var|data)
+    rm -rf /usr/local/zend
+
+    rm -f /etc/my.cnf
+    rm -f /etc/init.d/httpd
+    rm -f /etc/init.d/${DB_Name}
+    rm -f /bin/lnmp
+    echo "LAMP Uninstall completed."
 }
 
 Uninstall_LNAMP()
@@ -85,41 +114,21 @@ Uninstall_LNAMP()
     echo "LNAMP Uninstall completed."
 }
 
-Uninstall_LAMP()
-{
-    echo "Stoping LAMP ..."
-    lnmp stop
-
-    Remove_StartUp httpd
-    Remove_StartUp ${DB_Name}
-    echo "Deleting LAMP files ..."
-    rm -rf /usr/local/apache
-    rm -rf /usr/local/php
-    rm -rf /usr/local/${DB_Name}/!(var|data)
-    rm -rf /usr/local/zend
-
-    rm -f /etc/my.cnf
-    rm -f /etc/init.d/httpd
-    rm -f /etc/init.d/${DB_Name}
-    rm -f /bin/lnmp
-    echo "LAMP Uninstall completed."
-}
-
     Check_Stack
     echo "Current Stack: ${Get_Stack}"
 
     action=""
     echo "Enter 1 to uninstall LNMP"
-    echo "Enter 2 to uninstall LNAMP"
-    echo "Enter 3 to uninstall LAMP"
+    echo "Enter 2 to uninstall LAMP"
+    echo "Enter 3 to uninstall LNAMP"    
     read -p "(Please input 1, 2 or 3):" action
 
     case "$action" in
-    1|[lL][nN][nM][pP])
-        echo "You will uninstall LNMP"
-        Echo_Red "Please backup your configure files and mysql data !!!!!!"
-        Echo_Red "The following directory or files will be remove!"
-        cat << EOF
+        1|[lL][nN][mM][pP])
+            echo "You will uninstall LNMP"
+            Echo_Red "Please backup your configure files and mysql data !!!!!!"
+            Echo_Red "The following directory or files will be remove!"
+            cat << EOF
 /usr/local/nginx
 ${MySQL_Dir}
 /usr/local/php
@@ -130,15 +139,33 @@ ${MySQL_Dir}
 /etc/my.cnf
 /bin/lnmp
 EOF
-        sleep 3
-        Press_Start
-        Uninstall_LNMP
-    ;;
-    2|[lL][nN][aA][nM][pP])
-        echo "You will uninstall LNAMP"
-        Echo_Red "Please backup your configure files and mysql data !!!!!!"
-        Echo_Red "The following directory or files will be remove!"
-        cat << EOF
+            sleep 3
+            Press_Start
+            Uninstall_LNMP
+        ;;
+        2|[lL][aA][mM][pP])
+            echo "You will uninstall LAMP"
+            Echo_Red "Please backup your configure files and mysql data !!!!!!"
+            Echo_Red "The following directory or files will be remove!"
+            cat << EOF
+/usr/local/apache
+${MySQL_Dir}
+/etc/init.d/httpd
+/etc/init.d/${DB_Name}
+/usr/local/php
+/usr/local/zend
+/etc/my.cnf
+/bin/lnmp
+EOF
+            sleep 3
+            Press_Start
+            Uninstall_LAMP
+        ;;
+        3|[lL][nN][aA][mM][pP])
+            echo "You will uninstall LNAMP"
+            Echo_Red "Please backup your configure files and mysql data !!!!!!"
+            Echo_Red "The following directory or files will be remove!"
+            cat << EOF
 /usr/local/nginx
 ${MySQL_Dir}
 /usr/local/php
@@ -150,26 +177,8 @@ ${MySQL_Dir}
 /etc/my.cnf
 /bin/lnmp
 EOF
-        sleep 3
-        Press_Start
-        Uninstall_LNAMP
-    ;;
-    3|[lL][aA][nM][pP])
-        echo "You will uninstall LAMP"
-        Echo_Red "Please backup your configure files and mysql data !!!!!!"
-        Echo_Red "The following directory or files will be remove!"
-        cat << EOF
-/usr/local/apache
-${MySQL_Dir}
-/etc/init.d/httpd
-/etc/init.d/${DB_Name}
-/usr/local/php
-/usr/local/zend
-/etc/my.cnf
-/bin/lnmp
-EOF
-        sleep 3
-        Press_Start
-        Uninstall_LAMP
-    ;;
+            sleep 3
+            Press_Start
+            Uninstall_LNAMP
+        ;;    
     esac

@@ -1,7 +1,5 @@
 #!/bin/bash
 
-. include/common.sh
-
 Input_Mysql_RootPWD()
 {
     read -p "Please enter the password:   " MysqlRootPWD
@@ -300,14 +298,14 @@ Install_LSB()
     fi
 }
 
-Get_Linux_Distribution_Version()
+Get_Linux_Dist_Version()
 {
     Install_LSB
     eval ${DISTRO}_Version=`lsb_release -rs`
     eval echo "${DISTRO} \${${DISTRO}_Version}"
 }
 
-Get_Linux_Distribution_Name()
+Get_Linux_Dist_Name()
 {
     if grep -Eqi "CentOS" /etc/issue || grep -Eq "CentOS" /etc/*-release; then
         DISTRO='CentOS'
@@ -338,7 +336,7 @@ Get_Linux_Distribution_Name()
 
 Get_RHEL_Version()
 {
-    Get_Linux_Distribution_Name
+    Get_Linux_Dist_Name
     if [ "${DISTRO}" = "RHEL" ]; then
         if grep -Eqi "release 5." /etc/redhat-release; then
             echo "Current Version: RHEL Ver 5"

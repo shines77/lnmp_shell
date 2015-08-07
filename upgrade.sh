@@ -27,7 +27,7 @@ Upgrade_Date=$(date +"%Y%m%d%H%M%S")
 . include/upgrade_mysql2mariadb.sh
 
 Check_OS_Is_64Bit
-Get_Linux_Distribution_Name
+Get_Linux_Dist_Name
 
 Display_Upgrade_Menu()
 {
@@ -43,15 +43,24 @@ Display_Upgrade_Menu()
 }
 
 clear
+echo ""
 echo "+------------------------------------------------------------------------+"
-echo "|   Upgrade script @ LNAMP Ver ${LNAMP_Ver} for ${DISTRO} Linux Server    "
-echo "|                            Written by Licess                           |"
-echo "|                          Modified by shines77                          |"
+echo "|                                                                        |"
+echo "|            LNMP/LAMP/LNAMP Upgrade Script for Linux Server             |"
+echo "|                                                                        |"
+echo "|                          Version: ${LNAMP_Ver}                                  |"
+echo "|                          Host OS: ${DISTRO}                             "
+echo "|                                                                        |"
+echo "|                        Author by: Licess                               |"
+echo "|                      Modified by: shines77                             |"
+echo "|                    Last Modified: ${LNAMP_LastModified}                           |"
+echo "|                                                                        |"
 echo "+------------------------------------------------------------------------+"
 echo "|    A tool to upgrade Nginx, MySQL/Mariadb, PHP for LNMP/LAMP/LNAMP     |"
 echo "+------------------------------------------------------------------------+"
-echo "|         For more information please visit http://www.lnmp.org          |"
+echo "|     For more information please visit http://lnamp.cloudbuses.com      |"
 echo "+------------------------------------------------------------------------+"
+echo ""
 
 if [ "${action}" == "" ]; then
     Display_Upgrade_Menu
@@ -74,7 +83,7 @@ case "${action}" in
     5|[pP][hH][pP][aA])
         Upgrade_PHP 2>&1 | tee /root/upgrade_a_php${Upgrade_Date}.log
     ;;
-    6|[mM]2[mY])
+    6|[mM]2[mM])
         Upgrade_MySQL2MariaDB 2>&1 | tee /root/upgrade_mysql2mariadb${Upgrade_Date}.log
     ;;
     [eE][xX][iI][tT])
