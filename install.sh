@@ -38,7 +38,7 @@ clear
 echo ""
 echo "+------------------------------------------------------------------------+"
 echo "|                                                                        |"
-echo "|              LNMP/LAMP/LNAMP Shell Script for Linux Server             |"
+Echo_Blue "|              LNMP/LAMP/LNAMP Shell Script for Linux Server             |"
 echo "|                                                                        |"
 echo "|                          Version: ${LNAMP_Ver}                                  |"
 echo "|                          Host OS: ${DISTRO}                             "
