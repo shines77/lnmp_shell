@@ -12,7 +12,7 @@ Input_Mysql_RootPWD()
         echo ""
         case "${MysqlRootUseDefaultPWD}" in
             [yY][eE][sS]|[yY])
-                echo "You agree to use the default Mysql root password '${MysqlRootDefaultPWD}'."
+                Echo_Blue "You agree to use the default Mysql root password '${MysqlRootDefaultPWD}'."
                 MysqlRootUseDefaultPWD='y'
                 MysqlRootPWD="${MysqlRootDefaultPWD}"
                 MysqlRootConfirmPWD="${MysqlRootDefaultPWD}"
@@ -24,7 +24,7 @@ Input_Mysql_RootPWD()
                 Input_Mysql_RootPWD
             ;;
             *)
-                echo "No input, You agree to use the default Mysql root password '${MysqlRootDefaultPWD}'."
+                Echo_Blue "No input, You agree to use the default Mysql root password '${MysqlRootDefaultPWD}'."
                 MysqlRootUseDefaultPWD="y"
                 MysqlRootPWD="${MysqlRootDefaultPWD}"
                 MysqlRootConfirmPWD="${MysqlRootDefaultPWD}"
@@ -62,16 +62,16 @@ Dispaly_Selection()
     echo ""
     case "${SelectMalloc}" in
         1)
-            echo "You will install not install Memory Allocator."
+            Echo_Blue "You will install not install Memory Allocator."
         ;;
         2)
-            echo "You will install JeMalloc."
+            Echo_Blue "You will install JeMalloc."
         ;;
         3)
-            echo "You will Install TCMalloc."
+            Echo_Blue "You will Install TCMalloc."
         ;;
         *)
-            echo "No input, You will not install Memory Allocator."
+            Echo_Blue "No input, You will not install Memory Allocator."
             SelectMalloc="1"
         ;;
     esac
@@ -113,22 +113,22 @@ Dispaly_Selection()
     echo ""
     case "${DBSelect}" in
         1)
-            echo "You will install MySQL 5.1.73."
+            Echo_Blue "You will install MySQL 5.1.73."
         ;;
         2)
-            echo "You will install MySQL 5.5.42."
+            Echo_Blue "You will install MySQL 5.5.42."
         ;;
         3)
-            echo "You will Install MySQL 5.6.23."
+            Echo_Blue "You will Install MySQL 5.6.23."
         ;;
         4)
-            echo "You will install MariaDB 5.5.42."
+            Echo_Blue "You will install MariaDB 5.5.42."
         ;;
         5)
-            echo "You will install MariaDB 10.0.17."
+            Echo_Blue "You will install MariaDB 10.0.17."
         ;;
         *)
-            echo "No input, You will install MySQL 5.5.42 (Default)."
+            Echo_Blue "No input, You will install MySQL 5.5.42 (Default)."
             DBSelect="2"
         ;;
     esac
@@ -157,13 +157,13 @@ Dispaly_Selection()
     echo ""
     case "${InstallInnodb}" in
         [yY][eE][sS]|[yY])
-            echo "You will enable the InnoDB Storage Engine."
+            Echo_Blue "You will enable the InnoDB Storage Engine."
         ;;
         [nN][oO]|[nN])
-            echo "You will disable the InnoDB Storage Engine!"
+            Echo_Blue "You will disable the InnoDB Storage Engine!"
         ;;
         *)
-            echo "No input, The InnoDB Storage Engine will enable."
+            Echo_Blue "No input, The InnoDB Storage Engine will enable."
             InstallInnodb="y"
         ;;
     esac
@@ -179,7 +179,7 @@ Dispaly_Selection()
 
     Input_Mysql_RootPWD
     echo ""
-    Echo_Yellow "MySQL root password is: ${MysqlRootPWD}"
+    Echo_Blue "MySQL root password is: ${MysqlRootPWD}"
     echo ""
 
 #   // which PHP Version do you want to install?
@@ -201,22 +201,22 @@ Dispaly_Selection()
     echo ""
     case "${PHPSelect}" in
         1)
-            echo "You will install PHP 5.2.17."
+            Echo_Blue "You will install PHP 5.2.17."
         ;;
         2)
-            echo "You will install PHP 5.3.29."
+            Echo_Blue "You will install PHP 5.3.29."
         ;;
         3)
-            echo "You will Install PHP 5.4.41."
+            Echo_Blue "You will Install PHP 5.4.41."
         ;;
         4)
-            echo "You will install PHP 5.5.25."
+            Echo_Blue "You will install PHP 5.5.25."
         ;;
         5)
-            echo "You will install PHP 5.6.9."
+            Echo_Blue "You will install PHP 5.6.9."
         ;;
         *)
-            echo "No input, You will install PHP 5.5.25 (Default)."
+            Echo_Blue "No input, You will install PHP 5.5.25 (Default)."
             PHPSelect="4"
         ;;
     esac
@@ -240,11 +240,11 @@ Apache_Selection()
 
     echo ""
     if [ "${ApacheSelect}" = "1" ]; then
-        echo "You will install Apache 2.2.29."
+        Echo_Blue "You will install Apache 2.2.29."
     elif [ "${ApacheSelect}" = "2" ]; then
-        echo "You will install Apache 2.4.10."
+        Echo_Blue "You will install Apache 2.4.10."
     else
-        echo "No input, You will install Apache 2.2.29 (Default)."
+        Echo_Blue "No input, You will install Apache 2.2.29 (Default)."
         ApacheSelect="1"
     fi
     echo ""
@@ -258,11 +258,11 @@ Apache_Selection()
     read -p "Please enter Administrator Email Address: " ServerAdmin
     echo ""
     if [ "${ServerAdmin}" == "" ]; then
-        echo "Administrator Email Address will set to webmaster@example.com!"
+        Echo_Blue "Server Administrator Email will set to webmaster@example.com !"
         ServerAdmin="webmaster@example.com"
     else
         echo "========================================================"
-        echo Server Administrator Email: "${ServerAdmin}"
+        Echo_Blue "Server Administrator Email is: ${ServerAdmin}"
         echo "========================================================"
     fi
     echo ""
