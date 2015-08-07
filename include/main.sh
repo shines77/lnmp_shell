@@ -2,7 +2,7 @@
 
 Input_Mysql_RootPWD()
 {
-    read -p "Please enter the password:   " MysqlRootPWD
+    read -p "Please enter the password: " MysqlRootPWD
     if [ "${MysqlRootPWD}" = "" ]; then
         echo ""
         Echo_Magenta "You have no input, Mysql root password will be use the default value."
@@ -31,7 +31,7 @@ Input_Mysql_RootPWD()
             ;;
         esac
     else
-        read -p "Please confirm the password: " MysqlRootConfirmPWD
+        read -p "     Confirm the password: " MysqlRootConfirmPWD
         if [ "${MysqlRootConfirmPWD}" = "" ]; then
             MysqlRootConfirmPWD="${MysqlRootDefaultPWD}"
         fi
