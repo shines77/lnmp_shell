@@ -263,10 +263,10 @@ Echo_Color_Test()
 
 Echo_Color_Ex_Test()
 {
-    local prefix_text="|  <<<      "
-    local suffix_text="      >>>  |"
+    local prefix_text=" |  <<<      "
+    local suffix_text="      >>>  | "
     echo ""
-    Echo_Red_Ex "${prefix_text}" " This is Red color." "${suffix_text}"
+    Echo_Red_Ex "${prefix_text}" "  This is Red color.  " "${suffix_text}"
     Echo_Red_HL_Ex "${prefix_text}" "This is Red HL color." "${suffix_text}"
     Echo_Red_Blod_Ex "${prefix_text}" "This is Red blod color." "${suffix_text}"
     echo ""
