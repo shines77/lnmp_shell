@@ -4,16 +4,13 @@ export PATH
 
 . include/common.sh
 
-# Check whether the login user is a root account?
-if [ $(id -u) != "0" ]; then
-    Echo_Red "Error: You must be a root logon to run this script, please use root to install the lnamp."
-    exit 1
-fi
+# Check whether the logon user is a root account?
+Check_Is_Root_Account
 
 cur_dir=$(pwd)
 Stack=$1
 if [ "${Stack}" = "" ]; then
-    Stack="lnamp"
+    Stack="lnmp"
 else
     Stack=$1
 fi

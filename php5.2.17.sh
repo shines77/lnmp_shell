@@ -4,11 +4,7 @@ export PATH
 
 . include/common.sh
 
-# Check if user is root
-if [ $(id -u) != "0" ]; then
-    Echo_Red "Error: You must be root to run this script, please use root to install lnmp."
-    exit 1
-fi
+Check_Is_Root_Account
 
 . version.sh
 . config.sh
@@ -23,7 +19,7 @@ echo "|           Install PHP 5.2.17 for LNMP, Written by Licess              |"
 echo "+-----------------------------------------------------------------------+"
 echo "|                 A tool to install PHP 5.2.17 for LNMP                 |"
 echo "+-----------------------------------------------------------------------+"
-echo "|          For more information please visit http://www.lnmp.org        |"
+echo "|     For more information please visit http://lnamp.cloudbuses.com     |"
 echo "+-----------------------------------------------------------------------+"
 
 cur_dir=$(pwd)

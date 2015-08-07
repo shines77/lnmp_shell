@@ -4,11 +4,8 @@ export PATH
 
 . include/common.sh
 
-# Check if user is root
-if [ $(id -u) != "0" ]; then
-    Echo_Red "Error: You must be root to run this script"
-    exit 1
-fi
+# Check whether the login user is a root account?
+Check_Is_Root_Account
 
 cur_dir=$(pwd)
 action=$1

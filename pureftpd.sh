@@ -4,22 +4,21 @@ export PATH
 
 . include/common.sh
 
-# Check if user is root
-if [ $(id -u) != "0" ]; then
-    Echo_Red "Error: You must be root to run this script!"
-    exit 1
-fi
+# Check whether the login user is a root account?
+Check_Is_Root_Account
 
 clear
-echo "+----------------------------------------------------------+"
-echo "|          Pureftpd for LNMP,  Written by Licess           |"
-echo "+----------------------------------------------------------+"
-echo "|  This script is a tool to install pureftpd for LNMP      |"
-echo "+----------------------------------------------------------+"
-echo "|  For more information please visit http://www.lnmp.org   |"
-echo "+----------------------------------------------------------+"
-echo "|  Usage: ./pureftpd.sh                                    |"
-echo "+----------------------------------------------------------+"
+echo ""
+echo "+-----------------------------------------------------------------------+"
+echo "|                 Pureftpd for LNAMP,  Written by Licess                |"
+echo "+-----------------------------------------------------------------------+"
+echo "|           This script is a tool to install pureftpd for LNMP          |"
+echo "+-----------------------------------------------------------------------+"
+echo "|     For more information please visit http://lnamp.cloudbuses.com     |"
+echo "+-----------------------------------------------------------------------+"
+echo "|                      Usage: ./pureftpd.sh                             |"
+echo "+-----------------------------------------------------------------------+"
+echo ""
 
 cur_dir=$(pwd)
 action=$1

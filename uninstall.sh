@@ -4,16 +4,13 @@ export PATH
 
 . include/common.sh
 
-# Check if user is root
-if [ $(id -u) != "0" ]; then
-    Echo_Red "Error: You must be root to run this script, please use root to install lnmp."
-    exit 1
-fi
+# Check whether the login user is a root account?
+Check_Is_Root_Account
 
 cur_dir=$(pwd)
 Stack=$1
 if [ "${Stack}" = "" ]; then
-    Stack="lnamp"
+    Stack="lnmp"
 else
     Stack=$1
 fi
@@ -22,6 +19,7 @@ fi
 . config.sh
 
 . include/main.sh
+. include/init.sh
 
 shopt -s extglob
 
