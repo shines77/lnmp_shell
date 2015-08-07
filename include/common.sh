@@ -227,23 +227,36 @@ Echo_Cyan_HL_Ex()
 
 Echo_Color_Test()
 {
+    echo ""
     Echo_Red "This is Red color."
     Echo_Red_Blod "This is Red blod color."
+    Echo_Red_HL "This is Red HL color."
+    echo ""
 
     Echo_Green "This is Green color."
     Echo_Green_Blod "This is Green blod color."
+    Echo_Green_HL "This is Green HL color."
+    echo ""
 
     Echo_Blue "This is Blue color."
     Echo_Blue_Blod "This is Blue blod color."
+    Echo_Blue_HL "This is Blue HL color."
+    echo ""
 
     Echo_Yellow "This is Yellow color."
     Echo_Yellow_Blod "This is Yellow blod color."
+    Echo_Yellow_HL "This is Yellow HL color."
+    echo ""
 
     Echo_Magenta "This is Magenta color."
     Echo_Magenta_Blod "This is Magenta blod color."
+    Echo_Magenta_HL "This is Magenta HL color."
+    echo ""
 
     Echo_Cyan "This is Cyan color."
     Echo_Cyan_Blod "This is Cyan blod color."
+    Echo_Cyan_HL "This is Cyan HL color."
+    echo ""
 }
 
 # Check whether the logon user is a root account?
