@@ -4,28 +4,30 @@ Input_Mysql_RootPWD()
 {
     read -p "Please enter the password:   " MysqlRootPWD
     if [ "${MysqlRootPWD}" = "" ]; then
-        read -p "Do you sure use default Mysql password 'mysql2015'? [y/N]: " UseMysqlDefaultPWD
+        echo ""
+        read -p "Are you sure use Mysql root default password '${MysqlRootDefaultPWD}'? [y/N]: " MysqlRootUseDefaultPWD
 
         echo ""
-        case "${UseMysqlDefaultPWD}" in
+        case "${MysqlRootUseDefaultPWD}" in
             [yY][eE][sS]|[yY])
-                echo "You will use default Mysql root password."
+                echo "You will use default Mysql root password '${MysqlRootDefaultPWD}'."
+                MysqlRootUseDefaultPWD='y'
                 MysqlRootPWD="${MysqlRootDefaultPWD}"
                 MysqlRootConfirmPWD="${MysqlRootDefaultPWD}"
             ;;
             [nN][oO]|[nN])
                 Echo_Yellow "You have not choose the default Mysql root password, please input again."
+                MysqlRootUseDefaultPWD='n'
+                echo ""
                 Input_Mysql_RootPWD
             ;;
             *)
-                echo ""
-                echo "No input, You will use default Mysql root password."
-                UseMysqlDefaultPWD="y"
+                echo "No input, You will use default Mysql root password '${MysqlRootDefaultPWD}'."
+                MysqlRootUseDefaultPWD="y"
                 MysqlRootPWD="${MysqlRootDefaultPWD}"
                 MysqlRootConfirmPWD="${MysqlRootDefaultPWD}"
             ;;
         esac
-        echo ""
     else
         read -p "Please confirm the password: " MysqlRootConfirmPWD
         if [ "${MysqlRootConfirmPWD}" = "" ]; then
@@ -124,7 +126,6 @@ Dispaly_Selection()
             echo "You will install MariaDB 10.0.17."
         ;;
         *)
-            echo ""
             echo "No input, You will install MySQL 5.5.42 (Default)."
             DBSelect="2"
         ;;
@@ -160,7 +161,6 @@ Dispaly_Selection()
             echo "You will disable the InnoDB Storage Engine!"
         ;;
         *)
-            echo ""
             echo "No input, The InnoDB Storage Engine will enable."
             InstallInnodb="y"
         ;;
