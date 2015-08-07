@@ -36,7 +36,8 @@ Input_Mysql_RootPWD()
             MysqlRootConfirmPWD="${MysqlRootDefaultPWD}"
         fi
         if [ "${MysqlRootPWD}" != "${MysqlRootConfirmPWD}" ]; then
-            Echo_Red "Error: two time passwords are not equal."
+            echo ""
+            Echo_Red "Error: two time passwords are not equal, please try again."
             echo ""
             Input_Mysql_RootPWD
         fi
