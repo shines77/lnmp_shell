@@ -127,16 +127,16 @@ InnoDB_StorageEngine_Selection()
     echo ""
 }
 
-# Input mysql root password
+# Input MySQL root password
 
-Input_Mysql_RootPWD()
+Input_MySQL_RootPWD()
 {
     read -p "Please enter the password: " MysqlRootPWD
     if [ "${MysqlRootPWD}" = "" ]; then
         echo ""
         Echo_Magenta "You have no input, Mysql root password will be use the default value."
         echo ""
-        read -p "Are you sure use the default password: '${MysqlRootDefaultPWD}' ? [y/N]: " MysqlRootUseDefaultPWD
+        read -p "Are you sure use the default password: '${MysqlRootDefaultPWD}' ? [Y/n]: " MysqlRootUseDefaultPWD
 
         echo ""
         case "${MysqlRootUseDefaultPWD}" in
@@ -150,13 +150,17 @@ Input_Mysql_RootPWD()
                 Echo_Red "Info: You do not agree to use the default Mysql root password, please try again."
                 MysqlRootUseDefaultPWD='n'
                 echo ""
-                Input_Mysql_RootPWD
+                Input_MySQL_RootPWD
             ;;
             *)
-                Echo_Cyan "No input, You agree to use the default Mysql root password '${MysqlRootDefaultPWD}'."
-                MysqlRootUseDefaultPWD="y"
-                MysqlRootPWD="${MysqlRootDefaultPWD}"
-                MysqlRootConfirmPWD="${MysqlRootDefaultPWD}"
+#                Echo_Cyan "No input, You agree to use the default Mysql root password '${MysqlRootDefaultPWD}'."
+#                MysqlRootUseDefaultPWD="y"
+#                MysqlRootPWD="${MysqlRootDefaultPWD}"
+#                MysqlRootConfirmPWD="${MysqlRootDefaultPWD}"
+                Echo_Cyan "No input, You do not agree to use the default Mysql root password, please try again."
+                MysqlRootUseDefaultPWD='n'
+                echo ""
+                Input_MySQL_RootPWD
             ;;
         esac
     else
@@ -168,14 +172,14 @@ Input_Mysql_RootPWD()
             echo ""
             Echo_Red "Error: two time passwords are not equal, please try again."
             echo ""
-            Input_Mysql_RootPWD
+            Input_MySQL_RootPWD
         fi
     fi
 }
 
-# Set mysql root password
+# Set MySQL root password
 
-MySql_RootPWD_Setting()
+MySQL_RootPWD_Setting()
 {
     MysqlRootDefaultPWD="mysql2015"
     MysqlRootPWD=""
@@ -183,7 +187,7 @@ MySql_RootPWD_Setting()
     Echo_Yellow "Please setup the root password of MySQL. (Default password is: ${MysqlRootDefaultPWD})"
     echo ""
 
-    Input_Mysql_RootPWD
+    Input_MySQL_RootPWD
     echo ""
     Echo_Blue "Your MySQL root password is: ${MysqlRootPWD}"
     echo ""
@@ -323,7 +327,7 @@ Display_Selection()
 
     InnoDB_StorageEngine_Selection
 
-    MySql_RootPWD_Setting
+    MySQL_RootPWD_Setting
 
     echo "=========================================================="
 
