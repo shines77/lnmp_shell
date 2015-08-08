@@ -23,21 +23,68 @@ Pear_Pecl_Set()
     pecl config-set php_ini /usr/local/php/etc/php.ini
 }
 
-Install_PHP()
+Creat_PHP_Tools()
 {
-    if [ "${PHPSelect}" = "1" ]; then
-        Install_PHP_52
-    elif [ "${PHPSelect}" = "2" ]; then
-        Install_PHP_53
-    elif [ "${PHPSelect}" = "3" ]; then
-        Install_PHP_54
-    elif [ "${PHPSelect}" = "4" ]; then
-        Install_PHP_55
-    elif [ "${PHPSelect}" = "5" ]; then
-        Install_PHP_56
-    else
-#       // Default choice is PHP 5.5.25
-        Install_PHP_55
+    echo "Create PHP Info Tool ..."
+    cat >/home/wwwroot/default/phpinfo.php<<eof
+<?
+phpinfo();
+?>
+eof
+
+    echo "Copy PHP Prober ..."
+    cd ${cur_dir}/src
+    tar zxf p.tar.gz
+    \cp p.php /home/wwwroot/default/p.php
+
+    \cp ${cur_dir}/conf/index.html /home/wwwroot/default/index.html
+    \cp ${cur_dir}/conf/lnmp.gif /home/wwwroot/default/lnmp.gif
+    echo "============================Install PHPMyAdmin================================="
+    [[ -d /home/wwwroot/default/phpmyadmin ]] && rm -rf /home/wwwroot/default/phpmyadmin
+    tar zxf ${PhpMyAdmin_Ver}.tar.gz
+    mv ${PhpMyAdmin_Ver} /home/wwwroot/default/phpmyadmin
+    \cp ${cur_dir}/conf/config.inc.php /home/wwwroot/default/phpmyadmin/config.inc.php
+    sed -i 's/LNMPORG/LNMP.org'$RANDOM'VPSer.net/g' /home/wwwroot/default/phpmyadmin/config.inc.php
+    mkdir /home/wwwroot/default/phpmyadmin/{upload,save}
+    chmod 755 -R /home/wwwroot/default/phpmyadmin/
+    chown www:www -R /home/wwwroot/default/phpmyadmin/
+    echo "============================phpMyAdmin install completed======================="
+
+    #add iptables firewall rules
+    if [ -s /sbin/iptables ]; then
+        /sbin/iptables -I INPUT 1 -i lo -j ACCEPT
+        /sbin/iptables -I INPUT 2 -m state --state ESTABLISHED,RELATED -j ACCEPT
+        /sbin/iptables -I INPUT 3 -p tcp --dport 80 -j ACCEPT
+        /sbin/iptables -I INPUT 4 -p tcp -s 127.0.0.1 --dport 3306 -j ACCEPT
+        /sbin/iptables -I INPUT 5 -p tcp --dport 3306 -j DROP
+        if [ "$PM" = "yum" ]; then
+            service iptables save
+        elif [ "$PM" = "apt" ]; then
+            iptables-save > /etc/iptables.rules
+            cat >/etc/network/if-post-down.d/iptables<<EOF
+#!/bin/bash
+iptables-save > /etc/iptables.rules
+EOF
+            chmod +x /etc/network/if-post-down.d/iptables
+            cat >/etc/network/if-pre-up.d/iptables<<EOF
+#!/bin/bash
+iptables-restore < /etc/iptables.rules
+EOF
+            chmod +x /etc/network/if-pre-up.d/iptables
+        fi
+    fi
+}
+
+Check_PHP53_Curl()
+{
+    if [ "${DISTRO}" = "Fedora" ];then
+        PHP53_With_Curl='y'
+    elif echo "${Ubuntu_Version}" | grep -Eqi '^14.1';then
+        PHP53_With_Curl='y'
+    elif echo "${Ubuntu_Version}" | grep -Eqi '^15.';then
+        PHP53_With_Curl='y'
+    elif echo "${Debian_Version}" | grep -Eqi '^8.';then
+        PHP53_With_Curl='y'
     fi
 }
 
@@ -101,8 +148,8 @@ Install_PHP_52()
 
 ;ionCube
 
-[Zend Optimizer] 
-zend_optimizer.optimization_level=1 
+[Zend Optimizer]
+zend_optimizer.optimization_level=1
 zend_extension="/usr/local/zend/ZendOptimizer.so"
 
 ;xcache
@@ -332,7 +379,7 @@ Install_PHP_55()
     if [ "${Stack}" = "lnmp" ]; then
         ./configure --prefix=/usr/local/php --with-config-file-path=/usr/local/php/etc --enable-fpm --with-fpm-user=www --with-fpm-group=www --with-mysql=mysqlnd --with-mysqli=mysqlnd --with-pdo-mysql=mysqlnd --with-iconv-dir --with-freetype-dir=/usr/local/freetype --with-jpeg-dir --with-png-dir --with-zlib --with-libxml-dir=/usr --enable-xml --disable-rpath --enable-bcmath --enable-shmop --enable-sysvsem --enable-inline-optimization --with-curl --enable-mbregex --enable-mbstring --with-mcrypt --enable-ftp --with-gd --enable-gd-native-ttf --with-openssl --with-mhash --enable-pcntl --enable-sockets --with-xmlrpc --enable-zip --enable-soap --with-gettext --disable-fileinfo --enable-opcache
     else
-       ./configure --prefix=/usr/local/php --with-config-file-path=/usr/local/php/etc --with-apxs2=/usr/local/apache/bin/apxs --with-mysql=mysqlnd --with-mysqli=mysqlnd --with-pdo-mysql=mysqlnd --with-iconv-dir --with-freetype-dir=/usr/local/freetype --with-jpeg-dir --with-png-dir --with-zlib --with-libxml-dir=/usr --enable-xml --disable-rpath --enable-bcmath --enable-shmop --enable-sysvsem --enable-inline-optimization --with-curl --enable-mbregex --enable-mbstring --with-mcrypt --enable-ftp --with-gd --enable-gd-native-ttf --with-openssl --with-mhash --enable-pcntl --enable-sockets --with-xmlrpc --enable-zip --enable-soap --with-gettext --disable-fileinfo --enable-opcache 
+       ./configure --prefix=/usr/local/php --with-config-file-path=/usr/local/php/etc --with-apxs2=/usr/local/apache/bin/apxs --with-mysql=mysqlnd --with-mysqli=mysqlnd --with-pdo-mysql=mysqlnd --with-iconv-dir --with-freetype-dir=/usr/local/freetype --with-jpeg-dir --with-png-dir --with-zlib --with-libxml-dir=/usr --enable-xml --disable-rpath --enable-bcmath --enable-shmop --enable-sysvsem --enable-inline-optimization --with-curl --enable-mbregex --enable-mbstring --with-mcrypt --enable-ftp --with-gd --enable-gd-native-ttf --with-openssl --with-mhash --enable-pcntl --enable-sockets --with-xmlrpc --enable-zip --enable-soap --with-gettext --disable-fileinfo --enable-opcache
     fi
 
     make ZEND_EXTRA_LIBS='-liconv'
@@ -549,67 +596,21 @@ EOF
 fi
 }
 
-Creat_PHP_Tools()
+# Default choice is PHP 5.5.25
+
+Install_PHP()
 {
-    echo "Create PHP Info Tool ..."
-    cat >/home/wwwroot/default/phpinfo.php<<eof
-<?
-phpinfo();
-?>
-eof
-
-    echo "Copy PHP Prober ..."
-    cd ${cur_dir}/src
-    tar zxf p.tar.gz
-    \cp p.php /home/wwwroot/default/p.php
-
-    \cp ${cur_dir}/conf/index.html /home/wwwroot/default/index.html
-    \cp ${cur_dir}/conf/lnmp.gif /home/wwwroot/default/lnmp.gif
-    echo "============================Install PHPMyAdmin================================="
-    [[ -d /home/wwwroot/default/phpmyadmin ]] && rm -rf /home/wwwroot/default/phpmyadmin
-    tar zxf ${PhpMyAdmin_Ver}.tar.gz
-    mv ${PhpMyAdmin_Ver} /home/wwwroot/default/phpmyadmin
-    \cp ${cur_dir}/conf/config.inc.php /home/wwwroot/default/phpmyadmin/config.inc.php
-    sed -i 's/LNMPORG/LNMP.org'$RANDOM'VPSer.net/g' /home/wwwroot/default/phpmyadmin/config.inc.php
-    mkdir /home/wwwroot/default/phpmyadmin/{upload,save}
-    chmod 755 -R /home/wwwroot/default/phpmyadmin/
-    chown www:www -R /home/wwwroot/default/phpmyadmin/
-    echo "============================phpMyAdmin install completed======================="
-
-    #add iptables firewall rules
-    if [ -s /sbin/iptables ]; then
-        /sbin/iptables -I INPUT 1 -i lo -j ACCEPT
-        /sbin/iptables -I INPUT 2 -m state --state ESTABLISHED,RELATED -j ACCEPT
-        /sbin/iptables -I INPUT 3 -p tcp --dport 80 -j ACCEPT
-        /sbin/iptables -I INPUT 4 -p tcp -s 127.0.0.1 --dport 3306 -j ACCEPT
-        /sbin/iptables -I INPUT 5 -p tcp --dport 3306 -j DROP
-        if [ "$PM" = "yum" ]; then
-            service iptables save
-        elif [ "$PM" = "apt" ]; then
-            iptables-save > /etc/iptables.rules
-            cat >/etc/network/if-post-down.d/iptables<<EOF
-#!/bin/bash
-iptables-save > /etc/iptables.rules
-EOF
-            chmod +x /etc/network/if-post-down.d/iptables
-            cat >/etc/network/if-pre-up.d/iptables<<EOF
-#!/bin/bash
-iptables-restore < /etc/iptables.rules
-EOF
-            chmod +x /etc/network/if-pre-up.d/iptables
-        fi
-    fi
-}
-
-Check_PHP53_Curl()
-{
-    if [ "${DISTRO}" = "Fedora" ];then
-        PHP53_With_Curl='y'
-    elif echo "${Ubuntu_Version}" | grep -Eqi '^14.1';then
-        PHP53_With_Curl='y'
-    elif echo "${Ubuntu_Version}" | grep -Eqi '^15.';then 
-        PHP53_With_Curl='y'
-    elif echo "${Debian_Version}" | grep -Eqi '^8.';then
-        PHP53_With_Curl='y'
+    if [ "${PHPSelect}" = "1" ]; then
+        Install_PHP_52
+    elif [ "${PHPSelect}" = "2" ]; then
+        Install_PHP_53
+    elif [ "${PHPSelect}" = "3" ]; then
+        Install_PHP_54
+    elif [ "${PHPSelect}" = "4" ]; then
+        Install_PHP_55
+    elif [ "${PHPSelect}" = "5" ]; then
+        Install_PHP_56
+    else
+        Install_PHP_55
     fi
 }

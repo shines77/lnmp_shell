@@ -20,6 +20,7 @@ fi
 
 . include/main.sh
 . include/init.sh
+. include/memory_allocator.sh
 . include/mysql.sh
 . include/mariadb.sh
 . include/php.sh
@@ -89,30 +90,15 @@ Init_Install()
     Install_Freetype
     Install_Curl
     Install_Pcre
-    if [ "${SelectMalloc}" = "2" ]; then
-        Install_Jemalloc
-    elif [ "${SelectMalloc}" = "3" ]; then
-        Install_TCMalloc
-    fi
+
+    Install_MemoryAllocator
     if [ "$PM" = "yum" ]; then
         CentOS_Lib_Opt
     elif [ "$PM" = "apt" ]; then
         Debian_Lib_Opt
         Debian_Check_MySQL
     fi
-    if [ "${DBSelect}" = "1" ]; then
-        Install_MySQL_51
-    elif [ "${DBSelect}" = "2" ]; then
-        Install_MySQL_55
-    elif [ "${DBSelect}" = "3" ]; then
-        Install_MySQL_56
-    elif [ "${DBSelect}" = "4" ]; then
-        Install_MariaDB_5
-    elif [ "${DBSelect}" = "5" ]; then
-        Install_MariaDB_10
-    else
-        Install_MySQL_55
-    fi
+    Install_MySQL
     Export_PHP_Autoconf
 }
 

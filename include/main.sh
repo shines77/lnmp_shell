@@ -26,7 +26,7 @@ Dispaly_Selection()
 
     Nginx_Selection
 
-    if [ "${Stack}" = "lamp" || "${Stack}" = "lnamp" || "${Stack}" = "test" ]; then
+    if [[ "${Stack}" = "lamp" || "${Stack}" = "lnamp" || "${Stack}" = "test" ]]; then
 
         echo "=========================================================="
 

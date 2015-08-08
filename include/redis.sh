@@ -72,7 +72,7 @@ Install_Redis()
     make && make install
     cd ../
 
-sed -i '/the dl()/i\
+    sed -i '/the dl()/i\
 extension = "redis.so"' /usr/local/php/etc/php.ini
 
     \cp ${cur_dir}/init.d/init.d.redis /etc/init.d/redis

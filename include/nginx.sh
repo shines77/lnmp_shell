@@ -1,19 +1,5 @@
 #!/bin/bash
 
-Install_Nginx()
-{
-    if [ "${NginxSelect}" = "1" ]; then
-        Install_Nginx_1_4_7
-    elif [ "${NginxSelect}" = "2" ]; then
-        Install_Nginx_1_6_3
-    elif [ "${NginxSelect}" = "3" ]; then
-        Install_Nginx_1_8_0
-    else
-#       // Default choice is Nginx 1.8.0
-        Install_Nginx_1_8_0
-    fi
-}
-
 Install_Nginx_1_4_7()
 {
     Echo_Blue "[+] Installing ${Nginx_Ver} ... "
@@ -90,5 +76,20 @@ EOF
         chown -R www:www /tmp/tcmalloc
         sed -i '/nginx.pid/a\
 google_perftools_profiles /tmp/tcmalloc;' /usr/local/nginx/conf/nginx.conf
+    fi
+}
+
+# Default choice is Nginx 1.8.0
+
+Install_Nginx()
+{
+    if [ "${NginxSelect}" = "1" ]; then
+        Install_Nginx_1_4_7
+    elif [ "${NginxSelect}" = "2" ]; then
+        Install_Nginx_1_6_3
+    elif [ "${NginxSelect}" = "3" ]; then
+        Install_Nginx_1_8_0
+    else
+        Install_Nginx_1_8_0
     fi
 }
