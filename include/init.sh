@@ -239,6 +239,18 @@ Debian_Dependent()
     do apt-get install -y $packages --force-yes; done
 }
 
+Download_Files()
+{
+    local URL=$1
+    local FileName=$2
+    if [ -s "${FileName}" ]; then
+        echo "${FileName} [found]"
+    else
+        Echo_Red "Error: ${FileName} not found!!! download now ..."
+        wget -c ${URL}
+    fi
+}
+
 Check_Download_Files()
 {
     Echo_Blue "[+] Downloading files ..."

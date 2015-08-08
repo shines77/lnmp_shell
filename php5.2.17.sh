@@ -93,12 +93,12 @@ sed -i 's/disable_functions =.*/disable_functions = passthru,exec,system,chroot,
 
 cd ${cur_dir}/src
 if [ "${Is_64bit}" = "y" ] ; then
-    Download_Files http://soft.vpser.net/web/zend/ZendOptimizer-3.3.9-linux-glibc23-x86_64.tar.gz
+    Download_Files ${Download_Mirror}/web/zend/ZendOptimizer-3.3.9-linux-glibc23-x86_64.tar.gz
     tar zxf ZendOptimizer-3.3.9-linux-glibc23-x86_64.tar.gz
     mkdir -p /usr/local/zend52/
     \cp ZendOptimizer-3.3.9-linux-glibc23-x86_64/data/5_2_x_comp/ZendOptimizer.so /usr/local/zend52/
 else
-    Download_Files http://soft.vpser.net/web/zend/ZendOptimizer-3.3.9-linux-glibc23-i386.tar.gz
+    Download_Files ${Download_Mirror}/web/zend/ZendOptimizer-3.3.9-linux-glibc23-i386.tar.gz
     tar zxf ZendOptimizer-3.3.9-linux-glibc23-i386.tar.gz
     mkdir -p /usr/local/zend52/
     \cp ZendOptimizer-3.3.9-linux-glibc23-i386/data/5_2_x_comp/ZendOptimizer.so /usr/local/zend52/
