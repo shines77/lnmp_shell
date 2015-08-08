@@ -141,19 +141,19 @@ LNAMP_Stack()
 
 case "${Stack}" in   
     lnmp)
-        Dispaly_Selection
+        Display_Selection
         LNMP_Stack 2>&1 | tee -a /root/lnamp-install.log
         ;;
     lamp)
-        Dispaly_Selection
+        Display_Selection
         LAMP_Stack 2>&1 | tee -a /root/lnamp-install.log
         ;;
     lnamp)
-        Dispaly_Selection
+        Display_Selection
         LNAMP_Stack 2>&1 | tee -a /root/lnamp-install.log
         ;;
     test)
-        Dispaly_Selection
+        Display_Selection
         ;;
     timezone)
         Set_Timezone

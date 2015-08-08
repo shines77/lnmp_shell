@@ -255,7 +255,6 @@ Nginx_Selection()
         3)
             Echo_Blue "You will Install Nginx 1.8.0."
         ;;
-        ;;
         *)
             Echo_Blue "No input, You will install Nginx 1.8.0 (Default)."
             NginxSelect="3"
@@ -310,7 +309,7 @@ Admin_Email_Setting()
 
 # Get the selections about install
 
-Dispaly_Selection()
+Display_Selection()
 {
     echo "=========================================================="
 
