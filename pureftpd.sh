@@ -4,7 +4,7 @@ export PATH
 
 . include/common.sh
 
-# Check whether the login user is a root account?
+# Check whether the logon user is a root account?
 Check_Is_Root_Account
 
 clear

@@ -272,7 +272,7 @@ Apache_Selection()
 Press_Install()
 {
     echo ""
-    echo "Press any key to install or Press Ctrl+c to cancel ..."
+    echo "Press any key to install or Press Ctrl + C to cancel ..."
     OLDCONFIG=`stty -g`
     stty -icanon -echo min 1 time 0
     dd count=1 2>/dev/null
@@ -283,7 +283,7 @@ Press_Install()
 Press_Start()
 {
     echo ""
-    echo "Press any key to start or Press Ctrl+c to cancel ..."
+    echo "Press any key to start or Press Ctrl + C to cancel ..."
     OLDCONFIG=`stty -g`
     stty -icanon -echo min 1 time 0
     dd count=1 2>/dev/null
