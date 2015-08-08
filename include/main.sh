@@ -1,55 +1,47 @@
 #!/bin/bash
 
-Input_Mysql_RootPWD()
-{
-    read -p "Please enter the password: " MysqlRootPWD
-    if [ "${MysqlRootPWD}" = "" ]; then
-        echo ""
-        Echo_Magenta "You have no input, Mysql root password will be use the default value."
-        echo ""
-        read -p "Are you sure use the default password: '${MysqlRootDefaultPWD}' ? [y/N]: " MysqlRootUseDefaultPWD
-
-        echo ""
-        case "${MysqlRootUseDefaultPWD}" in
-            [yY][eE][sS]|[yY])
-                Echo_Cyan "You agree to use the default Mysql root password '${MysqlRootDefaultPWD}'."
-                MysqlRootUseDefaultPWD='y'
-                MysqlRootPWD="${MysqlRootDefaultPWD}"
-                MysqlRootConfirmPWD="${MysqlRootDefaultPWD}"
-            ;;
-            [nN][oO]|[nN])
-                Echo_Red "Info: You do not agree to use the default Mysql root password, please try again."
-                MysqlRootUseDefaultPWD='n'
-                echo ""
-                Input_Mysql_RootPWD
-            ;;
-            *)
-                Echo_Cyan "No input, You agree to use the default Mysql root password '${MysqlRootDefaultPWD}'."
-                MysqlRootUseDefaultPWD="y"
-                MysqlRootPWD="${MysqlRootDefaultPWD}"
-                MysqlRootConfirmPWD="${MysqlRootDefaultPWD}"
-            ;;
-        esac
-    else
-        read -p "     Confirm the password: " MysqlRootConfirmPWD
-        if [ "${MysqlRootConfirmPWD}" = "" ]; then
-            MysqlRootConfirmPWD="${MysqlRootDefaultPWD}"
-        fi
-        if [ "${MysqlRootPWD}" != "${MysqlRootConfirmPWD}" ]; then
-            echo ""
-            Echo_Red "Error: two time passwords are not equal, please try again."
-            echo ""
-            Input_Mysql_RootPWD
-        fi
-    fi
-}
+# Get the selections about install
 
 Dispaly_Selection()
 {
-#   // which Memory Allocator do you want to install?
+    echo "=========================================================="
+
+    MemeoryAllocator_Selection
 
     echo "=========================================================="
 
+    MySQL_Selection
+
+    echo "=========================================================="
+
+    InnoDB_StorageEngine_Selection
+
+    MySql_RootPWD_Setting
+
+    echo "=========================================================="
+
+    PHP_Selection
+
+    echo "=========================================================="
+
+    Nginx_Selection
+
+    if [ "${Stack}" = "lamp" || "${Stack}" = "lnamp" || "${Stack}" = "test" ]; then
+
+        echo "=========================================================="
+
+        Apache_Selection
+
+        echo "=========================================================="
+
+        Admin_Email_Setting
+    fi
+}
+
+# which Memory Allocator do you want to install?
+
+MemeoryAllocator_Selection()
+{
     SelectMalloc="1"
     echo ""
     Echo_Yellow "You have 3 options for your Memory Allocator install:"
@@ -94,11 +86,12 @@ Dispaly_Selection()
         MariaDBMAOpt="-DCMAKE_EXE_LINKER_FLAGS='-ltcmalloc' -DWITH_SAFEMALLOC=OFF"
         NginxMAOpt='--with-google_perftools_module'
     fi
+}
 
-#   // which MySQL Version do you want to install?
+# which MySQL Version do you want to install?
 
-    echo "=========================================================="
-
+MySQL_Selection()
+{
     DBSelect="2"
     echo ""
     Echo_Yellow "You have 5 options for your DataBase install:"
@@ -144,11 +137,12 @@ Dispaly_Selection()
         MySQL_Config="/usr/local/mysql/bin/mysql_config"
         MySQL_Dir="/usr/local/mysql"
     fi
+}
 
-#   // do you want to enable or disable the InnoDB Storage Engine?
+# do you want to enable or disable the InnoDB Storage Engine?
 
-    echo "=========================================================="
-
+InnoDB_StorageEngine_Selection()
+{
     InstallInnodb="y"
     echo ""
     Echo_Yellow "Do you want to enable or disable the InnoDB Storage Engine?"
@@ -169,9 +163,58 @@ Dispaly_Selection()
         ;;
     esac
     echo ""
+}
 
-#   // set mysql root password
+# Input mysql root password
 
+Input_Mysql_RootPWD()
+{
+    read -p "Please enter the password: " MysqlRootPWD
+    if [ "${MysqlRootPWD}" = "" ]; then
+        echo ""
+        Echo_Magenta "You have no input, Mysql root password will be use the default value."
+        echo ""
+        read -p "Are you sure use the default password: '${MysqlRootDefaultPWD}' ? [y/N]: " MysqlRootUseDefaultPWD
+
+        echo ""
+        case "${MysqlRootUseDefaultPWD}" in
+            [yY][eE][sS]|[yY])
+                Echo_Cyan "You agree to use the default Mysql root password '${MysqlRootDefaultPWD}'."
+                MysqlRootUseDefaultPWD='y'
+                MysqlRootPWD="${MysqlRootDefaultPWD}"
+                MysqlRootConfirmPWD="${MysqlRootDefaultPWD}"
+            ;;
+            [nN][oO]|[nN])
+                Echo_Red "Info: You do not agree to use the default Mysql root password, please try again."
+                MysqlRootUseDefaultPWD='n'
+                echo ""
+                Input_Mysql_RootPWD
+            ;;
+            *)
+                Echo_Cyan "No input, You agree to use the default Mysql root password '${MysqlRootDefaultPWD}'."
+                MysqlRootUseDefaultPWD="y"
+                MysqlRootPWD="${MysqlRootDefaultPWD}"
+                MysqlRootConfirmPWD="${MysqlRootDefaultPWD}"
+            ;;
+        esac
+    else
+        read -p "     Confirm the password: " MysqlRootConfirmPWD
+        if [ "${MysqlRootConfirmPWD}" = "" ]; then
+            MysqlRootConfirmPWD="${MysqlRootDefaultPWD}"
+        fi
+        if [ "${MysqlRootPWD}" != "${MysqlRootConfirmPWD}" ]; then
+            echo ""
+            Echo_Red "Error: two time passwords are not equal, please try again."
+            echo ""
+            Input_Mysql_RootPWD
+        fi
+    fi
+}
+
+# Set mysql root password
+
+MySql_RootPWD_Setting()
+{
     MysqlRootDefaultPWD="mysql2015"
     MysqlRootPWD=""
     MysqlRootConfirmPWD=""
@@ -182,11 +225,12 @@ Dispaly_Selection()
     echo ""
     Echo_Blue "Your MySQL root password is: ${MysqlRootPWD}"
     echo ""
+}
 
-#   // which PHP Version do you want to install?
+# Which PHP Version do you want to install?
 
-    echo "=========================================================="
-
+PHP_Selection()
+{
     PHPSelect="3"
     echo ""
     Echo_Yellow "You have 5 options for your PHP install:"
@@ -224,12 +268,44 @@ Dispaly_Selection()
     echo ""
 }
 
+# Which Nginx Version do you want to install?
+
+Nginx_Selection()
+{
+    NginxSelect="3"
+    echo ""
+    Echo_Yellow "You have 3 options for your Nginx install:"
+    echo ""
+    echo "1: Install Nginx 1.4.7"
+    echo "2: Install Nginx 1.6.3"
+    echo "3: Install Nginx 1.8.0 (Default)"
+    echo ""
+    read -p "Enter your choice (1, 2 or 3): " NginxSelect
+
+    echo ""
+    case "${NginxSelect}" in
+        1)
+            Echo_Blue "You will install Nginx 1.4.7."
+        ;;
+        2)
+            Echo_Blue "You will install Nginx 1.6.3."
+        ;;
+        3)
+            Echo_Blue "You will Install Nginx 1.8.0."
+        ;;
+        ;;
+        *)
+            Echo_Blue "No input, You will install Nginx 1.8.0 (Default)."
+            NginxSelect="3"
+        ;;
+    esac
+    echo ""
+}
+
+# Which Apache Version do you want to install?
+
 Apache_Selection()
 {
-#   // which Apache Version do you want to install?
-
-    echo "=========================================================="
-
     ApacheSelect="1"
     echo ""
     Echo_Yellow "You have 2 options for your Apache install:"
@@ -249,11 +325,12 @@ Apache_Selection()
         ApacheSelect="1"
     fi
     echo ""
+}
 
-#   // set Server Administrator Email Address
+# Set Server Administrator Email Address
 
-    echo "=========================================================="
-
+Admin_Email_Setting()
+{
     ServerAdmin=""
     echo ""
     read -p "Please enter Administrator Email Address: " ServerAdmin

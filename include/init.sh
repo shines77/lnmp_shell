@@ -1,9 +1,9 @@
 #!/bin/bash
 
+# Setting your server's timezone.
+
 Set_Timezone()
 {
-#   // Choice your server's timezone.
-
     echo "========================================"
     Echo_Blue " Setting server's timezone ..."
     echo "========================================"
@@ -34,44 +34,44 @@ Set_Timezone()
         1)
             echo "You choice Asia - Shanghai, Chongqing timezone."
 #           ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-            cp -f /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+            \cp -f /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
         ;;
         2)
             echo "You choice Asia - HongKong timezone."
 #           ln -s /usr/share/zoneinfo/Asia/Hong_Kong /etc/localtime
-            cp -f /usr/share/zoneinfo/Asia/Hong_Kong /etc/localtime
+            \cp -f /usr/share/zoneinfo/Asia/Hong_Kong /etc/localtime
         ;;    
         3)
             echo "You choice Asia - Singapore timezone."
 #           ln -s /usr/share/zoneinfo/Asia/Singapore /etc/localtime
-            cp -f /usr/share/zoneinfo/Asia/Singapore /etc/localtime
+            \cp -f /usr/share/zoneinfo/Asia/Singapore /etc/localtime
         ;;
         4)
             echo "You choice Asia - Japan timezone."
 #           ln -s /usr/share/zoneinfo/Japan /etc/localtime
-            cp -f /usr/share/zoneinfo/Japan /etc/localtime
+            \cp -f /usr/share/zoneinfo/Japan /etc/localtime
         ;;
         5)
             echo "You choice Amemrican - New York (East US) timezone."
 #           ln -s /usr/share/zoneinfo/US/Eastern /etc/localtime
 #           ln -s /usr/share/zoneinfo/America/New_York /etc/localtime
-            cp -f /usr/share/zoneinfo/America/New_York /etc/localtime
+            \cp -f /usr/share/zoneinfo/America/New_York /etc/localtime
         ;;
         6)
             echo "You choice Amemrican - Los Angeles (West US) timezone."
 #           ln -s /usr/share/zoneinfo/US/Pacific /etc/localtime
 #           ln -s /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
-            cp -f /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
+            \cp -f /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
         ;;
         7)
             echo "You choice Europe - London (United Kingdom) timezone."
 #           ln -s /usr/share/zoneinfo/Europe/London /etc/localtime
-            cp -f /usr/share/zoneinfo/Europe/London /etc/localtime
+            \cp -f /usr/share/zoneinfo/Europe/London /etc/localtime
         ;;
         8)
             echo "You choice Europe - Paris (France) timezone."
 #           ln -s /usr/share/zoneinfo/Europe/Paris /etc/localtime
-            cp -f /usr/share/zoneinfo/Europe/Paris /etc/localtime
+            \cp -f /usr/share/zoneinfo/Europe/Paris /etc/localtime
         ;;   
         *)
             echo "No input, you choice No change - Keep use now timezone setting (Default)."

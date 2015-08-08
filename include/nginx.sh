@@ -2,6 +2,30 @@
 
 Install_Nginx()
 {
+    if [ "${NginxSelect}" = "1" ]; then
+        Install_Nginx_1_4_7
+    elif [ "${NginxSelect}" = "2" ]; then
+        Install_Nginx_1_6_3
+    elif [ "${NginxSelect}" = "3" ]; then
+        Install_Nginx_1_8_0
+    else
+#       // Default choice is Nginx 1.8.0
+        Install_Nginx_1_8_0
+    fi
+}
+
+Install_Nginx_1_4_7()
+{
+    Echo_Blue "[+] Installing ${Nginx_Ver} ... "
+}
+
+Install_Nginx_1_6_3()
+{
+    Echo_Blue "[+] Installing ${Nginx_Ver} ... "
+}
+
+Install_Nginx_1_8_0()
+{
     Echo_Blue "[+] Installing ${Nginx_Ver} ... "
     groupadd www
     useradd -s /sbin/nologin -g www www
@@ -51,11 +75,11 @@ Install_Nginx()
     mkdir /usr/local/nginx/conf/vhost
 
     if [ "${Stack}" = "lnmp" ]; then
-    cat >/home/wwwroot/default/.user.ini<<EOF
+        cat >/home/wwwroot/default/.user.ini<<EOF
 open_basedir=/home/wwwroot/default:/tmp/:/proc/
 EOF
-    chmod 644 /home/wwwroot/default/.user.ini
-    chattr +i /home/wwwroot/default/.user.ini
+        chmod 644 /home/wwwroot/default/.user.ini
+        chattr +i /home/wwwroot/default/.user.ini
     fi
 
     \cp init.d/init.d.nginx /etc/init.d/nginx

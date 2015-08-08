@@ -112,6 +112,8 @@ Uninstall_LNAMP()
     echo "LNAMP Uninstall completed."
 }
 
+Run_Uninstall()
+{
     Check_Stack
     echo "Current Stack: ${Get_Stack}"
 
@@ -180,3 +182,6 @@ EOF
             Uninstall_LNAMP
         ;;    
     esac
+}
+
+Run_Uninstall

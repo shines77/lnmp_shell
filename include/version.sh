@@ -61,11 +61,11 @@ fi
 # Nginx
 Nginx_Ver='nginx-1.8.0'
 if [ "${NginxSelect}" = "1" ]; then
-    Apache_Version='nginx-1.4.7'
+    Nginx_Ver='nginx-1.4.7'
 elif [ "${NginxSelect}" = "2" ]; then
-    Apache_Version='nginx-1.6.3'
+    Nginx_Ver='nginx-1.6.3'
 elif [ "${NginxSelect}" = "3" ]; then
-    Apache_Version='nginx-1.8.0'    
+    Nginx_Ver='nginx-1.8.0'    
 fi
 
 # APR and Apache dependents

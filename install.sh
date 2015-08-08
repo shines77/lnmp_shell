@@ -130,7 +130,6 @@ LNMP_Stack()
 
 LAMP_Stack()
 {
-    Apache_Selection
     Init_Install
 
     Install_Apache
@@ -143,7 +142,6 @@ LAMP_Stack()
 
 LNAMP_Stack()
 {
-    Apache_Selection
     Init_Install
 
     Install_Apache
@@ -170,7 +168,6 @@ case "${Stack}" in
         ;;
     test)
         Dispaly_Selection
-        Apache_Selection
         ;;
     timezone)
         Set_Timezone
