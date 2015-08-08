@@ -51,22 +51,20 @@ DAEMON_OPTS=
 NAME=nginx
 DESC=nginx
 
-Color_Text()
+color_text()
 {
-    echo "\033[0;$2m$1\033[0m" -e
+    echo "\033[0;$2m$1\033[0m"
 }
 
-Echo_Red()
+echo_red()
 {
-    Color_Text "$1" "31"
+    color_text "$1" "31"
 }
 
-Echo_Yellow()
+echo_yellow()
 {
-    Color_Text "$1" "33"
+    color_text "$1" "33"
 }
-
-Echo_Red "test"
 
 #
 # Include nginx defaults if available
@@ -79,12 +77,12 @@ fi
 # Check the daemon file is exists?
 #
 if [ ! -x $DAEMON ]; then
-    Echo_Red "Error: Daemon binary ${DAEMON} is not existed."
-    # echo -e "\033[0;31mError: Daemon binary ${DAEMON} is not existed.\033[0m"
-    exit 0
+    # echo "\033[0;31mError: Daemon binary file ${DAEMON} does not exist.\033[0m"
+    echo_red "Error: Daemon binary file ${DAEMON} does not exist."
+    exit 1
 fi
 
-test -x $DAEMON || exit 0
+test -x $DAEMON || exit 1
 
 . /lib/init/vars.sh
 . /lib/lsb/init-functions
