@@ -79,10 +79,10 @@ fi
 if [ ! -x $DAEMON ]; then
     # echo "\033[0;31mError: Daemon binary file ${DAEMON} does not exist.\033[0m"
     echo_red "Error: Daemon binary file ${DAEMON} does not exist."
-    exit 1
+    exit 0
 fi
 
-test -x $DAEMON || exit 1
+test -x $DAEMON || exit 0
 
 . /lib/init/vars.sh
 . /lib/lsb/init-functions
