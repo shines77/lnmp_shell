@@ -1,4 +1,5 @@
-#! /bin/sh
+#!/bin/sh
+
 # chkconfig: 2345 55 25
 # Description: Startup script for nginx webserver on Debian. Place in /etc/init.d and
 # run 'update-rc.d -f nginx defaults', or use the appropriate command on your
@@ -6,8 +7,8 @@
 
 ### BEGIN INIT INFO
 # Provides:          nginx
-# Required-Start:    $all
-# Required-Stop:     $all
+# Required-Start:    $local_fs $remote_fs $network $syslog $named
+# Required-Stop:     $local_fs $remote_fs $network $syslog $named
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
 # Short-Description: starts the nginx web server
@@ -15,106 +16,289 @@
 ### END INIT INFO
 
 # Author:   licess
-# website:  http://lnmp.org
+# Modified: shines77
+# website:  http://lnamp.cloudbuses.com
 
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+
+#
+# Whether is manually compile and install?
+#
+#   "y" : Yes, it is manually compile and install.
+#   "n" : No, it is not manually compile, it is install by apt-get or yum command.
+#
+# default value is "y", example:
+#
+#   IS_MANUL_COMPILE="y"
+#
+IS_MANUL_COMPILE="y"
+
+if [ "${IS_MANUL_COMPILE}" = "n" ]; then
+    NGINX_ROOT=/usr
+
+    CONFIG_FILE=/etc/nginx/nginx.conf
+    PID_FILE=/run/nginx.pid
+else
+    NGINX_ROOT=/usr/local/nginx
+
+    CONFIG_FILE=$NGINX_ROOT/conf/nginx.conf
+    PID_FILE=$NGINX_ROOT/logs/nginx.pid
+fi    
+
+DAEMON=$NGINX_ROOT/sbin/nginx
+DAEMON_OPTS=
+
 NAME=nginx
-NGINX_BIN=/usr/local/nginx/sbin/$NAME
-CONFIGFILE=/usr/local/nginx/conf/$NAME.conf
-PIDFILE=/usr/local/nginx/logs/$NAME.pid
+DESC=nginx
+
+Color_Text()
+{
+    echo "\033[0;$2m$1\033[0m" -e
+}
+
+Echo_Red()
+{
+    Color_Text "$1" "31"
+}
+
+Echo_Yellow()
+{
+    Color_Text "$1" "33"
+}
+
+Echo_Red "test"
+
+#
+# Include nginx defaults if available
+#
+if [ -r /etc/default/nginx ]; then
+    . /etc/default/nginx
+fi
+
+#
+# Check the daemon file is exists?
+#
+if [ ! -x $DAEMON ]; then
+    Echo_Red "Error: Daemon binary ${DAEMON} is not existed."
+    # echo -e "\033[0;31mError: Daemon binary ${DAEMON} is not existed.\033[0m"
+    exit 0
+fi
+
+test -x $DAEMON || exit 0
+
+. /lib/init/vars.sh
+. /lib/lsb/init-functions
+
+PID=$(awk -F'[ \t;]+' '/[^#]pid/ {print $2}' $CONFIG_FILE)
+if [ -z "$PID" ]
+then
+    PID=PID_FILE
+fi
+
+#
+# Check if the ULIMIT is set in /etc/default/nginx
+#
+if [ -n "$ULIMIT" ]; then
+    # Set the ulimits
+    ulimit $ULIMIT
+fi
+
+test_nginx_config()
+{
+    $DAEMON -t $DAEMON_OPTS >/dev/null 2>&1
+}
+
+#
+# Function that starts the daemon/service
+#
+do_start()
+{
+    # Return
+    #   0 if daemon has been started
+    #   1 if daemon was already running
+    #   2 if daemon could not be started
+
+    echo -n " * Starting $NAME ... "
+
+    if netstat -tnpl | grep -q nginx; then
+        echo "$NAME already running."
+        exit 1
+    fi
+
+    $DAEMON -c $CONFIG_FILE
+
+    if [ "$?" != 0 ] ; then
+        echo "[ Failed ]"
+        exit 1
+    else
+        echo "[ OK ]"
+    fi
+}
+
+#
+# Function that stops the daemon/service
+#
+do_stop()
+{
+    # Return
+    #   0 if daemon has been stopped
+    #   1 if daemon was already stopped
+    #   2 if daemon could not be stopped
+    #   other if a failure occurred
+
+    echo -n " * Stopping $NAME ... "
+
+    if ! netstat -tnpl | grep -q nginx; then
+        echo "$NAME is not running."
+        exit 1
+    fi
+
+    $DAEMON -s stop
+
+    if [ "$?" != 0 ] ; then
+        echo "[ Failed ]. Use $NAME force-quit command please."
+        exit 1
+    else
+        echo "[ OK ]"
+    fi
+}
+
+#
+# Function that restart the daemon/service
+#
+do_restart()
+{
+    echo -n " * Restarting $NAME ... "
+
+    # Check configuration before stopping nginx
+    if ! test_nginx_config; then
+        echo "[ Configure file Error ]"
+        exit 0
+    else
+        echo "[ Configure file is OK ]"
+    fi
+
+    $0 stop
+    sleep 1
+    $0 start
+}
+
+#
+# Function that sends a SIGHUP to the daemon/service
+#
+do_reload()
+{
+    echo -n " * Reloading service $NAME ... "
+
+    # Check configuration before reload nginx
+    #
+    # This is not entirely correct since the on-disk nginx binary
+    # may differ from the in-memory one, but that's not common.
+    # We prefer to check the configuration and return an error
+    # to the administrator.
+    if ! test_nginx_config; then
+        echo "[ Configure file Error ]"
+        exit 0
+    fi
+
+    if netstat -tnpl | grep -q nginx; then
+        $DAEMON -s reload
+        echo "[ OK ]"
+    else
+        echo "$NAME is not running, can't reload."
+        exit 1
+    fi
+}
+
+do_force_quit()
+{
+    echo -n " * Terminating $NAME ... "
+
+    if ! netstat -tnpl | grep -q nginx; then
+        echo "$NAME is not running."
+        exit 1
+    fi
+
+    kill `pidof $NAME`
+
+    if [ "$?" != 0 ] ; then
+        echo "[ Failed ]"
+        exit 1
+    else
+        echo "[ OK ]"
+    fi
+}
+
+#
+# Rotate log files
+#
+do_rotate()
+{
+    echo -n " * Rotating $NAME ... "
+    echo "[ TODO ]"
+}
+
+#
+# Online upgrade nginx executable
+#
+# "Upgrading Executable on the Fly"
+# http://nginx.org/en/docs/control.html
+#
+do_upgrade()
+{
+    echo -n " * Upgrading $NAME ... "
+    echo "[ TODO ]"
+}
 
 case "$1" in
     start)
-        echo -n "Starting $NAME ... "
-
-        if netstat -tnpl | grep -q nginx;then
-            echo "$NAME (pid `pidof $NAME`) already running."
-            exit 1
-        fi
-
-        $NGINX_BIN -c $CONFIGFILE
-
-        if [ "$?" != 0 ] ; then
-            echo " failed"
-            exit 1
-        else
-            echo " done"
-        fi
+        do_start
         ;;
 
     stop)
-        echo -n "Stoping $NAME ... "
+        do_stop
+        ;;
 
-        if ! netstat -tnpl | grep -q nginx; then
-            echo "$NAME is not running."
-            exit 1
-        fi
+    restart)
+        do_restart
+        ;;
 
-        $NGINX_BIN -s stop
+    reload|force-reload)
+        do_reload
+        ;;
 
-        if [ "$?" != 0 ] ; then
-            echo " failed. Use force-quit"
-            exit 1
-        else
-            echo " done"
-        fi
+    force-quit)
+        do_force_quit
         ;;
 
     status)
         if netstat -tnpl | grep -q nginx; then
-            PID=`pidof nginx`
-            echo "$NAME (pid $PID) is running ..."
+            echo " * $NAME (pid `pidof $NAME`) is running ..."
         else
-            echo "$NAME is stopped"
+            echo " * $NAME is stopped."
             exit 0
         fi
         ;;
 
-    force-quit)
-        echo -n "Terminating $NAME ... "
+    test|configtest|testconfig)
+        echo " * Testing $NAME configure files ..."
 
-        if ! netstat -tnpl | grep -q nginx; then
-            echo "$NAME is not running."
-            exit 1
-        fi
-
-        kill `pidof $NAME`
-
-        if [ "$?" != 0 ] ; then
-            echo " failed"
-            exit 1
-        else
-            echo " done"
-        fi
+        $DAEMON -t $DAEMON_OPTS
         ;;
 
-    restart)
-        $0 stop
-        sleep 1
-        $0 start
+    rotate)
+        do_rotate
         ;;
 
-    reload)
-        echo -n "Reload service $NAME ... "
-
-        if netstat -tnpl | grep -q nginx; then
-            $NGINX_BIN -s reload
-            echo " done"
-        else
-            echo "$NAME is not running, can't reload."
-            exit 1
-        fi
-        ;;
-
-    configtest)
-        echo -n "Test $NAME configure files ... "
-
-        $NGINX_BIN -t
+    upgrade)
+        do_upgrade
         ;;
 
     *)
-        echo "Usage: $0 {start|stop|force-quit|restart|reload|status|configtest}"
-        exit 1
+        echo "Usage: $0 {start|stop|restart|reload|force-reload|force-quit|status|test|configtest|rotate|upgrade}"
+        exit 3
         ;;
 
 esac
+
+:

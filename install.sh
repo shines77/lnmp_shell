@@ -62,6 +62,7 @@ Init_Install()
 {
     Press_Install
     Print_Sys_Info
+    
     if [ "${DISTRO}" = "RHEL" ]; then
         RHEL_Modify_Source
     fi
@@ -69,6 +70,7 @@ Init_Install()
     if [ "${DISTRO}" = "Ubuntu" ]; then
         Ubuntu_Modify_Source
     fi
+
     Set_Timezone
     if [ "$PM" = "yum" ]; then
         CentOS_InstallNTP
@@ -80,6 +82,7 @@ Init_Install()
         Debian_RemoveAMP
         Debian_Dependent
     fi
+
     Disable_Selinux
     Check_Download_Files
     Install_Autoconf
@@ -92,12 +95,14 @@ Init_Install()
     Install_Pcre
 
     Install_MemoryAllocator
+
     if [ "$PM" = "yum" ]; then
         CentOS_Lib_Opt
     elif [ "$PM" = "apt" ]; then
         Debian_Lib_Opt
         Debian_Check_MySQL
     fi
+
     Install_MySQL
     Export_PHP_Autoconf
 }
