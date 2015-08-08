@@ -1,43 +1,5 @@
 #!/bin/bash
 
-# Get the selections about install
-
-Dispaly_Selection()
-{
-    echo "=========================================================="
-
-    MemeoryAllocator_Selection
-
-    echo "=========================================================="
-
-    MySQL_Selection
-
-    echo "=========================================================="
-
-    InnoDB_StorageEngine_Selection
-
-    MySql_RootPWD_Setting
-
-    echo "=========================================================="
-
-    PHP_Selection
-
-    echo "=========================================================="
-
-    Nginx_Selection
-
-    if [[ "${Stack}" = "lamp" || "${Stack}" = "lnamp" || "${Stack}" = "test" ]]; then
-
-        echo "=========================================================="
-
-        Apache_Selection
-
-        echo "=========================================================="
-
-        Admin_Email_Setting
-    fi
-}
-
 # which Memory Allocator do you want to install?
 
 MemeoryAllocator_Selection()
@@ -344,6 +306,44 @@ Admin_Email_Setting()
         echo "========================================================"
     fi
     echo ""
+}
+
+# Get the selections about install
+
+Dispaly_Selection()
+{
+    echo "=========================================================="
+
+    MemeoryAllocator_Selection
+
+    echo "=========================================================="
+
+    MySQL_Selection
+
+    echo "=========================================================="
+
+    InnoDB_StorageEngine_Selection
+
+    MySql_RootPWD_Setting
+
+    echo "=========================================================="
+
+    PHP_Selection
+
+    echo "=========================================================="
+
+    Nginx_Selection
+
+    if [[ "${Stack}" = "lamp" || "${Stack}" = "lnamp" || "${Stack}" = "test" ]]; then
+
+        echo "=========================================================="
+
+        Apache_Selection
+
+        echo "=========================================================="
+
+        Admin_Email_Setting
+    fi
 }
 
 Press_Install()
