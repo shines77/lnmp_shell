@@ -30,7 +30,7 @@ Set_Timezone()
     case "${TimeZoneSelect}" in
         0)
             echo "You choice No change - Keep use now timezone setting."
-        ;;         
+        ;;
         1)
             echo "You choice Asia - Shanghai, Chongqing timezone."
 #           ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
@@ -40,7 +40,7 @@ Set_Timezone()
             echo "You choice Asia - HongKong timezone."
 #           ln -s /usr/share/zoneinfo/Asia/Hong_Kong /etc/localtime
             \cp -f /usr/share/zoneinfo/Asia/Hong_Kong /etc/localtime
-        ;;    
+        ;;
         3)
             echo "You choice Asia - Singapore timezone."
 #           ln -s /usr/share/zoneinfo/Asia/Singapore /etc/localtime
@@ -72,7 +72,7 @@ Set_Timezone()
             echo "You choice Europe - Paris (France) timezone."
 #           ln -s /usr/share/zoneinfo/Europe/Paris /etc/localtime
             \cp -f /usr/share/zoneinfo/Europe/Paris /etc/localtime
-        ;;   
+        ;;
         *)
             echo "No input, you choice No change - Keep use now timezone setting (Default)."
             TimeZoneSelect="0"
@@ -121,11 +121,11 @@ Debian_RemoveAMP()
     for removepackages in apache2 apache2-doc apache2-utils apache2.2-common apache2.2-bin apache2-mpm-prefork apache2-doc apache2-mpm-worker mysql-client mysql-server mysql-common mysql-server-core-5.5 mysql-client-5.5 php5 php5-common php5-cgi php5-cli php5-mysql php5-curl php5-gd;
     do apt-get purge -y $removepackages; done
     killall apache2
-    dpkg -l |grep apache 
+    dpkg -l |grep apache
     dpkg -P apache2 apache2-doc apache2-mpm-prefork apache2-utils apache2.2-common
-    dpkg -l |grep mysql 
+    dpkg -l |grep mysql
     dpkg -P mysql-server mysql-common libmysqlclient15off libmysqlclient15-dev
-    dpkg -l |grep php 
+    dpkg -l |grep php
     dpkg -P php5 php5-common php5-cli php5-cgi php5-mysql php5-curl php5-gd
     apt-get autoremove -y && apt-get clean
 }
