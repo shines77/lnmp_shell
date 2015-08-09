@@ -5,14 +5,15 @@ LNAMP 一键安装包是什么?
 
 LNAMP 一键安装包是一个用 Linux Shell 编写的可以为 CentOS/RadHat/Fedora、Debian/Ubuntu/Raspbian VPS(VDS) 或独立主机安装 LNMP(Nginx/MySQL/PHP)、LAMP(Apache/MySQL/PHP)、LNAMP(Nginx/Apache/MySQL/PHP) 生产环境的 Shell 程序。同时提供一些实用的辅助工具如：虚拟主机管理、FTP用户管理、Nginx、MySQL/MariaDB、PHP的升级、常用缓存组件的安装、重置 MySQL root 密码、502自动重启、日志切割、SSH 防护 DenyHosts/Fail2Ban、备份等许多实用脚本。
 
+--------
 
-最后修改(派生版本): shines77 <shines77@cloudbuses.com>
-LNAMP官网(派生版本)：http://lnamp.cloudbuses.com
+LNAMP修改版作者:  shines77 <shines77@cloudbuses.com>
+LNAMP修改版官网： http://lnamp.cloudbuses.com
 
 --------
 
-原作者: licess <admin@lnmp.org>
-LNMP官网(原版本)：http://lnmp.org
+LNMP原版作者:  licess <admin@lnmp.org>
+LNMP原版官网： http://lnmp.org
 
 --------------------------------------------------------------------------------
 
