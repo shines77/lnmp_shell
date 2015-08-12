@@ -459,18 +459,6 @@ Get_RHEL_Version()
     fi
 }
 
-Download_Files()
-{
-    local URL=$1
-    local FileName=$2
-    if [ -s "${FileName}" ]; then
-        echo "${FileName} [found]"
-    else
-        echo "Error: ${FileName} not found!!! download now ..."
-        wget -c ${URL}
-    fi
-}
-
 Tar_Cd()
 {
     local FileName=$1
