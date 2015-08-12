@@ -253,7 +253,7 @@ Download_Files()
 
 Check_Download_Files()
 {
-    Echo_Blue "[+] Downloading files ..."
+    Echo_Blue "[+] Downloading install package files ..."
     cd ${cur_dir}/src
     Download_Files ${Download_Mirror}/lib/autoconf/${Autoconf_Ver}.tar.gz ${Autoconf_Ver}.tar.gz
     Download_Files ${Download_Mirror}/web/libiconv/${Libiconv_Ver}.tar.gz ${Libiconv_Ver}.tar.gz
@@ -278,7 +278,7 @@ Check_Download_Files()
     fi
     Download_Files ${Download_Mirror}/datebase/phpmyadmin/${PhpMyAdmin_Ver}.tar.gz ${PhpMyAdmin_Ver}.tar.gz
     Download_Files ${Download_Mirror}/prober/p.tar.gz p.tar.gz
-    if [ "${Stack}" != "lnmp" ]; then
+    if [[ "${Stack}" == "lamp" || "${Stack}" == "lnamp" ]]; then
         Download_Files ${Download_Mirror}/web/apache/${Apache_Version}.tar.gz ${Apache_Version}.tar.gz
         Download_Files ${Download_Mirror}/web/apache/${APR_Ver}.tar.gz ${APR_Ver}.tar.gz
         Download_Files ${Download_Mirror}/web/apache/${APR_Util_Ver}.tar.gz ${APR_Util_Ver}.tar.gz

@@ -13,6 +13,16 @@ Echo_Red()
     Color_Text "$1" "31"
 }
 
+# Check whether the logon user is a root account?
+
+Check_Is_Root_Account()
+{
+    if [ $(id -u) != "0" ]; then
+        Echo_Red "Error: You must logon a root account to run this lnamp script, please try again."
+        exit 1
+    fi
+}
+
 Echo_Green()
 {
     Color_Text "$1" "32"
@@ -295,14 +305,4 @@ Echo_Color_Ex_Test()
     Echo_Cyan_HL_Ex "${prefix_text}" "This is Cyan HL color.     " "${suffix_text}"
     Echo_Cyan_Blod_Ex "${prefix_text}" "This is Cyan blod color.   " "${suffix_text}"
     echo ""
-}
-
-# Check whether the logon user is a root account?
-
-Check_Is_Root_Account()
-{
-    if [ $(id -u) != "0" ]; then
-        Echo_Red "Error: You must logon a root account to run this lnamp script, please try again."
-        exit 1
-    fi
 }
