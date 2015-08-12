@@ -1,14 +1,14 @@
-					LNAMP 一键安装包 - Readme
+					LNMP Shell 一键安装包 - Readme
 
-LNAMP 一键安装包是什么?
+LNMP Shell 一键安装包是什么?
 ——————————————————————
 
-LNAMP 一键安装包是一个用 Linux Shell 编写的可以为 CentOS/RadHat/Fedora、Debian/Ubuntu/Raspbian VPS(VDS) 或独立主机安装 LNMP(Nginx/MySQL/PHP)、LAMP(Apache/MySQL/PHP)、LNAMP(Nginx/Apache/MySQL/PHP) 生产环境的 Shell 程序。同时提供一些实用的辅助工具如：虚拟主机管理、FTP用户管理、Nginx、MySQL/MariaDB、PHP的升级、常用缓存组件的安装、重置 MySQL root 密码、502自动重启、日志切割、SSH 防护 DenyHosts/Fail2Ban、备份等许多实用脚本。
+LNMP Shell 一键安装包是一个用 Linux Shell 编写的可以为 CentOS/RadHat/Fedora、Debian/Ubuntu/Raspbian VPS(VDS) 或独立主机安装 LNMP(Nginx/MySQL/PHP)、LAMP(Apache/MySQL/PHP)、LNAMP(Nginx/Apache/MySQL/PHP) 生产环境的 Shell 程序。同时提供一些实用的辅助工具如：虚拟主机管理、FTP用户管理、Nginx、MySQL/MariaDB、PHP的升级、常用缓存组件的安装、重置 MySQL root 密码、502自动重启、日志切割、SSH 防护 DenyHosts/Fail2Ban、备份等许多实用脚本。
 
 --------
 
-LNAMP修改版作者:  shines77 <shines77@cloudbuses.com>
-LNAMP修改版官网： http://lnamp.cloudbuses.com
+LNMP Shell修改版作者:  shines77 <shines77@cloudbuses.com>
+LNMP Shell修改版官网： http://lnmp.cloudbuses.com
 
 --------
 
@@ -19,24 +19,25 @@ LNMP原版官网： http://lnmp.org
 
 安装
 —————
-详细安装教程参考：http://lnamp.cloudbuses.com/install.html
+详细安装教程参考：http://lnmp.cloudbuses.com/install.html
 
 安装前建议使用 screen，执行：screen -S lnamp 后,
 
-执行：wget -c http://mirror.cloudbuses.com/lnamp/lnamp-1.0-full.tar.gz && tar zxf lnamp-1.0-full.tar.gz && cd lnamp-1.0-full && ./install.sh {lnmp|lamp|lnamp}
+执行：wget -c http://mirror.cloudbuses.com/lnmp/lnmp-shell-1.0-full.tar.gz && tar zxf lnmp-shell-1.0-full.tar.gz && cd lnmp-shell-1.0-full && ./install.sh {lnmp|lamp|lnamp}
 
 如断线可使用 screen -r lnamp 恢复。
 
 常用功能
 —————————
 
-以下操作需在 lnamp-1.0-full 目录下执行：
+以下操作需在 lnmp-shell-1.0-full 目录下执行：
 
-FTP服务器：执行：./pureftpd.sh 安装，http://yourIP/ftp/ 进行管理，也可使用 lnamp ftp {add|list|del} 进行管理。
+FTP服务器：执行：./pureftpd.sh 安装，http://yourIP/ftp/ 进行管理，也可使用 lnmp ftp {add|list|del} 进行管理。
 
 升级脚本：
 
 执行：./upgrade.sh 按提示进行选择
+
 也可以直接使用参数：./upgrade.sh {nginx|mysql|mariadb|php|phpa|m2m}
 
 参数: nginx   可升级至任意 Nginx 版本。
@@ -93,8 +94,8 @@ Apache状态管理：         lnmp httpd 或 /etc/init.d/httpd {start|stop|resta
 
 相关图形界面
 ————————————
-PHPMyAdmin：          http://yourIP/phpmyadmin/
-phpinfo：             http://yourIP/phpinfo.php
+PHPMyAdmin：           http://yourIP/phpmyadmin/
+phpinfo：              http://yourIP/phpinfo.php
 PHP探针：              http://yourIP/p.php
 PureFtp用户管理：      http://yourIP/ftp/
 Xcache管理界面：       http://yourIP/xcache/
