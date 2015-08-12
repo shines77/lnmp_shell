@@ -164,7 +164,7 @@ Input_MySQL_RootPWD()
             ;;
         esac
     else
-        read -p "Confirm the password     : " MysqlRootConfirmPWD
+        read -p "     Confirm the password: " MysqlRootConfirmPWD
         if [ "${MysqlRootConfirmPWD}" = "" ]; then
             MysqlRootConfirmPWD="${MysqlRootDefaultPWD}"
         fi
