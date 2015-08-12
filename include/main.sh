@@ -17,16 +17,16 @@ MemeoryAllocator_Selection()
     echo ""
     case "${SelectMalloc}" in
         1)
-            Echo_Blue "You will install not install Memory Allocator."
+            Echo_Cyan "You will install not install Memory Allocator."
         ;;
         2)
-            Echo_Blue "You will install JeMalloc."
+            Echo_Cyan "You will install JeMalloc."
         ;;
         3)
-            Echo_Blue "You will Install TCMalloc."
+            Echo_Cyan "You will Install TCMalloc."
         ;;
         *)
-            Echo_Blue "No input, You will not install Memory Allocator."
+            Echo_Cyan "No input, You will not install Memory Allocator."
             SelectMalloc="1"
         ;;
     esac
@@ -69,22 +69,22 @@ MySQL_Selection()
     echo ""
     case "${DBSelect}" in
         1)
-            Echo_Blue "You will install MySQL 5.1.73."
+            Echo_Cyan "You will install MySQL 5.1.73."
         ;;
         2)
-            Echo_Blue "You will install MySQL 5.5.42."
+            Echo_Cyan "You will install MySQL 5.5.42."
         ;;
         3)
-            Echo_Blue "You will Install MySQL 5.6.23."
+            Echo_Cyan "You will Install MySQL 5.6.23."
         ;;
         4)
-            Echo_Blue "You will install MariaDB 5.5.42."
+            Echo_Cyan "You will install MariaDB 5.5.42."
         ;;
         5)
-            Echo_Blue "You will install MariaDB 10.0.17."
+            Echo_Cyan "You will install MariaDB 10.0.17."
         ;;
         *)
-            Echo_Blue "No input, You will install MySQL 5.5.42 (Default)."
+            Echo_Cyan "No input, You will install MySQL 5.5.42 (Default)."
             DBSelect="2"
         ;;
     esac
@@ -114,13 +114,13 @@ InnoDB_StorageEngine_Selection()
     echo ""
     case "${InstallInnodb}" in
         [yY][eE][sS]|[yY])
-            Echo_Blue "You will enable the InnoDB Storage Engine."
+            Echo_Cyan "You will enable the InnoDB Storage Engine."
         ;;
         [nN][oO]|[nN])
-            Echo_Blue "You will disable the InnoDB Storage Engine!"
+            Echo_Cyan "You will disable the InnoDB Storage Engine!"
         ;;
         *)
-            Echo_Blue "No input, The InnoDB Storage Engine will enable."
+            Echo_Cyan "No input, The InnoDB Storage Engine will enable."
             InstallInnodb="y"
         ;;
     esac
@@ -157,14 +157,14 @@ Input_MySQL_RootPWD()
                 # MysqlRootUseDefaultPWD="y"
                 # MysqlRootPWD="${MysqlRootDefaultPWD}"
                 # MysqlRootConfirmPWD="${MysqlRootDefaultPWD}"
-                Echo_Cyan "No input, You do not agree to use the default Mysql root password, please try again."
+                Echo_Magenta "No input, You do not agree to use the default Mysql root password, please try again."
                 MysqlRootUseDefaultPWD='n'
                 echo ""
                 Input_MySQL_RootPWD
             ;;
         esac
     else
-        read -p "     Confirm the password: " MysqlRootConfirmPWD
+        read -p "Confirm the password     : " MysqlRootConfirmPWD
         if [ "${MysqlRootConfirmPWD}" = "" ]; then
             MysqlRootConfirmPWD="${MysqlRootDefaultPWD}"
         fi
@@ -189,7 +189,7 @@ MySQL_RootPWD_Setting()
 
     Input_MySQL_RootPWD
     echo ""
-    Echo_Blue "Your MySQL root password is: ${MysqlRootPWD}"
+    Echo_Cyan "Your MySQL root password is: ${MysqlRootPWD}"
     echo ""
 }
 
@@ -212,22 +212,22 @@ PHP_Selection()
     echo ""
     case "${PHPSelect}" in
         1)
-            Echo_Blue "You will install PHP 5.2.17."
+            Echo_Cyan "You will install PHP 5.2.17."
         ;;
         2)
-            Echo_Blue "You will install PHP 5.3.29."
+            Echo_Cyan "You will install PHP 5.3.29."
         ;;
         3)
-            Echo_Blue "You will Install PHP 5.4.41."
+            Echo_Cyan "You will Install PHP 5.4.41."
         ;;
         4)
-            Echo_Blue "You will install PHP 5.5.25."
+            Echo_Cyan "You will install PHP 5.5.25."
         ;;
         5)
-            Echo_Blue "You will install PHP 5.6.9."
+            Echo_Cyan "You will install PHP 5.6.9."
         ;;
         *)
-            Echo_Blue "No input, You will install PHP 5.5.25 (Default)."
+            Echo_Cyan "No input, You will install PHP 5.5.25 (Default)."
             PHPSelect="4"
         ;;
     esac
@@ -251,16 +251,16 @@ Nginx_Selection()
     echo ""
     case "${NginxSelect}" in
         1)
-            Echo_Blue "You will install Nginx 1.4.7."
+            Echo_Cyan "You will install Nginx 1.4.7."
         ;;
         2)
-            Echo_Blue "You will install Nginx 1.6.3."
+            Echo_Cyan "You will install Nginx 1.6.3."
         ;;
         3)
-            Echo_Blue "You will Install Nginx 1.8.0."
+            Echo_Cyan "You will Install Nginx 1.8.0."
         ;;
         *)
-            Echo_Blue "No input, You will install Nginx 1.8.0 (Default)."
+            Echo_Cyan "No input, You will install Nginx 1.8.0 (Default)."
             NginxSelect="3"
         ;;
     esac
@@ -282,11 +282,11 @@ Apache_Selection()
 
     echo ""
     if [ "${ApacheSelect}" = "1" ]; then
-        Echo_Blue "You will install Apache 2.2.29."
+        Echo_Cyan "You will install Apache 2.2.29."
     elif [ "${ApacheSelect}" = "2" ]; then
-        Echo_Blue "You will install Apache 2.4.10."
+        Echo_Cyan "You will install Apache 2.4.10."
     else
-        Echo_Blue "No input, You will install Apache 2.2.29 (Default)."
+        Echo_Cyan "No input, You will install Apache 2.2.29 (Default)."
         ApacheSelect="1"
     fi
     echo ""
@@ -301,11 +301,11 @@ Admin_Email_Setting()
     read -p "Please enter Administrator Email Address: " ServerAdmin
     echo ""
     if [ "${ServerAdmin}" == "" ]; then
-        Echo_Blue "Server Administrator Email will set to webmaster@example.com !"
+        Echo_Cyan "Server Administrator Email will set to webmaster@example.com !"
         ServerAdmin="webmaster@example.com"
     else
         echo "========================================================"
-        Echo_Blue "Server Administrator Email is: ${ServerAdmin}"
+        Echo_Cyan "Server Administrator Email is: ${ServerAdmin}"
         echo "========================================================"
     fi
     echo ""
