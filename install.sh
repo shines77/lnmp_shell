@@ -55,8 +55,8 @@ echo "|     For more information please visit http://lnamp.cloudbuses.com      |
 echo "+------------------------------------------------------------------------+"
 echo ""
 
-Echo_Color_Test
-Echo_Color_Ex_Test
+# Echo_Color_Test
+# Echo_Color_Ex_Test
 
 Init_Install()
 {
