@@ -153,10 +153,10 @@ Input_MySQL_RootPWD()
                 Input_MySQL_RootPWD
             ;;
             *)
-#                Echo_Cyan "No input, You agree to use the default Mysql root password '${MysqlRootDefaultPWD}'."
-#                MysqlRootUseDefaultPWD="y"
-#                MysqlRootPWD="${MysqlRootDefaultPWD}"
-#                MysqlRootConfirmPWD="${MysqlRootDefaultPWD}"
+                # Echo_Cyan "No input, You agree to use the default Mysql root password '${MysqlRootDefaultPWD}'."
+                # MysqlRootUseDefaultPWD="y"
+                # MysqlRootPWD="${MysqlRootDefaultPWD}"
+                # MysqlRootConfirmPWD="${MysqlRootDefaultPWD}"
                 Echo_Cyan "No input, You do not agree to use the default Mysql root password, please try again."
                 MysqlRootUseDefaultPWD='n'
                 echo ""
@@ -378,6 +378,24 @@ Print_Sys_Info()
     MemTotal=`free -m | grep Mem | awk '{print  $2}'`
     echo "Memory is: ${MemTotal} MB "
     df -h
+}
+
+# Check arch is 32-bit or 64-bit?
+Check_OS_Arch()
+{
+    case `uname -m` in
+        i[3456789]86|x86|i86pc)
+            os_arch='x86'
+            ;;
+        x86_64|amd64|AMD64)
+            os_arch='amd64'
+            ;;
+        *)
+            echo "Unknown architecture `uname -m`."
+            os_arch="unknown"
+            exit 1
+            ;;
+    esac
 }
 
 Check_OS_Is_64Bit()
