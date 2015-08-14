@@ -1,29 +1,52 @@
 
 #!/bin/bash
 
+# Check the variant whether is a number?
+
+function Check_Integer()
+{
+    # Filter integer numbers [0-9]
+    local tmp=`echo $1 | sed 's/[0-9]//g'`
+    # Filter integer sign
+    tmp=`echo ${tmp} | sed 's/-//g'`
+    tmp=`echo ${tmp} | sed 's/+//g'`
+    [ -n "${tmp}" ] && { echo "Error: Args "$1" must be a integer!"; exit 1; } 
+}
+
+# Get a integer ABS() value
+
+function Integer_ABS()
+{
+    local tmp=`echo $1 | sed 's/-//g'`
+    tmp=`echo ${tmp} | sed 's/+//g'`
+    echo ${tmp}
+}
+
 # Randomize number and randomize password
 
 function Random_Number()
 {
     local Min=$1
     local Max=$2
-    local Temp=$Max
-    local RndNum=$RANDOM*100000+$RANDOM
+    local Temp=${Max}
+    local RndNum=${RANDOM}*100000+${RANDOM}
     local RetNum=0
-    if [ $Min -lt 0 ]; then
-        Min=-$Min
+    Check_Integer ${Min}
+    if [ ${Min} -lt 0 ]; then
+        Min=$(Integer_ABS ${Min})
     fi
-    if [ $Max -lt 0 ]; then
-        Max=-$Max
+    Check_Integer ${Max}
+    if [ ${Max} -lt 0 ]; then
+        Max=$(Integer_ABS ${Max})
     fi
-    if [ $Min -gt $Max ]; then
-        Temp=$Max
-        Max=$Min
-        Min=$Temp
+    if [ ${Min} -gt ${Max} ]; then
+        Temp=${Max}
+        Max=${Min}
+        Min=${Temp}
     fi
-    echo "["$Min,$Max"]:"
+    echo "["${Min},${Max}"]:"
     ((RetNum=RndNum%(Max-Min)+Min));
-    echo $RetNum
+    echo ${RetNum}
 }
 
 function Random_Password()
@@ -36,7 +59,7 @@ function Random_Password()
     local Password=""
     while [ "${Len}" -le "${Max_Length}" ];
     do
-        Password="${Password}${Password_Chars:$(($RANDOM%${#Password_Chars})):1}"
+        Password="${Password}${Password_Chars:$((${RANDOM}%${#Password_Chars})):1}"
         let Len+=1
     done
 
