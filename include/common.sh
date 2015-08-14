@@ -277,7 +277,7 @@ function Mkdir_Recur()
         Echo_Cyan "mkdir $1"
         mkdir $1 || exit -1
     else
-        echo "dir [$1] has exists."
+        Echo_Magenta "dir [$1] has exists."
     fi
 }
 
