@@ -29,17 +29,17 @@ function Random_Number()
     local Min=$1
     local Max=$2
     local Temp=${Max}
-    local RndNum=${RANDOM}*100000+${RANDOM}
+    local RndNum=${RANDOM}*65536+${RANDOM}
     local RetNum=0
     Check_Integer ${Min}
     if [ ${Min} -lt 0 ]; then
-        # Min=$(Integer_ABS ${Min})
         Min=${Min}
+        # Min=$(Integer_ABS ${Min})
     fi
     Check_Integer ${Max}
     if [ ${Max} -lt 0 ]; then
-        # Max=$(Integer_ABS ${Max})
         Max=${Max}
+        # Max=$(Integer_ABS ${Max})
     fi
     if [ ${Min} -gt ${Max} ]; then
         Temp=${Max}
@@ -94,7 +94,7 @@ function Test_Random_Number()
     echo ""
     for i in {1..30};
     do
-        out=$(Random_Number 2 "-9999" 1);
+        out=$(Random_Number 2 "-9999a" 1);
         echo $i,"Random_Number [2-9999]",$out;
     done;
 }
