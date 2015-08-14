@@ -21,6 +21,7 @@ function Random_Number()
         Max=$Min
         Min=$Temp
     fi
+    echo "[",$Min,$Max,"]:"
     ((RetNum=RndNum%(Max-Min)+Min));
     echo $RetNum
 }
