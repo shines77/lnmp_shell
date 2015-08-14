@@ -16,7 +16,9 @@ function Random_Number()
 function Random_Password()
 {
     local Password_Chars="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz~!@#$%^&*()+="
-    local Max_Length=$1
+    local Length_Min=$1
+    local Length_Max=$2
+    local Max_Length=$(Random_Number $Length_Min $Length_Max)
     local Len=0
     local Password=""
     while [ "${Len}" -le "${Max_Length}" ]
@@ -28,36 +30,41 @@ function Random_Password()
     echo "${Password}"
 }
 
-function Test_Random_Number()
-{
-    local i=0
-    local out=""
-    local RndRange=$(Random_Number 0 1000)
-    echo "Random [0-1000] is: "$RndRange
-    for i in {1..10};
-    do
-        out=$(Random_Number 2 10000);
-        echo $i,"[2-10000]",$out;
-    done;
-}
-
-function Test_Random_Password()
-{
-    local RndPassword=$(Random_Password 12)
-    echo "Random Password [len = 12] is: "$RndPassword
-}
-
-# Test Random functions
-
-function Test_Random()
+function Test_System_Random()
 {
     local i=0
     local out=""
     for i in {1..10};
     do
         out=$RANDOM;
-        echo $i,"[2-10000]",$out;
+        echo $i,"System RANDOM [1-100000]",$out;
     done;
+}
+
+function Test_Random_Number()
+{
+    local i=0
+    local out=""
+    local RndRange=$(Random_Number 0 1000)
+    echo "Random Number is [0-1000]: "$RndRange
+    for i in {1..10};
+    do
+        out=$(Random_Number 2 10000);
+        echo $i,"Random_Number [2-10000]",$out;
+    done;
+}
+
+function Test_Random_Password()
+{
+    local RndPassword=$(Random_Password 12 14)
+    echo "Random Password is [length = 12-14]: "$RndPassword
+}
+
+# Test Random functions
+
+function Test_Random()
+{
+    Test_System_Random
     Test_Random_Number
     Test_Random_Password
 }
