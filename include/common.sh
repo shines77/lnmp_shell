@@ -84,18 +84,19 @@ function Random_Number()
     echo ${RetNum}
 }
 
-function Random_Password()
+function Generate_Random_Password()
 {
-    local Password_Chars="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz~!@#$%^&*()+="
-    local Length_Min=$1
-    local Length_Max=$2
+    local Password_Chars_Default="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz~!@#$%^&*()+="
+    local Password_Chars=$1
+    local Length_Min=$2
+    local Length_Max=$3
     local Max_Length=14
     local Len=0
     local Password=""
     if [ $# -eq 1 ]; then
         # When args = 1
-        Length_Max=$1
-        Max_Length=$1
+        Length_Max=$2
+        Max_Length=$2
     elif [ $# -ge 2 ]; then
         # When args >= 2
         Max_Length=$(Random_Number $Length_Min $Length_Max)
@@ -111,6 +112,26 @@ function Random_Password()
         Password="${Max_Length}|${Password}"
     fi
 
+    echo "${Password}"
+}
+
+function Random_Password_Base64()
+{
+    local Password_Chars="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz~#"
+    local Password=$(Generate_Random_Password Password_Chars $?)
+    echo "${Password}" 
+}
+
+function Random_Password_Wide()
+{
+    local Password_Chars="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz~!@#$%^&*()+="
+    local Password=$(Generate_Random_Password Password_Chars $?)
+    echo "${Password}"
+}
+
+function Random_Password()
+{
+    local Password=$(Random_Password_Base64 $?)
     echo "${Password}"
 }
 
@@ -142,12 +163,25 @@ function Test_Random_Number()
 function Test_Random_Password()
 {
     local RndPassword=""
+    echo "Random_Password_Base64():"
+    echo ""
     RndPassword=$(Random_Password)
     echo "Random Password is [length = default]: "$RndPassword
     RndPassword=$(Random_Password 12)
-    echo "Random Password is [length = 12]:      "$RndPassword    
+    echo "Random Password is [length = 12]:      "$RndPassword
     RndPassword=$(Random_Password 12 14 1)
-    echo "Random Password is [length = 12-14]:   "$RndPassword    
+    echo "Random Password is [length = 12-14]:   "$RndPassword
+    echo ""
+
+    echo "Random_Password_Wide():"
+    echo ""
+    RndPassword=$(Random_Password_Wide)
+    echo "Random Password is [length = default]: "$RndPassword
+    RndPassword=$(Random_Password_Wide 12)
+    echo "Random Password is [length = 12]:      "$RndPassword
+    RndPassword=$(Random_Password_Wide 12 14 1)
+    echo "Random Password is [length = 12-14]:   "$RndPassword
+    echo ""
 }
 
 # Test Random functions
