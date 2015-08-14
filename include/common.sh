@@ -91,7 +91,7 @@ function Generate_Random_Password()
     local Length_Min=$2
     local Length_Max=$3
     local Max_Length=14
-    local Len=0
+    local Len=1
     local Password=""
     if [ $# -eq 1 ]; then
         # When args = 1
@@ -100,6 +100,10 @@ function Generate_Random_Password()
     elif [ $# -ge 2 ]; then
         # When args >= 2
         Max_Length=$(Random_Number $Length_Min $Length_Max)
+    fi
+    # Password length mininum limited is 4.
+    if [ ${Max_Length} lt 4 ]; then
+        Max_Length=4
     fi
     while [ "${Len}" -le "${Max_Length}" ];
     do
