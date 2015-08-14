@@ -23,7 +23,7 @@ Pear_Pecl_Set()
     pecl config-set php_ini /usr/local/php/etc/php.ini
 }
 
-Creat_PHP_Tools()
+Create_PHP_Tools()
 {
     echo "Create PHP Info Tool ..."
     cat >/home/wwwroot/default/phpinfo.php<<eof

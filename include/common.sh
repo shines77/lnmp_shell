@@ -1,6 +1,67 @@
 
 #!/bin/bash
 
+# Randomize number and randomize password
+
+function Random_Number()
+{
+    local Min=$1
+    local Max=$2
+    local RndNum=$RANDOM*100000+$RANDOM
+    local RetNum=0
+    ((RetNum=RndNum%Max+Min));
+    echo $RetNum
+}
+
+function Random_Password()
+{
+    local Password_Chars="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz~!@#$%^&*()+="
+    local Max_Length=$1
+    local Len=0
+    local Password=""
+    while [ "${Len}" -le "${Max_Length}" ]
+    do
+        Password="${Password}${Password_Chars:$(($RANDOM%${#Password_Chars})):1}"
+        let Len+=1
+    done
+
+    echo "${Password}"
+}
+
+function Test_Random_Number()
+{
+    local i=0
+    local out=""
+    local RndRange=$(Random_Number 0 1000)
+    echo "Random [0-1000] is: "$RndRange
+    for i in {1..10};
+    do
+        out=$(Random_Number 2 10000);
+        echo $i,"[2-10000]",$out;
+    done;
+}
+
+function Test_Random_Password()
+{
+    local RndPassword=$(Random_Password 12)
+    echo "Random Password [len = 12] is: "$RndPassword
+}
+
+# Test Random functions
+
+function Test_Random()
+{
+    local i=0
+    local out=""
+    for i in {1..10};
+    do
+        out=$RANDOM;
+        echo $i,"[2-10000]",$out;
+    done;
+    Test_Random_Number
+    Test_Random_Password
+}
+
 # About shell Echo_RGBs()
 
 Color_Text()

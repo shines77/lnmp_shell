@@ -114,7 +114,7 @@ LNMP_Stack()
     Install_PHP
 
     Install_Nginx
-    Creat_PHP_Tools
+    Create_PHP_Tools
     Add_LNMP_Startup
     Check_LNMP_Install
 }
@@ -126,7 +126,7 @@ LAMP_Stack()
     Install_Apache
     Install_PHP
 
-    Creat_PHP_Tools
+    Create_PHP_Tools
     Add_LAMP_Startup
     Check_LAMP_Install
 }
@@ -139,7 +139,7 @@ LNAMP_Stack()
     Install_PHP
 
     Install_Nginx
-    Creat_PHP_Tools
+    Create_PHP_Tools
     Add_LNAMP_Startup
     Check_LNAMP_Install
 }
