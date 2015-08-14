@@ -7,9 +7,21 @@ function Random_Number()
 {
     local Min=$1
     local Max=$2
+    local Temp=$Max
     local RndNum=$RANDOM*100000+$RANDOM
     local RetNum=0
-    ((RetNum=RndNum%Max+Min));
+    if [ $Min -lt 0 ]; then
+        Min=-$Min
+    fi
+    if [ $Max -lt 0 ]; then
+        Max=-$Max
+    fi
+    if [ $Min -gt $Max ]; then
+        Temp=$Max
+        Max=$Min
+        Min=$Temp
+    fi
+    ((RetNum=RndNum%(Max-Min)+Min));
     echo $RetNum
 }
 
@@ -21,7 +33,7 @@ function Random_Password()
     local Max_Length=$(Random_Number $Length_Min $Length_Max)
     local Len=0
     local Password=""
-    while [ "${Len}" -le "${Max_Length}" ]
+    while [ "${Len}" -le "${Max_Length}" ];
     do
         Password="${Password}${Password_Chars:$(($RANDOM%${#Password_Chars})):1}"
         let Len+=1
@@ -72,6 +84,7 @@ function Test_Random()
     Test_Random_Number
     echo ""
     Test_Random_Password
+    echo ""
 }
 
 # About shell Echo_RGBs()
