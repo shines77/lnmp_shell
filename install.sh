@@ -58,7 +58,7 @@ echo ""
 # Echo_Color_Test
 # Echo_Color_Ex_Test
 
-Test_Random
+# Test_Random
 
 Init_Install()
 {
@@ -161,6 +161,13 @@ case "${Stack}" in
         ;;
     test)
         Display_Selection
+        ;;
+    test_random)
+        Test_Random
+        ;;
+    test_color)
+        Echo_Color_Test
+        Echo_Color_Ex_Test
         ;;
     timezone)
         Set_Timezone
