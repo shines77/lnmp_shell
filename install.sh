@@ -41,7 +41,7 @@ Display_Welcome()
     echo ""
     echo "+------------------------------------------------------------------------+"
     echo "|                                                                        |"
-    Echo_Blue_Ex "|" "              LNMP/LAMP/LNAMP Shell Script for Linux Server             " "|"
+    Echo_Cyan_Ex "|" "              LNMP/LAMP/LNAMP Shell Script for Linux Server             " "|"
     echo "|                                                                        |"
     echo "|                           Version: ${LNAMP_Ver}                                 |"
     echo "|                           Host OS: ${DISTRO}                            "
