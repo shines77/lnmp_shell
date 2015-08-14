@@ -35,30 +35,28 @@ if [ "${DISTRO}" = "unknow" ]; then
     exit 1
 fi
 
-clear
-echo ""
-echo "+------------------------------------------------------------------------+"
-echo "|                                                                        |"
-Echo_Blue_Ex "|" "              LNMP/LAMP/LNAMP Shell Script for Linux Server             " "|"
-echo "|                                                                        |"
-echo "|                           Version: ${LNAMP_Ver}                                 |"
-echo "|                           Host OS: ${DISTRO}                            "
-echo "|                                                                        |"
-echo "|                         Author by: Licess                              |"
-echo "|                       Modified by: shines77                            |"
-echo "|                     Last Modified: ${LNAMP_LastModified}                          |"
-echo "|                                                                        |"
-echo "+------------------------------------------------------------------------+"
-echo "|       A tool to auto-compile & install LNMP/LAMP/LNAMP on Linux        |"
-echo "+------------------------------------------------------------------------+"
-echo "|     For more information please visit http://lnamp.cloudbuses.com      |"
-echo "+------------------------------------------------------------------------+"
-echo ""
-
-# Echo_Color_Test
-# Echo_Color_Ex_Test
-
-# Test_Random
+Display_Welcome()
+{
+    clear
+    echo ""
+    echo "+------------------------------------------------------------------------+"
+    echo "|                                                                        |"
+    Echo_Blue_Ex "|" "              LNMP/LAMP/LNAMP Shell Script for Linux Server             " "|"
+    echo "|                                                                        |"
+    echo "|                           Version: ${LNAMP_Ver}                                 |"
+    echo "|                           Host OS: ${DISTRO}                            "
+    echo "|                                                                        |"
+    echo "|                         Author by: Licess                              |"
+    echo "|                       Modified by: shines77                            |"
+    echo "|                     Last Modified: ${LNAMP_LastModified}                          |"
+    echo "|                                                                        |"
+    echo "+------------------------------------------------------------------------+"
+    echo "|       A tool to auto-compile & install LNMP/LAMP/LNAMP on Linux        |"
+    echo "+------------------------------------------------------------------------+"
+    echo "|     For more information please visit http://lnamp.cloudbuses.com      |"
+    echo "+------------------------------------------------------------------------+"
+    echo ""
+}
 
 Init_Install()
 {
@@ -148,14 +146,17 @@ LNAMP_Stack()
 
 case "${Stack}" in   
     lnmp)
+        Display_Welcome
         Display_Selection
         LNMP_Stack 2>&1 | tee -a /root/lnamp-install.log
         ;;
     lamp)
+        Display_Welcome
         Display_Selection
         LAMP_Stack 2>&1 | tee -a /root/lnamp-install.log
         ;;
     lnamp)
+        Display_Welcome
         Display_Selection
         LNAMP_Stack 2>&1 | tee -a /root/lnamp-install.log
         ;;
@@ -173,6 +174,7 @@ case "${Stack}" in
         Set_Timezone
         ;;
     *)
+        Display_Welcome
         Echo_Red "Usage: $0 {lnmp|lamp|lnamp|test|test_random|test_color|timezone}"
         ;;
 esac
