@@ -24,15 +24,14 @@ function Get_Integer()
 {
     if [ $# -lt 1 ]; then
         echo "0"
-        exit 1
     else
         # Filter integer numbers [0-9]
         local tmp=`echo $1 | sed 's/[0-9]//g'`
         # Filter integer sign
         tmp=`echo ${tmp} | sed 's/-//g'`
         tmp=`echo ${tmp} | sed 's/+//g'`
-        [ -n "${tmp}" ] && { echo "0"; exit 1; }
-        [ ! -n "${tmp}" ] && { echo ${tmp}; exit 0; }
+        [ -n "${tmp}" ] && { echo "0"; }
+        [ ! -n "${tmp}" ] && { echo ${tmp}; }
     fi
 }
 
