@@ -283,6 +283,7 @@ function Mkdir_Recur()
 
 function Test_Mkdir_Recur()
 {
+    echo ""
     Mkdir_Recur /home/guozi/git/lnmp_shell/
     echo ""
     Mkdir_Recur /home/guozi/git_tmp/lnmp_shell_test
