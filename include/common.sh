@@ -34,10 +34,12 @@ function Random_Number()
     Check_Integer ${Min}
     if [ ${Min} -lt 0 ]; then
         # Min=$(Integer_ABS ${Min})
+        Min=${Min}
     fi
     Check_Integer ${Max}
     if [ ${Max} -lt 0 ]; then
         # Max=$(Integer_ABS ${Max})
+        Max=${Max}
     fi
     if [ ${Min} -gt ${Max} ]; then
         Temp=${Max}
