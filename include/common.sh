@@ -33,11 +33,11 @@ function Random_Number()
     local RetNum=0
     Check_Integer ${Min}
     if [ ${Min} -lt 0 ]; then
-        Min=$(Integer_ABS ${Min})
+        # Min=$(Integer_ABS ${Min})
     fi
     Check_Integer ${Max}
     if [ ${Max} -lt 0 ]; then
-        Max=$(Integer_ABS ${Max})
+        # Max=$(Integer_ABS ${Max})
     fi
     if [ ${Min} -gt ${Max} ]; then
         Temp=${Max}
@@ -65,7 +65,9 @@ function Random_Password()
         let Len+=1
     done
 
-    Password="${Max_Length}${Password}"
+    if [ $# -ge 2 ]; then
+        Password="${Max_Length}|${Password}"
+    fi
 
     echo "${Password}"
 }
@@ -97,7 +99,7 @@ function Test_Random_Number()
 
 function Test_Random_Password()
 {
-    local RndPassword=$(Random_Password 12 14)
+    local RndPassword=$(Random_Password 12 14 1)
     echo "Random Password is [length = 12-14]: "$RndPassword
 }
 
