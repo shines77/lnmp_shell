@@ -117,7 +117,7 @@ function Generate_Random_Password()
 
 function Random_Password_Base64()
 {
-    local Password_Chars="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz~#"
+    local Password_Chars="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789~#"
     local Password=$(Generate_Random_Password Password_Chars $?)
     echo "${Password}" 
 }
@@ -132,6 +132,7 @@ function Random_Password_Wide()
 function Random_Password()
 {
     local Password=$(Random_Password_Base64 $?)
+    echo $?
     echo "${Password}"
 }
 
