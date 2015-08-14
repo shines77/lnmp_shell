@@ -230,7 +230,15 @@ function Mkdir_Recur()
         echo "mkdir $1"
         mkdir $1 || exit -1
     fi
-} 
+}
+
+function Test_Mkdir_Recur()
+{
+    Mkdir_Recur /home/guozi/git/lnmp_shell/
+    echo ""
+    Mkdir_Recur /home/guozi/git_tmp/lnmp_shell_test
+    echo ""
+}
 
 # About shell Echo_RGBs()
 

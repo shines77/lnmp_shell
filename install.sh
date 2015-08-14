@@ -171,6 +171,9 @@ case "${Stack}" in
         Echo_Color_Test
         Echo_Color_Ex_Test
         ;;
+    test_mkdir)
+        Test_Mkdir_Recur
+        ;;
     timezone)
         Set_Timezone
         ;;
