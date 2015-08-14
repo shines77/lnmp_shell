@@ -121,10 +121,10 @@ function Generate_Random_Password()
 
     if [ $# -ge 4 ]; then
         # When args >= 4
-        Password="${Max_Length}|${Password}"
+        Password="${Chars_Length}|${Password}"
     fi
 
-    echo "${Password}"
+    echo "${Password}|${Password_Chars}"
 }
 
 function Random_Password_Base64()
