@@ -58,6 +58,8 @@ echo ""
 # Echo_Color_Test
 # Echo_Color_Ex_Test
 
+Test_Random
+
 Init_Install()
 {
     Press_Install
