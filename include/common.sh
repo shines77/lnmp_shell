@@ -109,7 +109,7 @@ function Generate_Random_Password()
         Length_Max=$3
         Chars_Length=$(Random_Number $Length_Min $Length_Max)
     fi
-    # Password length mininum limited is 4.
+    # The password minimum length is 4.
     if [ ${Chars_Length} -lt 4 ]; then
         Chars_Length=4
     fi
@@ -124,7 +124,8 @@ function Generate_Random_Password()
         Password="${Chars_Length}|${Password}"
     fi
 
-    echo "${Password}|${Password_Chars}"
+    echo "${Password_Chars}"
+    # echo "${Password}""|""${Password_Chars}"
 }
 
 function Random_Password_Base64()
