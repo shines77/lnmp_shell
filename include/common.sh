@@ -124,7 +124,7 @@ function Generate_Random_Password()
         Password="${Chars_Length}|${Password}"
     fi
 
-    echo "${Password_Chars}"
+    echo $Password_Chars
     # echo "${Password}""|""${Password_Chars}"
 }
 
