@@ -64,8 +64,8 @@ function Test_Random_Number()
     echo ""
     for i in {1..10};
     do
-        out=$(Random_Number 2 10000);
-        echo $i,"Random_Number [2-10000]",$out;
+        out=$(Random_Number 2 "9999");
+        echo $i,"Random_Number [2-9999]",$out;
     done;
 }
 
