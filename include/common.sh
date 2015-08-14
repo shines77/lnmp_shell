@@ -125,7 +125,7 @@ function Test_Random_Number()
     echo ""
     for i in {1..30};
     do
-        out=$(Random_Number 2 "-9999a" 1);
+        out=$(Random_Number 2 "-9999" 1);
         echo $i,"Random_Number [2-9999]",$out;
     done;
 }
