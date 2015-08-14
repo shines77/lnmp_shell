@@ -84,35 +84,43 @@ function Random_Number()
     echo ${RetNum}
 }
 
+# Generate the randomize password of specified length
+
 function Generate_Random_Password()
 {
-    local Password_Chars_Default="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz~!@#$%^&*()+="
+    local Password_Chars_Default="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789~#"
     local Password_Chars=$1
-    local Length_Min=$2
-    local Length_Max=$3
-    local Max_Length=14
+    local Length_Min=14
+    local Length_Max=14
+    local Chars_Length=14
     local Len=1
     local Password=""
-    if [ $# -eq 1 ]; then
-        # When args = 1
+    if [ $# -eq 0]; then
+        # When args = 0
+        Password_Chars=${Password_Chars_Default}
+    elif [ $# -eq 2 ]; then
+        # When args = 2
+        Length_Min=$2
         Length_Max=$2
-        Max_Length=$2
-    elif [ $# -ge 2 ]; then
-        # When args >= 2
-        Max_Length=$(Random_Number $Length_Min $Length_Max)
+        Chars_Length=$2
+    elif [ $# -ge 3 ]; then
+        # When args >= 3
+        Length_Min=$2
+        Length_Max=$3
+        Chars_Length=$(Random_Number $Length_Min $Length_Max)
     fi
     # Password length mininum limited is 4.
-    if [ ${Max_Length} lt 4 ]; then
-        Max_Length=4
+    if [ ${Chars_Length} lt 4 ]; then
+        Chars_Length=4
     fi
-    while [ "${Len}" -le "${Max_Length}" ];
+    while [ "${Len}" -le "${Chars_Length}" ];
     do
         Password="${Password}${Password_Chars:$((${RANDOM}%${#Password_Chars})):1}"
         let Len+=1
     done
 
-    if [ $# -ge 3 ]; then
-        # When args >= 3
+    if [ $# -ge 4 ]; then
+        # When args >= 4
         Password="${Max_Length}|${Password}"
     fi
 
@@ -123,7 +131,7 @@ function Random_Password_Base64()
 {
     local Password_Chars="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789~#"
     local Password=$(Generate_Random_Password Password_Chars $@)
-    echo "${Password}" 
+    echo "${Password}"
 }
 
 function Random_Password_Wide()
@@ -136,9 +144,6 @@ function Random_Password_Wide()
 function Random_Password()
 {
     local Password=$(Random_Password_Base64 $@)
-    echo $?
-    echo $*
-    echo $@
     echo "${Password}"
 }
 
