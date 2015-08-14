@@ -88,7 +88,7 @@ function Random_Number()
 
 function Generate_Random_Password()
 {
-    local Password_Chars_Default="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789~#"
+    local Password_Chars_Default="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789~#=!@$"
     local Password_Chars=$1
     local Length_Min=14
     local Length_Max=14

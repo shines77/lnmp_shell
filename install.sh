@@ -161,6 +161,7 @@ case "${Stack}" in
         LNAMP_Stack 2>&1 | tee -a /root/lnamp-install.log
         ;;
     test)
+        Display_Welcome
         Display_Selection
         ;;
     test_random)
