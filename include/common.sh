@@ -44,7 +44,9 @@ function Random_Number()
         Max=${Min}
         Min=${Temp}
     fi
-    echo "["${Min},${Max}"]:"
+    if [ $# -ge 3 ]; then
+        echo "["${Min},${Max}"]:"
+    fi
     ((RetNum=RndNum%(Max-Min)+Min));
     echo ${RetNum}
 }
@@ -88,7 +90,7 @@ function Test_Random_Number()
     echo ""
     for i in {1..10};
     do
-        out=$(Random_Number 2 "-9999");
+        out=$(Random_Number 2 "-9999" 1);
         echo $i,"Random_Number [2-9999]",$out;
     done;
 }
