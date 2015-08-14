@@ -173,6 +173,6 @@ case "${Stack}" in
         Set_Timezone
         ;;
     *)
-        Echo_Red "Usage: $0 {lnmp|lamp|lnamp}"
+        Echo_Red "Usage: $0 {lnmp|lamp|lnamp|test|test_random|test_color|timezone}"
         ;;
 esac

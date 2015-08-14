@@ -151,7 +151,7 @@ function Test_System_Random()
 {
     local i=0
     local out=""
-    for i in {1..40};
+    for i in {1..10};
     do
         out=$RANDOM;
         echo $i,"System RANDOM [1-100000]",$out;
@@ -165,7 +165,7 @@ function Test_Random_Number()
     local RndRange=$(Random_Number 0 1000)
     echo "Random Number is [0-1000]: "$RndRange
     echo ""
-    for i in {1..30};
+    for i in {1..10};
     do
         out=$(Random_Number 2 "-9999" 1);
         echo $i,"Random_Number [2-9999]",$out;
@@ -193,7 +193,6 @@ function Test_Random_Password()
     echo "Random Password is [length = 12]:      "$RndPassword
     RndPassword=$(Random_Password_Wide 12 14 1)
     echo "Random Password is [length = 12-14]:   "$RndPassword
-    echo ""
 }
 
 # Test Random functions
