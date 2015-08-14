@@ -76,7 +76,11 @@ function Random_Number()
     if [ $# -ge 3 ]; then
         echo "["${Min},${Max}"]:"
     fi
-    ((RetNum=RndNum%(Max-Min)+Min));
+    if [ ${Min} -eq ${Max} ]; then
+        ((RetNum=Min));
+    else
+        ((RetNum=RndNum%(Max-Min+1)+Min));
+    fi
     echo ${RetNum}
 }
 
