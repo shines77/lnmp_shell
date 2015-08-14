@@ -145,9 +145,9 @@ function Test_Random_Password()
     RndPassword=$(Random_Password)
     echo "Random Password is [length = default]: "$RndPassword
     RndPassword=$(Random_Password 12)
-    echo "Random Password is [length = 12]: "$RndPassword    
+    echo "Random Password is [length = 12]:      "$RndPassword    
     RndPassword=$(Random_Password 12 14 1)
-    echo "Random Password is [length = 12-14]: "$RndPassword    
+    echo "Random Password is [length = 12-14]:   "$RndPassword    
 }
 
 # Test Random functions
