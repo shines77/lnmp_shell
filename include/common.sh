@@ -27,6 +27,8 @@ function Random_Password()
         let Len+=1
     done
 
+    Password="${Max_Length}${Password}"
+
     echo "${Password}"
 }
 
@@ -47,6 +49,7 @@ function Test_Random_Number()
     local out=""
     local RndRange=$(Random_Number 0 1000)
     echo "Random Number is [0-1000]: "$RndRange
+    echo ""
     for i in {1..10};
     do
         out=$(Random_Number 2 10000);
@@ -65,7 +68,9 @@ function Test_Random_Password()
 function Test_Random()
 {
     Test_System_Random
+    echo ""
     Test_Random_Number
+    echo ""
     Test_Random_Password
 }
 
