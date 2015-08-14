@@ -207,6 +207,31 @@ function Test_Random()
     echo ""
 }
 
+#
+# Mkdir full path recursive
+#
+#   See: http://cloudmail.iteye.com/blog/1520560
+#
+# or
+#   mkdir -p project/{bin,demo/stat/a,doc/{html,info,pdf},lib/ext,src}
+#
+#   See: http://khaozi.blog.51cto.com/952782/1113888
+#
+function Mkdir_Recur()  
+{  
+    if [ -z $1 -o $1 = "/" ]; then
+        return
+    fi
+
+    local parent_dir=`dirname $1`
+    Mkdir_Recur $parent_dir
+
+    if [ ! -d $1 ]; then
+        echo "mkdir $1"
+        mkdir $1 || exit -1
+    fi
+} 
+
 # About shell Echo_RGBs()
 
 Color_Text()
@@ -217,16 +242,6 @@ Color_Text()
 Echo_Red()
 {
     Color_Text "$1" "31"
-}
-
-# Check whether the logon user is a root account?
-
-Check_Is_Root_Account()
-{
-    if [ $(id -u) != "0" ]; then
-        Echo_Red "Error: You must logon a root account to run this lnamp script, please try again."
-        exit 1
-    fi
 }
 
 Echo_Green()
@@ -252,6 +267,16 @@ Echo_Magenta()
 Echo_Cyan()
 {
     Color_Text "$1" "36"
+}
+
+# Check whether the logon user is a root account?
+
+function Check_Is_Root_Account()
+{
+    if [ $(id -u) != "0" ]; then
+        Echo_Red "Error: You must logon a root account to run this lnamp script, please try again."
+        exit 1
+    fi
 }
 
 # About shell Echo_RGBs_Ex()

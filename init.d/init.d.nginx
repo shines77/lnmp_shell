@@ -43,7 +43,7 @@ else
 
     CONFIG_FILE=$NGINX_ROOT/conf/nginx.conf
     PID_FILE=$NGINX_ROOT/logs/nginx.pid
-fi    
+fi
 
 DAEMON=$NGINX_ROOT/sbin/nginx
 DAEMON_OPTS=

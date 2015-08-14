@@ -36,12 +36,12 @@
 #
 # Apache control script designed to allow an easy command line interface
 # to controlling Apache.  Written by Marc Slemko, 1997/08/23
-# 
+#
 # The exit codes returned are:
 #   XXX this doc is no longer correct now that the interesting
 #   XXX functions are handled by httpd
 #    0 - operation completed successfully
-#    1 - 
+#    1 -
 #    2 - usage error
 #    3 - httpd could not be started
 #    4 - httpd could not be stopped
@@ -57,7 +57,7 @@ ARGV="$@"
 #
 # |||||||||||||||||||| START CONFIGURATION SECTION  ||||||||||||||||||||
 # --------------------                              --------------------
-# 
+#
 # the path to your httpd binary, including options if necessary
 HTTPD='/usr/local/apache/bin/httpd'
 PID='/usr/local/apache/logs/httpd.pid'
@@ -77,7 +77,7 @@ if [ "x$ULIMIT_MAX_FILES" != "x" ] ; then
 fi
 
 ERROR=0
-if [ "x$ARGV" = "x" ] ; then 
+if [ "x$ARGV" = "x" ] ; then
     ARGV="-h"
 fi
 
@@ -101,11 +101,11 @@ case $ARGV in
         fi
         ;;
     status)
-        if [ -f "$PID" ]; then  
+        if [ -f "$PID" ]; then
             echo "Apache is running."
         else
             echo "Apache is stopped."
-        fi 
+        fi
         ;;
     *)
         echo $"Usage: $0 {start|stop|restart|graceful|graceful-stop|configtest|status}"
