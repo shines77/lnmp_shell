@@ -5,21 +5,48 @@
 
 function Check_Integer()
 {
-    # Filter integer numbers [0-9]
-    local tmp=`echo $1 | sed 's/[0-9]//g'`
-    # Filter integer sign
-    tmp=`echo ${tmp} | sed 's/-//g'`
-    tmp=`echo ${tmp} | sed 's/+//g'`
-    [ -n "${tmp}" ] && { echo "Error: Args "$1" must be a integer!"; exit 1; } 
+    if [ $# -lt 1 ]; then
+        echo "Error: No input args."
+        exit 1
+    else
+        # Filter integer numbers [0-9]
+        local tmp=`echo $1 | sed 's/[0-9]//g'`
+        # Filter integer sign
+        tmp=`echo ${tmp} | sed 's/-//g'`
+        tmp=`echo ${tmp} | sed 's/+//g'`
+        [ -n "${tmp}" ] && { echo "Error: Args '"$1"' must be a integer!"; exit 1; }
+    fi
+}
+
+# If the input argument is not a integer, will be return 0.
+
+function Get_Integer()
+{
+    if [ $# -lt 1 ]; then
+        echo "0"
+        exit 1
+    else
+        # Filter integer numbers [0-9]
+        local tmp=`echo $1 | sed 's/[0-9]//g'`
+        # Filter integer sign
+        tmp=`echo ${tmp} | sed 's/-//g'`
+        tmp=`echo ${tmp} | sed 's/+//g'`
+        [ -n "${tmp}" ] && { echo "0"; exit 1; }
+        [ ! -n "${tmp}" ] && { echo ${tmp}; exit 0; }
+    fi
 }
 
 # Get a integer ABS() value
 
 function Integer_ABS()
 {
-    local tmp=`echo $1 | sed 's/-//g'`
-    tmp=`echo ${tmp} | sed 's/+//g'`
-    echo ${tmp}
+    if [ $# -lt 1 ]; then
+        echo "0"
+    else
+        local tmp=`echo $1 | sed 's/-//g'`
+        tmp=`echo ${tmp} | sed 's/+//g'`
+        echo ${tmp}
+    fi
 }
 
 # Randomize number and randomize password
@@ -31,12 +58,12 @@ function Random_Number()
     local Temp=${Max}
     local RndNum=${RANDOM}*65536+${RANDOM}
     local RetNum=0
-    Check_Integer ${Min}
+    Min=$(Get_Integer ${Min})
     if [ ${Min} -lt 0 ]; then
         Min=${Min}
         # Min=$(Integer_ABS ${Min})
     fi
-    Check_Integer ${Max}
+    Max=$(Get_Integer ${Max})
     if [ ${Max} -lt 0 ]; then
         Max=${Max}
         # Max=$(Integer_ABS ${Max})
