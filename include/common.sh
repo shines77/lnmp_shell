@@ -21,7 +21,7 @@ function Random_Number()
         Max=$Min
         Min=$Temp
     fi
-    echo "[",$Min,$Max,"]:"
+    echo "["$Min,$Max"]:"
     ((RetNum=RndNum%(Max-Min)+Min));
     echo $RetNum
 }
@@ -65,7 +65,7 @@ function Test_Random_Number()
     echo ""
     for i in {1..10};
     do
-        out=$(Random_Number 2 "9999");
+        out=$(Random_Number 2 "9999a");
         echo $i,"Random_Number [2-9999]",$out;
     done;
 }
