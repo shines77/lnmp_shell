@@ -207,44 +207,6 @@ function Test_Random()
     echo ""
 }
 
-#
-# Mkdir full path recursive
-#
-#   See: http://cloudmail.iteye.com/blog/1520560
-#
-# or
-#   mkdir -p project/{bin,demo/stat/a,doc/{html,info,pdf},lib/ext,src}
-#
-#   See: http://khaozi.blog.51cto.com/952782/1113888
-#
-function Mkdir_Recur()
-{
-    if [ -z $1 -o $1 = "/" ]; then
-        return
-    fi
-
-    local parent_dir=`dirname $1`
-    Mkdir_Recur $parent_dir
-
-    if [ ! -d $1 ]; then
-        echo "mkdir $1"
-        mkdir $1 || exit -1
-    else
-        echo "dir [$1] has exists."
-    fi
-}
-
-function Test_Mkdir_Recur()
-{
-    Mkdir_Recur /home/guozi/git/lnmp_shell/
-    echo ""
-    Mkdir_Recur /home/guozi/git_tmp/lnmp_shell_test
-    echo ""
-
-    rm -r -f /home/guozi/git/lnmp_shell
-    rm -r -f /home/guozi/git_tmp/lnmp_shell_test
-}
-
 # About shell Echo_RGBs()
 
 Color_Text()
@@ -290,6 +252,44 @@ function Check_Is_Root_Account()
         Echo_Red "Error: You must logon a root account to run this lnamp script, please try again."
         exit 1
     fi
+}
+
+#
+# Mkdir full path recursive
+#
+#   See: http://cloudmail.iteye.com/blog/1520560
+#
+# or
+#   mkdir -p project/{bin,demo/stat/a,doc/{html,info,pdf},lib/ext,src}
+#
+#   See: http://khaozi.blog.51cto.com/952782/1113888
+#
+function Mkdir_Recur()
+{
+    if [ -z $1 -o $1 = "/" ]; then
+        return
+    fi
+
+    local parent_dir=`dirname $1`
+    Mkdir_Recur $parent_dir
+
+    if [ ! -d $1 ]; then
+        Echo_Cyan "mkdir $1"
+        mkdir $1 || exit -1
+    else
+        echo "dir [$1] has exists."
+    fi
+}
+
+function Test_Mkdir_Recur()
+{
+    Mkdir_Recur /home/guozi/git/lnmp_shell/
+    echo ""
+    Mkdir_Recur /home/guozi/git_tmp/lnmp_shell_test
+    echo ""
+
+    rm -r -f /home/guozi/git/lnmp_shell
+    rm -r -f /home/guozi/git_tmp/lnmp_shell_test
 }
 
 # About shell Echo_RGBs_Ex()
