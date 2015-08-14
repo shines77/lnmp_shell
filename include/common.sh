@@ -241,8 +241,8 @@ function Test_Mkdir_Recur()
     Mkdir_Recur /home/guozi/git_tmp/lnmp_shell_test
     echo ""
 
-    rm -d /home/guozi/git/lnmp_shell
-    rm -d /home/guozi/git_tmp/lnmp_shell_test
+    rm -r -f /home/guozi/git/lnmp_shell
+    rm -r -f /home/guozi/git_tmp/lnmp_shell_test
 }
 
 # About shell Echo_RGBs()
