@@ -217,8 +217,8 @@ function Test_Random()
 #
 #   See: http://khaozi.blog.51cto.com/952782/1113888
 #
-function Mkdir_Recur()  
-{  
+function Mkdir_Recur()
+{
     if [ -z $1 -o $1 = "/" ]; then
         return
     fi
@@ -229,6 +229,8 @@ function Mkdir_Recur()
     if [ ! -d $1 ]; then
         echo "mkdir $1"
         mkdir $1 || exit -1
+    else
+        echo "dir [$1] has exists."
     fi
 }
 
