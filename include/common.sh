@@ -56,7 +56,7 @@ function Random_Number()
     local Min=$1
     local Max=$2
     local Temp=${Max}
-    local RndNum=${RANDOM}*65536+${RANDOM}
+    local RndNum=${RANDOM}*32768+${RANDOM}
     local RetNum=0
     Min=$(Get_Integer ${Min})
     if [ ${Min} -lt 0 ]; then
@@ -89,16 +89,25 @@ function Random_Password()
     local Password_Chars="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz~!@#$%^&*()+="
     local Length_Min=$1
     local Length_Max=$2
-    local Max_Length=$(Random_Number $Length_Min $Length_Max)
+    local Max_Length=14
     local Len=0
     local Password=""
+    if [ $# -eq 1 ]; then
+        # When args = 1
+        Length_Max=$1
+        Max_Length=$1
+    elif [ $# -ge 2 ]; then
+        # When args >= 2
+        Max_Length=$(Random_Number $Length_Min $Length_Max)
+    fi
     while [ "${Len}" -le "${Max_Length}" ];
     do
         Password="${Password}${Password_Chars:$((${RANDOM}%${#Password_Chars})):1}"
         let Len+=1
     done
 
-    if [ $# -ge 2 ]; then
+    if [ $# -ge 3 ]; then
+        # When args >= 3
         Password="${Max_Length}|${Password}"
     fi
 
@@ -132,8 +141,13 @@ function Test_Random_Number()
 
 function Test_Random_Password()
 {
-    local RndPassword=$(Random_Password 12 14 1)
-    echo "Random Password is [length = 12-14]: "$RndPassword
+    local RndPassword=""
+    RndPassword=$(Random_Password)
+    echo "Random Password is [length = default]: "$RndPassword
+    RndPassword=$(Random_Password 12)
+    echo "Random Password is [length = 12]: "$RndPassword    
+    RndPassword=$(Random_Password 12 14 1)
+    echo "Random Password is [length = 12-14]: "$RndPassword    
 }
 
 # Test Random functions
