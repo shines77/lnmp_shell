@@ -4,10 +4,46 @@
 
 # Download mirrors URLs
 
-Download_Mirror='http://mirror.cloudbuses.com'
+Download_Mirror='http://mirrors.cloudbuses.com'
 
-Download_Mirror_1='http://mirror.cloudbuses.com'
+Download_Mirror_1='http://mirrors.cloudbuses.com'
 Download_Mirror_2='http://soft.vpser.net'
+
+#############################################################
+
+# The path of download mirrors install package files
+Mirrors_Packages_Dir="/home/wwwroot/mirrors/lnmp_shell"
+
+# The path of install package files
+Packages_Dir="/home/lnmp_shell/install/packages"
+# The temp path of unzip the package files
+Unzip_Dir="/home/lnmp_shell/install/unzip"
+
+####################################################
+#
+# File tree example:
+#
+# /libs/jemalloc/jemalloc-3.6.0.tar.gz
+# /libs/tcmalloc/gperftools-2.1.tar.gz
+# /libs/tcmalloc/libunwind/libunwind-1.5.2.tar.gz
+#
+# /php/php-5.5.16-x86_64.tar.gz
+# /php/libs/libmcrypt/libmcrypt-3.2.2-x86_64.tar.gz
+# /php/extensions/zend/ZendOptimizer-3.3.9-linux-glibc23-x86_64.tar.gz
+# /php/extensions/ioncube/ioncube_loaders_lin_x86-64.tar.gz
+# /php/phpmyadmin/phpmyadmin-5.5.31-x86_64.tar.gz
+#
+# /database/mysql/mysql-5.5.22-x86_64.tar.gz
+# /database/mariadb/mariadb-5.5.31-x86_64.tar.gz
+# /database/pdo/pdo-1.0.2-x86_64.tar.gz
+#
+# /server/nginx/nginx-1.8.0-x86_64.tar.gz
+# /server/apache/apache-2.4.2-x86_64.tar.gz
+# /server/apache/apr-2.1.9-x86_64.tar.gz
+#
+# /ftp/pureftpd/pureftpd-3.4.1-x86_64.tar.gz
+#
+####################################################
 
 #############################################################
 
