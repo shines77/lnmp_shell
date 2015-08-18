@@ -8,25 +8,27 @@ Export_PHP_Autoconf()
 
 Ln_PHP_Bin()
 {
-    ln -sf /usr/local/php/bin/php /usr/bin/php
-    ln -sf /usr/local/php/bin/phpize /usr/bin/phpize
-    ln -sf /usr/local/php/bin/pear /usr/bin/pear
-    ln -sf /usr/local/php/bin/pecl /usr/bin/pecl
+    ln -sf ${PHP_Dir}/bin/php /usr/bin/php
+    ln -sf ${PHP_Dir}/bin/phpize /usr/bin/phpize
+    ln -sf ${PHP_Dir}/bin/pear /usr/bin/pear
+    ln -sf ${PHP_Dir}/bin/pecl /usr/bin/pecl
     if [ "${Stack}" = "lnmp" ]; then
-        ln -sf /usr/local/php/sbin/php-fpm /usr/bin/php-fpm
+        ln -sf ${PHP_Dir}/sbin/php-fpm /usr/bin/php-fpm
     fi
 }
 
 Pear_Pecl_Set()
 {
-    pear config-set php_ini /usr/local/php/etc/php.ini
-    pecl config-set php_ini /usr/local/php/etc/php.ini
+    # /usr/local/php/etc/php.ini
+    pear config-set php_ini ${PHP_Conf_File}
+    pecl config-set php_ini ${PHP_Conf_File}
 }
 
 Create_PHP_Tools()
 {
     echo "Create PHP Info Tool ..."
-    cat >/home/wwwroot/default/phpinfo.php<<eof
+    # /home/wwwroot/default/phpinfo.php
+    cat >${WWWROOT_Default_Site}/phpinfo.php<<eof
 <?
 phpinfo();
 ?>
@@ -35,22 +37,29 @@ eof
     echo "Copy PHP Prober ..."
     cd ${cur_dir}/src
     tar zxf p.tar.gz
-    \cp p.php /home/wwwroot/default/p.php
+    # /home/wwwroot/default/p.php
+    \cp p.php ${WWWROOT_Default_Site}"/"${PHP_Prober_FileName}
 
-    \cp ${cur_dir}/conf/index.html /home/wwwroot/default/index.html
-    \cp ${cur_dir}/conf/lnmp.gif /home/wwwroot/default/lnmp.gif
+    \cp ${cur_dir}/conf/index.html ${WWWROOT_Default_Site}/index.html
+    \cp ${cur_dir}/conf/lnmp.gif ${WWWROOT_Default_Site}/lnmp.gif
     echo "============================Install PHPMyAdmin================================="
-    [[ -d /home/wwwroot/default/phpmyadmin ]] && rm -rf /home/wwwroot/default/phpmyadmin
+    # /home/wwwroot/default/phpmyadmin
+    [[ -d ${WWWROOT_Default_Site}/phpmyadmin ]] && rm -rf ${WWWROOT_Default_Site}/phpmyadmin
+    # /home/wwwroot/default/phpmyadmin_??????????
+    [[ -d ${WWWROOT_Default_Site}/${PhpMyAdmin_PathName} ]] && rm -rf ${WWWROOT_Default_Site}/${PhpMyAdmin_PathName}
     tar zxf ${PhpMyAdmin_Ver}.tar.gz
-    mv ${PhpMyAdmin_Ver} /home/wwwroot/default/phpmyadmin
-    \cp ${cur_dir}/conf/config.inc.php /home/wwwroot/default/phpmyadmin/config.inc.php
-    sed -i 's/LNMPORG/LNMP.org'$RANDOM'VPSer.net/g' /home/wwwroot/default/phpmyadmin/config.inc.php
-    mkdir /home/wwwroot/default/phpmyadmin/{upload,save}
-    chmod 755 -R /home/wwwroot/default/phpmyadmin/
-    chown www:www -R /home/wwwroot/default/phpmyadmin/
+    # /home/wwwroot/default/phpmyadmin
+    mv ${PhpMyAdmin_Ver} ${PhpMyAdmin_Dir}
+    # /home/wwwroot/default/phpmyadmin/config.inc.php
+    \cp ${cur_dir}/conf/config.inc.php ${PhpMyAdmin_Dir}/config.inc.php
+    sed -i 's/LNMPORG/LNMP.org'$RANDOM'VPSer.net/g' ${PhpMyAdmin_Dir}/config.inc.php
+    mkdir -p ${PhpMyAdmin_Dir}/{upload,save}
+    # /home/wwwroot/default/phpmyadmin/
+    chmod 755 -R ${PhpMyAdmin_Dir}"/"
+    chown www:www -R ${PhpMyAdmin_Dir}"/"
     echo "============================phpMyAdmin install completed======================="
 
-    #add iptables firewall rules
+    # add iptables firewall rules
     if [ -s /sbin/iptables ]; then
         /sbin/iptables -I INPUT 1 -i lo -j ACCEPT
         /sbin/iptables -I INPUT 2 -m state --state ESTABLISHED,RELATED -j ACCEPT
@@ -110,39 +119,49 @@ Install_PHP_52()
     make ZEND_EXTRA_LIBS='-liconv'
     make install
 
+    echo "Copy new php configure file ..."
+
+    # mkdir for configure file /usr/local/php/etc/php.ini, Mkdir4File()
     mkdir -p /usr/local/php/etc
-    \cp php.ini-dist /usr/local/php/etc/php.ini
+    # /usr/local/php/etc/php.ini
+    \cp php.ini-dist ${PHP_Conf_File}
     cd ../
 
     Ln_PHP_Bin
 
-    # php extensions
-    sed -i 's#extension_dir = "./"#extension_dir = "/usr/local/php/lib/php/extensions/no-debug-non-zts-20060613/"\n#' /usr/local/php/etc/php.ini
-    sed -i 's#output_buffering = Off#output_buffering = On#' /usr/local/php/etc/php.ini
-    sed -i 's/post_max_size = 8M/post_max_size = 50M/g' /usr/local/php/etc/php.ini
-    sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 50M/g' /usr/local/php/etc/php.ini
-    sed -i 's/;date.timezone =/date.timezone = PRC/g' /usr/local/php/etc/php.ini
-    sed -i 's/short_open_tag = Off/short_open_tag = On/g' /usr/local/php/etc/php.ini
-    sed -i 's/; cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' /usr/local/php/etc/php.ini
-    sed -i 's/; cgi.fix_pathinfo=0/cgi.fix_pathinfo=0/g' /usr/local/php/etc/php.ini
-    sed -i 's/max_execution_time = 30/max_execution_time = 300/g' /usr/local/php/etc/php.ini
-    sed -i 's/disable_functions =.*/disable_functions = passthru,exec,system,chroot,scandir,chgrp,chown,shell_exec,proc_open,proc_get_status,popen,ini_alter,ini_restore,dl,openlog,syslog,readlink,symlink,popepassthru,stream_socket_server,fsocket/g' /usr/local/php/etc/php.ini
+    # PHP extensions
+    # For /usr/local/php/etc/php.ini
+    echo "Modify php.ini ......"
+    sed -i 's#extension_dir = "./"#extension_dir = "${PHP_Dir}/lib/php/extensions/no-debug-non-zts-20060613/"\n#' ${PHP_Conf_File}
+    sed -i 's#output_buffering = Off#output_buffering = On#' ${PHP_Conf_File}
+    sed -i 's/post_max_size = 8M/post_max_size = 50M/g' ${PHP_Conf_File}
+    sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 50M/g' ${PHP_Conf_File}
+    sed -i 's/;date.timezone =/date.timezone = PRC/g' ${PHP_Conf_File}
+    sed -i 's/short_open_tag = Off/short_open_tag = On/g' ${PHP_Conf_File}
+    sed -i 's/; cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' ${PHP_Conf_File}
+    sed -i 's/; cgi.fix_pathinfo=0/cgi.fix_pathinfo=0/g' ${PHP_Conf_File}
+    sed -i 's/max_execution_time = 30/max_execution_time = 300/g' ${PHP_Conf_File}
+    sed -i 's/disable_functions =.*/disable_functions = passthru,exec,system,chroot,scandir,chgrp,chown,shell_exec,proc_open,proc_get_status,popen,ini_alter,ini_restore,dl,openlog,syslog,readlink,symlink,popepassthru,stream_socket_server,fsocket/g' ${PHP_Conf_File}
+
     Pear_Pecl_Set
 
     cd ${cur_dir}/src
-    if [ "${Is_64bit}" = "y" ] ; then
+    if [ "${Is_64bit}" = "y" ]; then
         Download_Files ${Download_Mirror}/web/zend/ZendOptimizer-3.3.9-linux-glibc23-x86_64.tar.gz
         tar zxf ZendOptimizer-3.3.9-linux-glibc23-x86_64.tar.gz
-        mkdir -p /usr/local/zend/
-        \cp ZendOptimizer-3.3.9-linux-glibc23-x86_64/data/5_2_x_comp/ZendOptimizer.so /usr/local/zend/
+        # /usr/local/zend/
+        mkdir -p ${ZendOptimizer_Dir}"/"
+        \cp ZendOptimizer-3.3.9-linux-glibc23-x86_64/data/5_2_x_comp/ZendOptimizer.so ${ZendOptimizer_Dir}"/"
     else
         Download_Files ${Download_Mirror}/web/zend/ZendOptimizer-3.3.9-linux-glibc23-i386.tar.gz
         tar zxf ZendOptimizer-3.3.9-linux-glibc23-i386.tar.gz
-        mkdir -p /usr/local/zend/
-        \cp ZendOptimizer-3.3.9-linux-glibc23-i386/data/5_2_x_comp/ZendOptimizer.so /usr/local/zend/
+        # /usr/local/zend/
+        mkdir -p ${ZendOptimizer_Dir}"/"
+        \cp ZendOptimizer-3.3.9-linux-glibc23-i386/data/5_2_x_comp/ZendOptimizer.so ${ZendOptimizer_Dir}"/"
     fi
 
-    cat >>/usr/local/php/etc/php.ini<<EOF
+    # /usr/local/php/etc/php.ini
+    cat >>${PHP_Conf_File}<<EOF
 
 ;eaccelerator
 
@@ -150,15 +169,20 @@ Install_PHP_52()
 
 [Zend Optimizer]
 zend_optimizer.optimization_level=1
-zend_extension="/usr/local/zend/ZendOptimizer.so"
+zend_extension="${ZendOptimizer_Dir}/ZendOptimizer.so"
 
 ;xcache
 ;xcache end
 EOF
 
     if [ "${Stack}" = "lnmp" ]; then
-        rm -f /usr/local/php/etc/php-fpm.conf
-        \cp ${cur_dir}/conf/php-fpm5.2.conf /usr/local/php/etc/php-fpm.conf
+        echo "Creating new php-fpm configure file ..."
+        # /usr/local/php/etc/php-fpm.conf
+        rm -f ${PHP_FPM_Conf_File}
+        # /usr/local/php/etc/php-fpm.conf
+        \cp ${cur_dir}/conf/php-fpm5.2.conf ${PHP_FPM_Conf_File}
+        # /etc/init.d/php-fpm
+        echo "Copy php-fpm init.d file ..."
         \cp ${cur_dir}/init.d/init.d.php-fpm5.2 /etc/init.d/php-fpm
         chmod +x /etc/init.d/php-fpm
     fi
@@ -190,23 +214,27 @@ Install_PHP_53()
     Ln_PHP_Bin
 
     echo "Copy new php configure file ..."
+    # mkdir for configure file /usr/local/php/etc/php.ini, Mkdir4File()
     mkdir -p /usr/local/php/etc
-    \cp php.ini-production /usr/local/php/etc/php.ini
+    # /usr/local/php/etc/php.ini
+    \cp php.ini-production ${PHP_Conf_File}
 
     cd ${cur_dir}
-    # php extensions
-    echo "Modify php.ini......"
-    sed -i 's/post_max_size = 8M/post_max_size = 50M/g' /usr/local/php/etc/php.ini
-    sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 50M/g' /usr/local/php/etc/php.ini
-    sed -i 's/;date.timezone =/date.timezone = PRC/g' /usr/local/php/etc/php.ini
-    sed -i 's/short_open_tag = Off/short_open_tag = On/g' /usr/local/php/etc/php.ini
-    sed -i 's/; cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' /usr/local/php/etc/php.ini
-    sed -i 's/; cgi.fix_pathinfo=0/cgi.fix_pathinfo=0/g' /usr/local/php/etc/php.ini
-    sed -i 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' /usr/local/php/etc/php.ini
-    sed -i 's/max_execution_time = 30/max_execution_time = 300/g' /usr/local/php/etc/php.ini
-    sed -i 's/register_long_arrays = On/;register_long_arrays = On/g' /usr/local/php/etc/php.ini
-    sed -i 's/magic_quotes_gpc = On/;magic_quotes_gpc = On/g' /usr/local/php/etc/php.ini
-    sed -i 's/disable_functions =.*/disable_functions = passthru,exec,system,chroot,scandir,chgrp,chown,shell_exec,proc_open,proc_get_status,popen,ini_alter,ini_restore,dl,openlog,syslog,readlink,symlink,popepassthru,stream_socket_server/g' /usr/local/php/etc/php.ini
+
+    # PHP extensions
+    # For /usr/local/php/etc/php.ini
+    echo "Modify php.ini ......"
+    sed -i 's/post_max_size = 8M/post_max_size = 50M/g' ${PHP_Conf_File}
+    sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 50M/g' ${PHP_Conf_File}
+    sed -i 's/;date.timezone =/date.timezone = PRC/g' ${PHP_Conf_File}
+    sed -i 's/short_open_tag = Off/short_open_tag = On/g' ${PHP_Conf_File}
+    sed -i 's/; cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' ${PHP_Conf_File}
+    sed -i 's/; cgi.fix_pathinfo=0/cgi.fix_pathinfo=0/g' ${PHP_Conf_File}
+    sed -i 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' ${PHP_Conf_File}
+    sed -i 's/max_execution_time = 30/max_execution_time = 300/g' ${PHP_Conf_File}
+    sed -i 's/register_long_arrays = On/;register_long_arrays = On/g' ${PHP_Conf_File}
+    sed -i 's/magic_quotes_gpc = On/;magic_quotes_gpc = On/g' ${PHP_Conf_File}
+    sed -i 's/disable_functions =.*/disable_functions = passthru,exec,system,chroot,scandir,chgrp,chown,shell_exec,proc_open,proc_get_status,popen,ini_alter,ini_restore,dl,openlog,syslog,readlink,symlink,popepassthru,stream_socket_server/g' ${PHP_Conf_File}
     Pear_Pecl_Set
 
     echo "Install ZendGuardLoader for PHP 5.3 ..."
@@ -214,24 +242,26 @@ Install_PHP_53()
     if [ "${Is_64bit}" = "y" ] ; then
         Download_Files ${Download_Mirror}/web/zend/ZendGuardLoader-php-5.3-linux-glibc23-x86_64.tar.gz
         tar zxf ZendGuardLoader-php-5.3-linux-glibc23-x86_64.tar.gz
-        mkdir -p /usr/local/zend/
-        \cp ZendGuardLoader-php-5.3-linux-glibc23-x86_64/php-5.3.x/ZendGuardLoader.so /usr/local/zend/
+        # /usr/local/zend/
+        mkdir -p ${ZendOptimizer_Dir}"/"
+        \cp ZendGuardLoader-php-5.3-linux-glibc23-x86_64/php-5.3.x/ZendGuardLoader.so ${ZendOptimizer_Dir}"/"
     else
         Download_Files ${Download_Mirror}/web/zend/ZendGuardLoader-php-5.3-linux-glibc23-i386.tar.gz
         tar zxf ZendGuardLoader-php-5.3-linux-glibc23-i386.tar.gz
-        mkdir -p /usr/local/zend/
-        \cp ZendGuardLoader-php-5.3-linux-glibc23-i386/php-5.3.x/ZendGuardLoader.so /usr/local/zend/
+        # /usr/local/zend/
+        mkdir -p ${ZendOptimizer_Dir}"/"
+        \cp ZendGuardLoader-php-5.3-linux-glibc23-i386/php-5.3.x/ZendGuardLoader.so ${ZendOptimizer_Dir}"/"
     fi
 
     echo "Write ZendGuardLoader to php.ini ..."
-    cat >>/usr/local/php/etc/php.ini<<EOF
+    cat >>${PHP_Conf_File}<<EOF
 
 ;eaccelerator
 
 ;ionCube
 
 [Zend ZendGuard Loader]
-zend_extension=/usr/local/zend/ZendGuardLoader.so
+zend_extension=${ZendOptimizer_Dir}/ZendGuardLoader.so
 zend_loader.enable=1
 zend_loader.disable_licensing=0
 zend_loader.obfuscation_level_support=3
@@ -243,10 +273,10 @@ EOF
 
     if [ "${Stack}" = "lnmp" ]; then
         echo "Creating new php-fpm configure file ..."
-        cat >/usr/local/php/etc/php-fpm.conf<<EOF
+        cat >${PHP_FPM_Conf_File}<<EOF
 [global]
-pid = /usr/local/php/var/run/php-fpm.pid
-error_log = /usr/local/php/var/log/php-fpm.log
+pid = ${PHP_Dir}/var/run/php-fpm.pid
+error_log = ${PHP_Dir}/var/log/php-fpm.log
 log_level = notice
 
 [www]
@@ -265,7 +295,7 @@ pm.min_spare_servers = 1
 pm.max_spare_servers = 6
 request_terminate_timeout = 100
 request_slowlog_timeout = 0
-slowlog = var/log/slow.log
+slowlog = ${PHP_Dir}/var/log/slow.log
 EOF
 
         echo "Copy php-fpm init.d file ..."
