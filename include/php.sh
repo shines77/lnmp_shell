@@ -28,7 +28,7 @@ Create_PHP_Tools()
 {
     echo "Create PHP Info Tool ..."
     # /home/wwwroot/default/phpinfo.php
-    cat >${WWWROOT_Default_Site}/phpinfo.php<<eof
+    cat >${WWWRoot_Default_Site}/phpinfo.php<<eof
 <?
 phpinfo();
 ?>
@@ -38,15 +38,15 @@ eof
     cd ${cur_dir}/src
     tar zxf p.tar.gz
     # /home/wwwroot/default/p.php
-    \cp p.php ${WWWROOT_Default_Site}"/"${PHP_Prober_FileName}
+    \cp p.php ${WWWRoot_Default_Site}"/"${PHP_Prober_FileName}
 
-    \cp ${cur_dir}/conf/index.html ${WWWROOT_Default_Site}/index.html
-    \cp ${cur_dir}/conf/lnmp.gif ${WWWROOT_Default_Site}/lnmp.gif
+    \cp ${cur_dir}/conf/index.html ${WWWRoot_Default_Site}/index.html
+    \cp ${cur_dir}/conf/lnmp.gif ${WWWRoot_Default_Site}/lnmp.gif
     echo "============================Install PHPMyAdmin================================="
     # /home/wwwroot/default/phpmyadmin
-    [[ -d ${WWWROOT_Default_Site}/phpmyadmin ]] && rm -rf ${WWWROOT_Default_Site}/phpmyadmin
+    [[ -d ${WWWRoot_Default_Site}/phpmyadmin ]] && rm -rf ${WWWRoot_Default_Site}/phpmyadmin
     # /home/wwwroot/default/phpmyadmin_??????????
-    [[ -d ${WWWROOT_Default_Site}/${PhpMyAdmin_PathName} ]] && rm -rf ${WWWROOT_Default_Site}/${PhpMyAdmin_PathName}
+    [[ -d ${WWWRoot_Default_Site}/${PhpMyAdmin_PathName} ]] && rm -rf ${WWWRoot_Default_Site}/${PhpMyAdmin_PathName}
     tar zxf ${PhpMyAdmin_Ver}.tar.gz
     # /home/wwwroot/default/phpmyadmin
     mv ${PhpMyAdmin_Ver} ${PhpMyAdmin_Dir}

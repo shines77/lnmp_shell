@@ -2,7 +2,7 @@
 
 #############################################################
 
-# Download mirrors URL
+# Download mirrors URLs
 
 Download_Mirror='http://mirror.cloudbuses.com'
 
@@ -11,13 +11,14 @@ Download_Mirror_2='http://soft.vpser.net'
 
 #############################################################
 
-### Install folders ###
-### Configure file pathname ###
+### Install paths and configure files ###
+
+## Note: All the path must be not end of "/". ##
 
 #############################################################
 
-# VHOST default site folder
-WWWROOT_Default_Site="/home/wwwroot/default"
+# WwWRoot: VHOST default site folder
+WWWRoot_Default_Site="/home/wwwroot/default"
 
 # PhpMyAdmin pathname
 PhpMyAdmin_PathName="phpmyadmin_JI1R7E5G3PY8VQ"
@@ -26,9 +27,9 @@ PHP_Prober_FileName="tanzhen_HI2WU3E7Y67U2R.php"
 
 #############################################################
 
-# Nginx install folder
+# Nginx install path
 Nginx_Dir="/usr/local/nginx"
-# Nginx logs folder
+# Nginx logs path
 Nginx_Logs_Dir="/home/wwwlogs"
 
 # Nginx confiure file
@@ -36,9 +37,9 @@ Nginx_Conf_File="/usr/local/nginx/conf/nginx.conf"
 
 #############################################################
 
-# Apache install folder
+# Apache install path
 Apache_Dir="/usr/local/apache"
-# Apache logs folder
+# Apache logs path
 Apache_Logs_Dir="/home/wwwlogs"
 
 # Apache confiure file
@@ -46,9 +47,9 @@ Apache_Conf_File="/usr/local/apache/conf/httpd.conf"
 
 #############################################################
 
-# MySQL install folder
+# MySQL install path
 MySQL_Dir="/usr/local/mysql"
-# MariaDB install folder
+# MariaDB install path
 MariaDB_Dir="/usr/local/mariadb"
 
 # MySQL/MariaDB confiure file
@@ -57,10 +58,10 @@ MariaDB_Conf_File="/etc/my.cnf"
 
 #############################################################
 
-# PHP install folder
+# PHP install path
 PHP_Dir="/usr/local/php"
-# PhpMyAdmin install folder
-PhpMyAdmin_Dir=${WWWROOT_Default_Site}"/"${PhpMyAdmin_PathName}
+# PhpMyAdmin install path
+PhpMyAdmin_Dir=${WWWRoot_Default_Site}"/"${PhpMyAdmin_PathName}
 
 # PHP confiure file
 PHP_Conf_File="/usr/local/php/etc/php.ini"
