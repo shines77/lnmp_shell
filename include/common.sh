@@ -309,6 +309,7 @@ function Check_PathName()
         sPathName=${sParentPath}
         sParentPath=`dirname ${sPathName}`
     done
+    echo "Check_PathName() result is:"
     echo sPathName
 }
 
@@ -341,7 +342,9 @@ function Check_PathName2()
 # Check the path, if the first char is not '/', add '/' to it.
 function Check_PathName_Head()
 {
-    #
+    local sPathName=$1
+    echo "Check_PathName_Head() result is:"
+    echo sPathName
 }
 
 function Test_CheckPathName()
