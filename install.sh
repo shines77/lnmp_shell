@@ -174,6 +174,9 @@ case "${Stack}" in
     test_mkdir)
         Test_Mkdir_Recur
         ;;
+    test_checkpath)
+        Test_CheckPathName
+        ;;
     timezone)
         Set_Timezone
         ;;

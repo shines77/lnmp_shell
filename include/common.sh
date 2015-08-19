@@ -293,7 +293,7 @@ function Test_Mkdir_Recur()
     rm -r -f /home/guozi/git_tmp/lnmp_shell_test
 }
 
-# Check the path, if last char is '/', remove it.
+# Check the path, if the last char is '/', remove '/'.
 function Check_PathName()
 {
     local sPathName=$1
@@ -304,12 +304,63 @@ function Check_PathName()
     local sParentPath=`dirname ${sPathName}`
     echo "sPathName = "${sPathName}
     echo "sParentPath = "${sParentPath}
-    when [[ "${sParentPath}/" = "${sPathName}" ]];
+    while [[ "${sParentPath}/" = "${sPathName}" ]];
     do
         sPathName=${sParentPath}
         sParentPath=`dirname ${sPathName}`
     done
     echo sPathName
+}
+
+# Check the path, if the last char is '/', remove '/'.
+function Check_PathName2()
+{
+    local sPathName=$1
+    if [ -z ${sPathName} -o ${sPathName} = "/" ]; then
+        echo sPathName
+        return
+    fi
+    local sParentPath=${sPathName}
+    local sLength=${#sParentPath}
+    local sLastChar=""
+    let sLength-=1
+    sLastChar=${sParentPath:${sLength}:1}
+    echo "sParentPath = "${sParentPath}
+    echo "sLength = "${sLength}
+    echo "sLastChar = "${sLastChar}
+    while [[ sLength -gt 0 && sLastChar = "/" ]];
+    do
+        sParentPath=${sParentPath:0:${sLength}}
+        sLength=${#sParentPath}
+        let sLength-=1
+    done
+    echo "Check_PathName2() result is:"
+    echo sParentPath
+}
+
+# Check the path, if the first char is not '/', add '/' to it.
+function Check_PathName_Head()
+{
+    #
+}
+
+function Test_CheckPathName()
+{
+    echo ""
+    Check_PathName "/home/wwwroot/default"
+    echo ""
+    Check_PathName "/home/wwwroot/default/"
+    echo ""
+    Check_PathName "/home/wwwroot/default//"
+    echo ""
+
+    echo ""
+    Check_PathName2 "/home/wwwroot/default"
+    echo ""
+    Check_PathName2 "/home/wwwroot/default/"
+    echo ""
+    Check_PathName2 "/home/wwwroot/default//"
+    echo ""
 }
 
 # About shell Echo_RGBs_Ex()
