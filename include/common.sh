@@ -310,7 +310,7 @@ function Check_PathName()
         sParentPath=`dirname ${sPathName}`
     done
     echo "Check_PathName() result is:"
-    echo sPathName
+    echo ${sPathName}
 }
 
 # Check the path, if the last char is '/', remove '/'.
@@ -321,22 +321,21 @@ function Check_PathName2()
         echo sPathName
         return
     fi
-    local sParentPath=${sPathName}
-    local sLength=${#sParentPath}
+    local sLength=${#sPathName}
     local sLastChar=""
     let sLength-=1
-    sLastChar=${sParentPath:${sLength}:1}
-    echo "sParentPath = "${sParentPath}
+    sLastChar=${sPathName:${sLength}:1}
+    echo "sPathName = "${sPathName}
     echo "sLength = "${sLength}
     echo "sLastChar = "${sLastChar}
     while [[ sLength -gt 0 && sLastChar = "/" ]];
     do
-        sParentPath=${sParentPath:0:${sLength}}
-        sLength=${#sParentPath}
+        sPathName=${sPathName:0:${sLength}}
+        sLength=${#sPathName}
         let sLength-=1
     done
     echo "Check_PathName2() result is:"
-    echo sParentPath
+    echo ${sPathName}
 }
 
 # Check the path, if the first char is not '/', add '/' to it.
@@ -344,11 +343,13 @@ function Check_PathName_Head()
 {
     local sPathName=$1
     echo "Check_PathName_Head() result is:"
-    echo sPathName
+    echo ${sPathName}
 }
 
 function Test_CheckPathName()
 {
+    echo "------------------------------------------------"
+
     echo ""
     Check_PathName "/home/wwwroot/default"
     echo ""
@@ -357,6 +358,8 @@ function Test_CheckPathName()
     Check_PathName "/home/wwwroot/default//"
     echo ""
 
+    echo "------------------------------------------------"
+
     echo ""
     Check_PathName2 "/home/wwwroot/default"
     echo ""
@@ -364,6 +367,8 @@ function Test_CheckPathName()
     echo ""
     Check_PathName2 "/home/wwwroot/default//"
     echo ""
+
+    echo "------------------------------------------------"
 }
 
 # About shell Echo_RGBs_Ex()
