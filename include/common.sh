@@ -305,10 +305,11 @@ function Check_PathName()
         echo "sPathName = "${sPathName}
         echo "sParentPath = "${sParentPath}
         echo "sBaseName = "${sBaseName}
-        if [ "${sParentPath}/${sBaseName}" <> "${sPathName}" ]; then
+        if [ "${sParentPath}/${sBaseName}" != "${sPathName}" ]; then
             sPathName="${sParentPath}/${sBaseName}"
         fi
     fi
+    echo ""
     echo "Check_PathName() result is:"
     echo ${sPathName}
 }
@@ -342,6 +343,7 @@ function Check_PathName2()
             fi
         done
     fi
+    echo ""
     echo "Check_PathName2() result is:"
     echo ${sPathName}
 }
