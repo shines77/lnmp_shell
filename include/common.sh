@@ -302,15 +302,10 @@ function Check_PathName()
     else
         local sParentPath=`dirname ${sPathName}`
         local sBaseName=`basename ${sPathName}`
-        echo "sPathName = "${sPathName}
-        echo "sParentPath = "${sParentPath}
-        echo "sBaseName = "${sBaseName}
         if [ "${sParentPath}/${sBaseName}" != "${sPathName}" ]; then
             sPathName="${sParentPath}/${sBaseName}"
         fi
-    fi
-    echo ""
-    echo "Check_PathName() result is:"
+    fi   
     echo ${sPathName}
 }
 
@@ -325,9 +320,6 @@ function Check_PathName2()
         local sLastChar=""
         let sLength-=1
         sLastChar=${sPathName:${sLength}:1}
-        echo "sPathName = "${sPathName}
-        echo "sLength = "${sLength}
-        echo "sLastChar = "${sLastChar}
         # If the last char is '/', remove the '/'.
         while [ "${sLastChar}" = "/" ];
         do
@@ -343,8 +335,6 @@ function Check_PathName2()
             fi
         done
     fi
-    echo ""
-    echo "Check_PathName2() result is:"
     echo ${sPathName}
 }
 
@@ -364,7 +354,8 @@ function Check_PathName_Head()
 function Test_CheckPathName()
 {
     echo "------------------------------------------------"
-
+    echo ""
+    echo "Check_PathName() Test:"
     echo ""
     Check_PathName "/home/wwwroot/default"
     echo ""
@@ -372,9 +363,13 @@ function Test_CheckPathName()
     echo ""
     Check_PathName "/home/wwwroot/default//"
     echo ""
-
+    Check_PathName "/"
+    echo ""
+    Check_PathName ""
+    echo ""
     echo "------------------------------------------------"
-
+    echo ""
+    echo "Check_PathName2() Test:"
     echo ""
     Check_PathName2 "/home/wwwroot/default"
     echo ""
@@ -382,7 +377,10 @@ function Test_CheckPathName()
     echo ""
     Check_PathName2 "/home/wwwroot/default//"
     echo ""
-
+    Check_PathName2 "/"
+    echo ""
+    Check_PathName2 ""
+    echo ""
     echo "------------------------------------------------"
 }
 
