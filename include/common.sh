@@ -293,47 +293,55 @@ function Test_Mkdir_Recur()
     rm -r -f /home/guozi/git_tmp/lnmp_shell_test
 }
 
-# Check the path, if the last char is '/', remove '/'.
+# Check the path, if the last char is '/', remove the last char '/'.
 function Check_PathName()
 {
     local sPathName=$1
     if [ -z ${sPathName} -o ${sPathName} = "/" ]; then
-        echo sPathName
-        return
+        sPathName="/"
+    else
+        local sParentPath=`dirname ${sPathName}`
+        local sBaseName=`basename ${sPathName}`
+        echo "sPathName = "${sPathName}
+        echo "sParentPath = "${sParentPath}
+        echo "sBaseName = "${sBaseName}
+        if [ "${sParentPath}/${sBaseName}" <> "${sPathName}" ]; then
+            sPathName="${sParentPath}/${sBaseName}"
+        fi
     fi
-    local sParentPath=`dirname ${sPathName}`
-    echo "sPathName = "${sPathName}
-    echo "sParentPath = "${sParentPath}
-    while [[ "${sParentPath}/" = "${sPathName}" ]];
-    do
-        sPathName=${sParentPath}
-        sParentPath=`dirname ${sPathName}`
-    done
     echo "Check_PathName() result is:"
     echo ${sPathName}
 }
 
-# Check the path, if the last char is '/', remove '/'.
+# Check the path, if the last char is '/', remove the last char '/'.
 function Check_PathName2()
 {
     local sPathName=$1
     if [ -z ${sPathName} -o ${sPathName} = "/" ]; then
-        echo sPathName
-        return
-    fi
-    local sLength=${#sPathName}
-    local sLastChar=""
-    let sLength-=1
-    sLastChar=${sPathName:${sLength}:1}
-    echo "sPathName = "${sPathName}
-    echo "sLength = "${sLength}
-    echo "sLastChar = "${sLastChar}
-    while [[ sLength -gt 0 && sLastChar = "/" ]];
-    do
-        sPathName=${sPathName:0:${sLength}}
-        sLength=${#sPathName}
+        sPathName="/"
+    else
+        local sLength=${#sPathName}
+        local sLastChar=""
         let sLength-=1
-    done
+        sLastChar=${sPathName:${sLength}:1}
+        echo "sPathName = "${sPathName}
+        echo "sLength = "${sLength}
+        echo "sLastChar = "${sLastChar}
+        # If the last char is '/', remove the '/'.
+        while [ sLastChar = "/" ];
+        do
+            sPathName=${sPathName:0:${sLength}}
+            sLength=${#sPathName}
+            if [ sLength -ge 1 ]; then
+                # If the sPathName length is greater or equal 1, remove last char.
+                let sLength-=1
+                sLastChar=${sPathName:${sLength}:1}
+            else
+                # If the sPathName length is lesser 1, the end.
+                sLastChar=""
+            fi
+        done
+    fi
     echo "Check_PathName2() result is:"
     echo ${sPathName}
 }
@@ -342,6 +350,11 @@ function Check_PathName2()
 function Check_PathName_Head()
 {
     local sPathName=$1
+    if [ -z ${sPathName} -o ${sPathName} = "/" ]; then
+        sPathName="/"
+    else
+        sPathName=$1
+    fi
     echo "Check_PathName_Head() result is:"
     echo ${sPathName}
 }
