@@ -11,13 +11,13 @@ Download_Mirror_2='http://soft.vpser.net'
 
 #############################################################
 
+# The path of install package files
+Packages_Dir="/home/lnmp_install/packages"
+# The temp path of unzip the package files
+Unzip_Dir="/home/lnmp_install/unzip"
+
 # The path of download mirrors install package files
 Mirrors_Packages_Dir="/home/wwwroot/mirrors/lnmp_shell"
-
-# The path of install package files
-Packages_Dir="/home/lnmp_shell/install/packages"
-# The temp path of unzip the package files
-Unzip_Dir="/home/lnmp_shell/install/unzip"
 
 ####################################################
 #

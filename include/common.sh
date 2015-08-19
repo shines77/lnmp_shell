@@ -270,8 +270,8 @@ function Mkdir_Recur()
         return
     fi
 
-    local parent_dir=`dirname $1`
-    Mkdir_Recur $parent_dir
+    local sParentDir=`dirname $1`
+    Mkdir_Recur $sParentDir
 
     if [ ! -d $1 ]; then
         Echo_Cyan "mkdir $1"
@@ -291,6 +291,25 @@ function Test_Mkdir_Recur()
 
     rm -r -f /home/guozi/git/lnmp_shell
     rm -r -f /home/guozi/git_tmp/lnmp_shell_test
+}
+
+# Check the path, if last char is '/', remove it.
+function Check_PathName()
+{
+    local sPathName=$1
+    if [ -z ${sPathName} -o ${sPathName} = "/" ]; then
+        echo sPathName
+        return
+    fi
+    local sParentPath=`dirname ${sPathName}`
+    echo "sPathName = "${sPathName}
+    echo "sParentPath = "${sParentPath}
+    when [[ "${sParentPath}/" = "${sPathName}" ]];
+    do
+        sPathName=${sParentPath}
+        sParentPath=`dirname ${sPathName}`
+    done
+    echo sPathName
 }
 
 # About shell Echo_RGBs_Ex()

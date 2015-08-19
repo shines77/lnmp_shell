@@ -489,6 +489,23 @@ Tar_Cd()
     cd ${DirName}
 }
 
+Unzip_Package()
+{
+    local sPackagePath=$1
+    local sFileName=$2
+    local sDirName=$3
+    local sUnzipPath=${Unzip_Dir}${PackagePath}
+    cd ${sUnzipPath}
+    # Remove the previous uncompress files and folders, if it have exists.
+    [[ -d "${sDirName}" ]] && rm -rf ${sDirName}
+    # Uncompress the package to a folder.
+    echo "Uncompress ${sFileName} to dir [${sUnzipPath}] ..."
+    tar -zvf ${Packages_Dir}${sPackagePath}${sFileName} ${sUnzipPath}
+    # Change the current path to the uncompressed folder.
+    echo "cd ${sUnzipPath}${sDirName} ..."
+    cd ${sUnzipPath}${sDirName}
+}
+
 StartUp()
 {
     init_name=$1
