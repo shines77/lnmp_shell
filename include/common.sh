@@ -302,8 +302,14 @@ function Check_PathName()
     else
         local sParentPath=`dirname ${sPathName}`
         local sBaseName=`basename ${sPathName}`
-        if [ "${sParentPath}/${sBaseName}" != "${sPathName}" ]; then
-            sPathName="${sParentPath}/${sBaseName}"
+        if [ "${sParentPath}" = "/" ]; then
+            if [ "/${sBaseName}" != "${sPathName}" ]; then
+                sPathName="/${sBaseName}"
+            fi
+        else
+            if [ "${sParentPath}/${sBaseName}" != "${sPathName}" ]; then
+                sPathName="${sParentPath}/${sBaseName}"
+            fi
         fi
     fi   
     echo ${sPathName}
