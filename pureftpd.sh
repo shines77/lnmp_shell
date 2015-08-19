@@ -74,8 +74,8 @@ Install_Pureftpd()
 
     echo "Download files ..."
     cd ${cur_dir}/src
-    Download_Files ${Download_Mirror}/ftp/pure-ftpd/${Pureftpd_Ver}.tar.gz ${Pureftpd_Ver}.tar.gz
-    Download_Files ${Download_Mirror}/ftp/pure-ftpd/${Pureftpd_Manager_Ver}.zip ${Pureftpd_Manager_Ver}.zip
+    Download_File ${Download_Mirror}/ftp/pure-ftpd/${Pureftpd_Ver}.tar.gz ${Pureftpd_Ver}.tar.gz
+    Download_File ${Download_Mirror}/ftp/pure-ftpd/${Pureftpd_Manager_Ver}.zip ${Pureftpd_Manager_Ver}.zip
 
     if [ -s /var/lib/mysql/mysql.sock ]; then
     ln -sf /tmp/mysql.sock /var/lib/mysql/mysql.sock

@@ -30,7 +30,7 @@ Install_XCache()
     cpu_count=`cat /proc/cpuinfo |grep -c processor`
 
     cd ${cur_dir}/src
-    Download_Files ${Download_Mirror}/web/xcache/${XCache_Ver}.tar.gz ${XCache_Ver}.tar.gz
+    Download_File ${Download_Mirror}/web/xcache/${XCache_Ver}.tar.gz ${XCache_Ver}.tar.gz
     Tar_Cd ${XCache_Ver}.tar.gz ${XCache_Ver}
     /usr/local/php/bin/phpize
     ./configure --enable-xcache --enable-xcache-coverager --enable-xcache-optimizer --with-php-config=/usr/local/php/bin/php-config

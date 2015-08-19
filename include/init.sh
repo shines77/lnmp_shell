@@ -239,7 +239,7 @@ Debian_Dependent()
     do apt-get install -y $packages --force-yes; done
 }
 
-Download_Files()
+Download_File()
 {
     local URL=$1
     local FileName=$2
@@ -255,34 +255,34 @@ Check_Download_Files()
 {
     Echo_Blue "[+] Downloading install package files ..."
     cd ${cur_dir}/src
-    Download_Files ${Download_Mirror}/lib/autoconf/${Autoconf_Ver}.tar.gz ${Autoconf_Ver}.tar.gz
-    Download_Files ${Download_Mirror}/web/libiconv/${Libiconv_Ver}.tar.gz ${Libiconv_Ver}.tar.gz
-    Download_Files ${Download_Mirror}/web/libmcrypt/${LibMcrypt_Ver}.tar.gz ${LibMcrypt_Ver}.tar.gz
-    Download_Files ${Download_Mirror}/web/mcrypt/${Mcypt_Ver}.tar.gz ${Mcypt_Ver}.tar.gz
-    Download_Files ${Download_Mirror}/web/mhash/${Mash_Ver}.tar.gz ${Mash_Ver}.tar.gz
-    Download_Files ${Download_Mirror}/lib/freetype/${Freetype_Ver}.tar.gz ${Freetype_Ver}.tar.gz
-    Download_Files ${Download_Mirror}/lib/curl/${Curl_Ver}.tar.gz ${Curl_Ver}.tar.gz
-    Download_Files ${Download_Mirror}/web/pcre/${Pcre_Ver}.tar.gz ${Pcre_Ver}.tar.gz
+    Download_File ${Download_Mirror}/lib/autoconf/${Autoconf_Ver}.tar.gz ${Autoconf_Ver}.tar.gz
+    Download_File ${Download_Mirror}/web/libiconv/${Libiconv_Ver}.tar.gz ${Libiconv_Ver}.tar.gz
+    Download_File ${Download_Mirror}/web/libmcrypt/${LibMcrypt_Ver}.tar.gz ${LibMcrypt_Ver}.tar.gz
+    Download_File ${Download_Mirror}/web/mcrypt/${Mcypt_Ver}.tar.gz ${Mcypt_Ver}.tar.gz
+    Download_File ${Download_Mirror}/web/mhash/${Mash_Ver}.tar.gz ${Mash_Ver}.tar.gz
+    Download_File ${Download_Mirror}/lib/freetype/${Freetype_Ver}.tar.gz ${Freetype_Ver}.tar.gz
+    Download_File ${Download_Mirror}/lib/curl/${Curl_Ver}.tar.gz ${Curl_Ver}.tar.gz
+    Download_File ${Download_Mirror}/web/pcre/${Pcre_Ver}.tar.gz ${Pcre_Ver}.tar.gz
     if [ "${SelectMalloc}" = "2" ]; then
-        Download_Files ${Download_Mirror}/lib/jemalloc/${Jemalloc_Ver}.tar.bz2 ${Jemalloc_Ver}.tar.bz2
+        Download_File ${Download_Mirror}/lib/jemalloc/${Jemalloc_Ver}.tar.bz2 ${Jemalloc_Ver}.tar.bz2
     elif [ "${SelectMalloc}" = "3" ]; then
-        Download_Files ${Download_Mirror}/lib/tcmalloc/${TCMalloc_Ver}.tar.gz ${TCMalloc_Ver}.tar.gz
-        Download_Files ${Download_Mirror}/lib/libunwind/${Libunwind_Ver}.tar.gz ${Libunwind_Ver}.tar.gz
+        Download_File ${Download_Mirror}/lib/tcmalloc/${TCMalloc_Ver}.tar.gz ${TCMalloc_Ver}.tar.gz
+        Download_File ${Download_Mirror}/lib/libunwind/${Libunwind_Ver}.tar.gz ${Libunwind_Ver}.tar.gz
     fi
-    Download_Files ${Download_Mirror}/web/nginx/${Nginx_Ver}.tar.gz ${Nginx_Ver}.tar.gz
-    Download_Files ${Download_Mirror}/datebase/mysql/${Mysql_Ver}.tar.gz ${Mysql_Ver}.tar.gz
-    Download_Files ${Download_Mirror}/datebase/mariadb/${Mariadb_Ver}.tar.gz ${Mariadb_Ver}.tar.gz
-    Download_Files ${Download_Mirror}/web/php/${Php_Ver}.tar.gz ${Php_Ver}.tar.gz
+    Download_File ${Download_Mirror}/web/nginx/${Nginx_Ver}.tar.gz ${Nginx_Ver}.tar.gz
+    Download_File ${Download_Mirror}/datebase/mysql/${Mysql_Ver}.tar.gz ${Mysql_Ver}.tar.gz
+    Download_File ${Download_Mirror}/datebase/mariadb/${Mariadb_Ver}.tar.gz ${Mariadb_Ver}.tar.gz
+    Download_File ${Download_Mirror}/web/php/${Php_Ver}.tar.gz ${Php_Ver}.tar.gz
     if [ ${PHPSelect} = "1" ]; then
-        Download_Files ${Download_Mirror}/web/phpfpm/${Php_Ver}-fpm-0.5.14.diff.gz ${Php_Ver}-fpm-0.5.14.diff.gz
+        Download_File ${Download_Mirror}/web/phpfpm/${Php_Ver}-fpm-0.5.14.diff.gz ${Php_Ver}-fpm-0.5.14.diff.gz
     fi
-    Download_Files ${Download_Mirror}/datebase/phpmyadmin/${PhpMyAdmin_Ver}.tar.gz ${PhpMyAdmin_Ver}.tar.gz
-    Download_Files ${Download_Mirror}/prober/p.tar.gz p.tar.gz
+    Download_File ${Download_Mirror}/datebase/phpmyadmin/${PhpMyAdmin_Ver}.tar.gz ${PhpMyAdmin_Ver}.tar.gz
+    Download_File ${Download_Mirror}/prober/p.tar.gz p.tar.gz
     if [[ "${Stack}" == "lamp" || "${Stack}" == "lnamp" ]]; then
-        Download_Files ${Download_Mirror}/web/apache/${Apache_Version}.tar.gz ${Apache_Version}.tar.gz
-        Download_Files ${Download_Mirror}/web/apache/${APR_Ver}.tar.gz ${APR_Ver}.tar.gz
-        Download_Files ${Download_Mirror}/web/apache/${APR_Util_Ver}.tar.gz ${APR_Util_Ver}.tar.gz
-        Download_Files ${Download_Mirror}/web/apache/rpaf/${Mod_RPAF_Ver}.tar.gz ${Mod_RPAF_Ver}.tar.gz
+        Download_File ${Download_Mirror}/web/apache/${Apache_Version}.tar.gz ${Apache_Version}.tar.gz
+        Download_File ${Download_Mirror}/web/apache/${APR_Ver}.tar.gz ${APR_Ver}.tar.gz
+        Download_File ${Download_Mirror}/web/apache/${APR_Util_Ver}.tar.gz ${APR_Util_Ver}.tar.gz
+        Download_File ${Download_Mirror}/web/apache/rpaf/${Mod_RPAF_Ver}.tar.gz ${Mod_RPAF_Ver}.tar.gz
     fi
 }
 

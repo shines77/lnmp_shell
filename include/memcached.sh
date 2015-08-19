@@ -4,7 +4,7 @@ Install_PHPMemcache()
 {
     echo "Install memcache php extension ..."
     cd ${cur_dir}/src
-    Download_Files ${Download_Mirror}/web/memcache/${PHPMemcache_Ver}.tgz ${PHPMemcache_Ver}.tgz
+    Download_File ${Download_Mirror}/web/memcache/${PHPMemcache_Ver}.tgz ${PHPMemcache_Ver}.tgz
     Tar_Cd ${PHPMemcache_Ver}.tgz ${PHPMemcache_Ver}
     /usr/local/php/bin/phpize
     ./configure --with-php-config=/usr/local/php/bin/php-config
@@ -28,13 +28,13 @@ Install_PHPMemcached()
     elif [ "$PM" = "apt" ]; then
         apt-get install libsasl2-2 sasl2-bin libsasl2-2 libsasl2-dev libsasl2-modules -y
     fi
-    Download_Files ${Download_Mirror}/web/libmemcached/${Libmemcached_Ver}.tar.gz
+    Download_File ${Download_Mirror}/web/libmemcached/${Libmemcached_Ver}.tar.gz
     Tar_Cd ${Libmemcached_Ver}.tar.gz ${Libmemcached_Ver}
     ./configure --prefix=/usr/local/libmemcached --with-memcached
     make && make install
     cd ../
 
-    Download_Files ${Download_Mirror}/web/php-memcached/${PHPMemcached_Ver}.tgz ${PHPMemcached_Ver}.tgz
+    Download_File ${Download_Mirror}/web/php-memcached/${PHPMemcached_Ver}.tgz ${PHPMemcached_Ver}.tgz
     Tar_Cd ${PHPMemcached_Ver}.tgz ${PHPMemcached_Ver}
     /usr/local/php/bin/phpize
     ./configure --with-php-config=/usr/local/php/bin/php-config --enable-memcached --with-libmemcached-dir=/usr/local/libmemcached
@@ -88,7 +88,7 @@ extension = \"${PHP_ZTS}\"" /usr/local/php/etc/php.ini
 
     echo "Install memcached..."
     cd ${cur_dir}/src
-    Download_Files ${Download_Mirror}/web/memcached/${Memcached_Ver}.tar.gz ${Memcached_Ver}.tar.gz
+    Download_File ${Download_Mirror}/web/memcached/${Memcached_Ver}.tar.gz ${Memcached_Ver}.tar.gz
     Tar_Cd ${Memcached_Ver}.tar.gz ${Memcached_Ver}
     ./configure --prefix=/usr/local/memcached
     make &&make install

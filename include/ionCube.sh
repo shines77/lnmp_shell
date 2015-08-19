@@ -29,20 +29,20 @@ Install_ionCube()
     rm -rf ioncube_loaders_lin_x8*.tar.gz
     if grep -Eqi "xcache.so" /usr/local/php/etc/php.ini; then
         if [ "${Is_64bit}" = "y" ]; then
-            Download_Files ${Download_Mirror}/web/ioncube/4.7.5/ioncube_loaders_lin_x86-64.tar.gz ioncube_loaders_lin_x86-64.tar.gz
+            Download_File ${Download_Mirror}/web/ioncube/4.7.5/ioncube_loaders_lin_x86-64.tar.gz ioncube_loaders_lin_x86-64.tar.gz
             tar zxf ioncube_loaders_lin_x86-64.tar.gz
         else
             cd ${cur_dir}/src
-            Download_Files ${Download_Mirror}/web/ioncube/4.7.5/ioncube_loaders_lin_x86.tar.gz ioncube_loaders_lin_x86.tar.gz
+            Download_File ${Download_Mirror}/web/ioncube/4.7.5/ioncube_loaders_lin_x86.tar.gz ioncube_loaders_lin_x86.tar.gz
             tar zxf ioncube_loaders_lin_x86.tar.gz
         fi
     else
         if [ "${Is_64bit}" = "y" ]; then
-            Download_Files http://downloads3.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.tar.gz ioncube_loaders_lin_x86-64.tar.gz
+            Download_File http://downloads3.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.tar.gz ioncube_loaders_lin_x86-64.tar.gz
             tar zxf ioncube_loaders_lin_x86-64.tar.gz
         else
             cd ${cur_dir}/src
-            Download_Files http://downloads3.ioncube.com/loader_downloads/ioncube_loaders_lin_x86.tar.gz ioncube_loaders_lin_x86.tar.gz
+            Download_File http://downloads3.ioncube.com/loader_downloads/ioncube_loaders_lin_x86.tar.gz ioncube_loaders_lin_x86.tar.gz
             tar zxf ioncube_loaders_lin_x86.tar.gz
         fi
     fi

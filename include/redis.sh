@@ -33,10 +33,10 @@ Install_Redis()
 
     cd ${cur_dir}/src
     if [ "${ver}" = "1" ]; then
-        Download_Files http://download.redis.io/releases/${Redis_Stable_Ver}.tar.gz ${Redis_Stable_Ver}.tar.gz
+        Download_File http://download.redis.io/releases/${Redis_Stable_Ver}.tar.gz ${Redis_Stable_Ver}.tar.gz
         Tar_Cd ${Redis_Stable_Ver}.tar.gz ${Redis_Stable_Ver}
     else
-        Download_Files http://download.redis.io/releases/${Redis_Old_Ver}.tar.gz ${Redis_Old_Ver}.tar.gz
+        Download_File http://download.redis.io/releases/${Redis_Old_Ver}.tar.gz ${Redis_Old_Ver}.tar.gz
         Tar_Cd ${Redis_Old_Ver}.tar.gz ${Redis_Old_Ver}
     fi
 
@@ -65,7 +65,7 @@ Install_Redis()
         rm -rf ${PHPRedis_Ver}
     fi
 
-    Download_Files http://pecl.php.net/get/${PHPRedis_Ver}.tgz ${PHPRedis_Ver}.tgz
+    Download_File http://pecl.php.net/get/${PHPRedis_Ver}.tgz ${PHPRedis_Ver}.tgz
     Tar_Cd ${PHPRedis_Ver}.tgz ${PHPRedis_Ver}
     /usr/local/php/bin/phpize
     ./configure --with-php-config=/usr/local/php/bin/php-config

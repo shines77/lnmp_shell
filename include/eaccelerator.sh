@@ -14,7 +14,7 @@ Install_Old_eA()
         exit 1 
     fi
 
-    Download_Files ${Download_Mirror}/web/eaccelerator/eaccelerator-0.9.5.3.tar.bz2 eaccelerator-0.9.5.3.tar.bz2
+    Download_File ${Download_Mirror}/web/eaccelerator/eaccelerator-0.9.5.3.tar.bz2 eaccelerator-0.9.5.3.tar.bz2
     tar jxvf eaccelerator-0.9.5.3.tar.bz2
     cd eaccelerator-0.9.5.3/
     /usr/local/php/bin/phpize
@@ -36,7 +36,7 @@ Install_New_eA()
         exit 1 
     fi
 
-    Download_Files ${Download_Mirror}/web/eaccelerator/eaccelerator-0.9.6.1.tar.bz2 eaccelerator-0.9.6.1.tar.bz2
+    Download_File ${Download_Mirror}/web/eaccelerator/eaccelerator-0.9.6.1.tar.bz2 eaccelerator-0.9.6.1.tar.bz2
     tar jxvf eaccelerator-0.9.6.1.tar.bz2
     cd eaccelerator-0.9.6.1/
     /usr/local/php/bin/phpize
@@ -58,7 +58,7 @@ Install_Dev_eA()
         exit 1 
     fi
 
-    Download_Files ${Download_Mirror}/web/eaccelerator/eaccelerator-eaccelerator-42067ac.tar.gz eaccelerator-eaccelerator-42067ac.tar.gz
+    Download_File ${Download_Mirror}/web/eaccelerator/eaccelerator-eaccelerator-42067ac.tar.gz eaccelerator-eaccelerator-42067ac.tar.gz
     tar zxvf eaccelerator-eaccelerator-42067ac.tar.gz
     cd eaccelerator-eaccelerator-42067ac/
     /usr/local/php/bin/phpize

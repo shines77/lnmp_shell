@@ -13,8 +13,8 @@ Install_ImageMagic()
     fi
 
     cd ${cur_dir}/src
-    Download_Files ${Download_Mirror}/web/imagemagick/${ImageMagick_Ver}.tar.gz ${ImageMagick_Ver}.tar.gz
-    Download_Files ${Download_Mirror}/web/imagick/${Imagick_Ver}.tgz ${Imagick_Ver}.tgz
+    Download_File ${Download_Mirror}/web/imagemagick/${ImageMagick_Ver}.tar.gz ${ImageMagick_Ver}.tar.gz
+    Download_File ${Download_Mirror}/web/imagick/${Imagick_Ver}.tgz ${Imagick_Ver}.tgz
 
     Tar_Cd ${ImageMagick_Ver}.tar.gz ${ImageMagick_Ver}
     ./configure --prefix=/usr/local/imagemagick

@@ -50,7 +50,7 @@ Start_Upgrade_PHP()
     fi
 
     if echo "${php_version}" | grep -Eqi '^5.2.';then
-        Download_Files ${Download_Mirror}/web/phpfpm/php-${php_version}-fpm-0.5.14.diff.gz php-${php_version}-fpm-0.5.14.diff.gz
+        Download_File ${Download_Mirror}/web/phpfpm/php-${php_version}-fpm-0.5.14.diff.gz php-${php_version}-fpm-0.5.14.diff.gz
     fi
     lnmp stop
 
@@ -459,12 +459,12 @@ Upgrade_PHP_556()
         echo "Install ZendGuardLoader for PHP 5.5 ..."
         cd ${cur_dir}/src
         if [ "${Is_64bit}" = "y" ] ; then
-            Download_Files ${Download_Mirror}/web/zend/zend-loader-php5.5-linux-x86_64.tar.gz
+            Download_File ${Download_Mirror}/web/zend/zend-loader-php5.5-linux-x86_64.tar.gz
             tar zxf zend-loader-php5.5-linux-x86_64.tar.gz
             mkdir -p /usr/local/zend/
             \cp zend-loader-php5.5-linux-x86_64/ZendGuardLoader.so /usr/local/zend/
         else
-            Download_Files ${Download_Mirror}/web/zend/zend-loader-php5.5-linux-i386.tar.gz
+            Download_File ${Download_Mirror}/web/zend/zend-loader-php5.5-linux-i386.tar.gz
             tar zxf zend-loader-php5.5-linux-i386.tar.gz
             mkdir -p /usr/local/zend/
             \cp zend-loader-php5.5-linux-i386/ZendGuardLoader.so /usr/local/zend/
@@ -473,12 +473,12 @@ Upgrade_PHP_556()
         echo "Install ZendGuardLoader for PHP 5.6 ..."
         cd ${cur_dir}/src
         if [ "${Is_64bit}" = "y" ] ; then
-            Download_Files ${Download_Mirror}/web/zend/zend-loader-php5.6-linux-x86_64.tar.gz
+            Download_File ${Download_Mirror}/web/zend/zend-loader-php5.6-linux-x86_64.tar.gz
             tar zxf zend-loader-php5.6-linux-x86_64.tar.gz
             mkdir -p /usr/local/zend/
             \cp zend-loader-php5.6-linux-x86_64/ZendGuardLoader.so /usr/local/zend/
         else
-            Download_Files ${Download_Mirror}/web/zend/zend-loader-php5.6-linux-i386.tar.gz
+            Download_File ${Download_Mirror}/web/zend/zend-loader-php5.6-linux-i386.tar.gz
             tar zxf zend-loader-php5.6-linux-i386.tar.gz
             mkdir -p /usr/local/zend/
             \cp zend-loader-php5.6-linux-i386/ZendGuardLoader.so /usr/local/zend/

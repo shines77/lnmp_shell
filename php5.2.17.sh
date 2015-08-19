@@ -41,8 +41,8 @@ echo "=================================================="
 Press_Start
 
 cd ${cur_dir}/src
-Download_Files http://soft.vpser.net/web/php/php-5.2.17.tar.gz php-5.2.17.tar.gz
-Download_Files http://soft.vpser.net/web/phpfpm/php-5.2.17-fpm-0.5.14.diff.gz php-5.2.17-fpm-0.5.14.diff.gz
+Download_File http://soft.vpser.net/web/php/php-5.2.17.tar.gz php-5.2.17.tar.gz
+Download_File http://soft.vpser.net/web/phpfpm/php-5.2.17-fpm-0.5.14.diff.gz php-5.2.17-fpm-0.5.14.diff.gz
 
 lnmp stop
 
@@ -93,12 +93,12 @@ sed -i 's/disable_functions =.*/disable_functions = passthru,exec,system,chroot,
 
 cd ${cur_dir}/src
 if [ "${Is_64bit}" = "y" ] ; then
-    Download_Files ${Download_Mirror}/web/zend/ZendOptimizer-3.3.9-linux-glibc23-x86_64.tar.gz
+    Download_File ${Download_Mirror}/web/zend/ZendOptimizer-3.3.9-linux-glibc23-x86_64.tar.gz
     tar zxf ZendOptimizer-3.3.9-linux-glibc23-x86_64.tar.gz
     mkdir -p /usr/local/zend52/
     \cp ZendOptimizer-3.3.9-linux-glibc23-x86_64/data/5_2_x_comp/ZendOptimizer.so /usr/local/zend52/
 else
-    Download_Files ${Download_Mirror}/web/zend/ZendOptimizer-3.3.9-linux-glibc23-i386.tar.gz
+    Download_File ${Download_Mirror}/web/zend/ZendOptimizer-3.3.9-linux-glibc23-i386.tar.gz
     tar zxf ZendOptimizer-3.3.9-linux-glibc23-i386.tar.gz
     mkdir -p /usr/local/zend52/
     \cp ZendOptimizer-3.3.9-linux-glibc23-i386/data/5_2_x_comp/ZendOptimizer.so /usr/local/zend52/
