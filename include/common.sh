@@ -300,28 +300,6 @@ function Check_PathName()
     if [[ -z ${sPathName} || ${sPathName} = "/" ]]; then
         sPathName="/"
     else
-        local sParentPath=`dirname ${sPathName}`
-        local sBaseName=`basename ${sPathName}`
-        if [ "${sParentPath}" = "/" ]; then
-            if [ "/${sBaseName}" != "${sPathName}" ]; then
-                sPathName="/${sBaseName}"
-            fi
-        else
-            if [ "${sParentPath}/${sBaseName}" != "${sPathName}" ]; then
-                sPathName="${sParentPath}/${sBaseName}"
-            fi
-        fi
-    fi   
-    echo ${sPathName}
-}
-
-# Check the path, if the last char is '/', remove the last char '/'.
-function Check_PathName2()
-{
-    local sPathName=$1
-    if [[ -z ${sPathName} || ${sPathName} = "/" ]]; then
-        sPathName="/"
-    else
         local sLength=${#sPathName}
         local sLastChar=""
         let sLength-=1
@@ -341,6 +319,28 @@ function Check_PathName2()
             fi
         done
     fi
+    echo ${sPathName}
+}
+
+# Check the path, if the last char is '/', remove the last char '/'.
+function Check_PathName2()
+{
+    local sPathName=$1
+    if [[ -z ${sPathName} || ${sPathName} = "/" ]]; then
+        sPathName="/"
+    else
+        local sParentPath=`dirname ${sPathName}`
+        local sBaseName=`basename ${sPathName}`
+        if [ "${sParentPath}" = "/" ]; then
+            if [ "/${sBaseName}" != "${sPathName}" ]; then
+                sPathName="/${sBaseName}"
+            fi
+        else
+            if [ "${sParentPath}/${sBaseName}" != "${sPathName}" ]; then
+                sPathName="${sParentPath}/${sBaseName}"
+            fi
+        fi
+    fi   
     echo ${sPathName}
 }
 
@@ -364,15 +364,10 @@ function Test_CheckPathName()
     echo "Check_PathName() Test:"
     echo ""
     Check_PathName "/home/wwwroot/default"
-    echo ""
     Check_PathName "/home/wwwroot/default/"
-    echo ""
     Check_PathName "/home/wwwroot/default//"
-    echo ""
     Check_PathName "/usr"
-    echo ""
     Check_PathName "/"
-    echo ""
     Check_PathName ""
     echo ""
     echo "------------------------------------------------"
@@ -380,15 +375,10 @@ function Test_CheckPathName()
     echo "Check_PathName2() Test:"
     echo ""
     Check_PathName2 "/home/wwwroot/default"
-    echo ""
     Check_PathName2 "/home/wwwroot/default/"
-    echo ""
     Check_PathName2 "/home/wwwroot/default//"
-    echo ""
     Check_PathName2 "/usr"
-    echo ""
     Check_PathName2 "/"
-    echo ""
     Check_PathName2 ""
     echo ""
     echo "------------------------------------------------"
