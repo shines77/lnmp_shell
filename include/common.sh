@@ -329,7 +329,7 @@ function Check_PathName2()
         echo "sLength = "${sLength}
         echo "sLastChar = "${sLastChar}
         # If the last char is '/', remove the '/'.
-        while [ sLastChar = "/" ];
+        while [ "${sLastChar}" = "/" ];
         do
             sPathName=${sPathName:0:${sLength}}
             sLength=${#sPathName}
