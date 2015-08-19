@@ -316,35 +316,21 @@ Admin_Email_Setting()
 Display_Selection()
 {
     echo "=========================================================="
-
     MemeoryAllocator_Selection
-
     echo "=========================================================="
-
     MySQL_Selection
-
     echo "=========================================================="
-
     InnoDB_StorageEngine_Selection
-
     MySQL_RootPWD_Setting
-
     echo "=========================================================="
-
     PHP_Selection
-
     echo "=========================================================="
-
     Nginx_Selection
 
     if [[ "${Stack}" = "lamp" || "${Stack}" = "lnamp" || "${Stack}" = "test" ]]; then
-
         echo "=========================================================="
-
         Apache_Selection
-
         echo "=========================================================="
-
         Admin_Email_Setting
     fi
 }
