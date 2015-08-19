@@ -333,7 +333,7 @@ function Check_PathName2()
         do
             sPathName=${sPathName:0:${sLength}}
             sLength=${#sPathName}
-            if [ sLength -ge 1 ]; then
+            if [ ${sLength} -ge 1 ]; then
                 # If the sPathName length is greater or equal 1, remove last char.
                 let sLength-=1
                 sLastChar=${sPathName:${sLength}:1}
