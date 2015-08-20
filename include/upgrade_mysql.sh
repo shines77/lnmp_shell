@@ -74,11 +74,11 @@ Upgrade_MySQL55() {
         sed '/skip-external-locking/i\default-storage-engine=MyISAM\nloose-skip-innodb' -i /etc/my.cnf
     fi
 
-cat > /etc/ld.so.conf.d/mysql.conf<<EOF
+    cat > /etc/ld.so.conf.d/mysql.conf<<EOF
 /usr/local/mysql/lib
 /usr/local/lib
 EOF
-ldconfig
+    ldconfig
 }
 
 Upgrade_MySQL56() {
@@ -89,7 +89,7 @@ Upgrade_MySQL56() {
 
     groupadd mysql
     useradd -s /sbin/nologin -M -g mysql mysql
-cat > /etc/my.cnf<<EOF
+    cat > /etc/my.cnf<<EOF
 # Example MySQL config file for medium systems.
 #
 # This is for a system with little memory (32M - 64M) where MySQL plays
@@ -218,11 +218,11 @@ EOF
         sed -i 's/#loose-innodb/loose-innodb/g' /etc/my.cnf
     fi
 
-cat > /etc/ld.so.conf.d/mysql.conf<<EOF
+    cat > /etc/ld.so.conf.d/mysql.conf<<EOF
 /usr/local/mysql/lib
 /usr/local/lib
 EOF
-ldconfig
+    ldconfig
 }
 
 StartAll()
@@ -292,17 +292,18 @@ Upgrade_MySQL()
     read -p "(Default yes, if you want please input: y, if not please enter: n): " installinnodb
 
     case "${installinnodb}" in
-    y|Y|Yes|YES|yes|yES|yEs|YeS|yeS)
-    echo "You will install the InnoDB Storage Engine"
-    installinnodb="y"
-    ;;
-    n|N|No|NO|no|nO)
-    echo "You will NOT install the InnoDB Storage Engine!"
-    installinnodb="n"
-    ;;
-    *)
-    echo "No input, The InnoDB Storage Engine will enable."
-    installinnodb="y"
+        y|Y|Yes|YES|yes|yES|yEs|YeS|yeS)
+            echo "You will install the InnoDB Storage Engine"
+            installinnodb="y"
+            ;;
+        n|N|No|NO|no|nO)
+            echo "You will NOT install the InnoDB Storage Engine!"
+            installinnodb="n"
+            ;;
+        *)
+            echo "Unknown input, The InnoDB Storage Engine will enable."
+            installinnodb="y"
+            ;;
     esac
 
     mysql_short_version=`echo ${mysql_version} | cut -d. -f1-2`

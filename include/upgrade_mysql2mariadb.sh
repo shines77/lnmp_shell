@@ -52,7 +52,7 @@ Upgrade_MySQL2MariaDB()
         exit 1
     fi
 
-    #do you want to install the InnoDB Storage Engine?
+    # Do you want to install the InnoDB Storage Engine?
     echo "==========================="
 
     installinnodb="y"
@@ -60,17 +60,18 @@ Upgrade_MySQL2MariaDB()
     read -p "(Default yes, if you want please input: y, if not please enter: n):" installinnodb
 
     case "${installinnodb}" in
-    y|Y|Yes|YES|yes|yES|yEs|YeS|yeS)
-    echo "You will install the InnoDB Storage Engine"
-    installinnodb="y"
-    ;;
-    n|N|No|NO|no|nO)
-    echo "You will NOT install the InnoDB Storage Engine!"
-    installinnodb="n"
-    ;;
-    *)
-    echo "No input,The InnoDB Storage Engine will enable."
-    installinnodb="y"
+        y|Y|Yes|YES|yes|yES|yEs|YeS|yeS)
+            echo "You will install the InnoDB Storage Engine"
+            installinnodb="y"
+        ;;
+        n|N|No|NO|no|nO)
+            echo "You will NOT install the InnoDB Storage Engine!"
+            installinnodb="n"
+        ;;
+        *)
+            echo "Unknown input,The InnoDB Storage Engine will enable."
+            installinnodb="y"
+            ;;
     esac
 
     echo "====================================================================="
@@ -128,7 +129,7 @@ Upgrade_MySQL2MariaDB()
     echo -e "\nexpire_logs_days = 10" >> /etc/my.cnf
     sed -i '/skip-external-locking/a\max_connections = 1000' /etc/my.cnf
 
-cat > /etc/ld.so.conf.d/mariadb.conf<<EOF
+    cat > /etc/ld.so.conf.d/mariadb.conf<<EOF
 /usr/local/mariadb/lib
 /usr/local/lib
 EOF
@@ -146,7 +147,7 @@ EOF
 
     /usr/local/mariadb/bin/mysqladmin -u root password $mysql_root_password
 
-cat > /tmp/mariadb_sec_script<<EOF
+    cat > /tmp/mariadb_sec_script<<EOF
 use mysql;
 update user set password=password('${mysql_root_password}') where user='root';
 delete from user where not (user='root') ;

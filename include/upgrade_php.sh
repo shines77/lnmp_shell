@@ -270,7 +270,7 @@ Upgrade_PHP_53()
     fi
 
     echo "Write ZendGuardLoader to php.ini ......"
-cat >>/usr/local/php/etc/php.ini<<EOF
+    cat >>/usr/local/php/etc/php.ini<<EOF
 
 ;eaccelerator
 
@@ -287,9 +287,9 @@ zend_loader.license_path=
 ;xcache end
 EOF
 
-if [ "${Stack}" = "lnmp" ]; then
-    echo "Creating new php-fpm configure file ......"
-    cat >/usr/local/php/etc/php-fpm.conf<<EOF
+    if [ "${Stack}" = "lnmp" ]; then
+        echo "Creating new php-fpm configure file ......"
+        cat >/usr/local/php/etc/php-fpm.conf<<EOF
 [global]
 pid = /usr/local/php/var/run/php-fpm.pid
 error_log = /usr/local/php/var/log/php-fpm.log
@@ -314,10 +314,10 @@ request_slowlog_timeout = 0
 slowlog = var/log/slow.log
 EOF
 
-echo "Copy php-fpm init.d file ......"
-\cp ${cur_dir}/src/php-${php_version}/sapi/fpm/init.d.php-fpm /etc/init.d/php-fpm
-chmod +x /etc/init.d/php-fpm
-fi
+        echo "Copy php-fpm init.d file ......"
+        \cp ${cur_dir}/src/php-${php_version}/sapi/fpm/init.d.php-fpm /etc/init.d/php-fpm
+        chmod +x /etc/init.d/php-fpm
+    fi
 
     lnmp start
     Check_PHP_Upgrade_Files
@@ -370,7 +370,7 @@ Upgrade_PHP_54()
     fi
 
     echo "Write ZendGuardLoader to php.ini ......"
-cat >>/usr/local/php/etc/php.ini<<EOF
+    cat >>/usr/local/php/etc/php.ini<<EOF
 
 ;eaccelerator
 
@@ -387,9 +387,9 @@ zend_loader.license_path=
 ;xcache end
 EOF
 
-if [ "${Stack}" = "lnmp" ]; then
-    echo "Creating new php-fpm configure file ......"
-    cat >/usr/local/php/etc/php-fpm.conf<<EOF
+    if [ "${Stack}" = "lnmp" ]; then
+        echo "Creating new php-fpm configure file ......"
+        cat >/usr/local/php/etc/php-fpm.conf<<EOF
 [global]
 pid = /usr/local/php/var/run/php-fpm.pid
 error_log = /usr/local/php/var/log/php-fpm.log
@@ -414,10 +414,10 @@ request_slowlog_timeout = 0
 slowlog = var/log/slow.log
 EOF
 
-echo "Copy php-fpm init.d file ......"
-\cp ${cur_dir}/src/php-${php_version}/sapi/fpm/init.d.php-fpm /etc/init.d/php-fpm
-chmod +x /etc/init.d/php-fpm
-fi
+        echo "Copy php-fpm init.d file ......"
+        \cp ${cur_dir}/src/php-${php_version}/sapi/fpm/init.d.php-fpm /etc/init.d/php-fpm
+        chmod +x /etc/init.d/php-fpm
+    fi
 
     lnmp start
     Check_PHP_Upgrade_Files
@@ -486,7 +486,7 @@ Upgrade_PHP_556()
     fi
 
     echo "Write ZendGuardLoader to php.ini ......"
-cat >>/usr/local/php/etc/php.ini<<EOF
+    cat >>/usr/local/php/etc/php.ini<<EOF
 
 ;eaccelerator
 
@@ -514,12 +514,12 @@ opcache.enable_cli=1
 ;xcache end
 EOF
 
-echo "Download Opcache Control Panel ..."
-\cp ${cur_dir}/conf/ocp.php /home/wwwroot/default/ocp.php
+    echo "Download Opcache Control Panel ..."
+    \cp ${cur_dir}/conf/ocp.php /home/wwwroot/default/ocp.php
 
-if [ "${Stack}" = "lnmp" ]; then
-    echo "Creating new php-fpm configure file ......"
-    cat >/usr/local/php/etc/php-fpm.conf<<EOF
+    if [ "${Stack}" = "lnmp" ]; then
+        echo "Creating new php-fpm configure file ......"
+        cat >/usr/local/php/etc/php-fpm.conf<<EOF
 [global]
 pid = /usr/local/php/var/run/php-fpm.pid
 error_log = /usr/local/php/var/log/php-fpm.log
@@ -544,10 +544,10 @@ request_slowlog_timeout = 0
 slowlog = var/log/slow.log
 EOF
 
-echo "Copy php-fpm init.d file ......"
-\cp ${cur_dir}/src/php-${php_version}/sapi/fpm/init.d.php-fpm /etc/init.d/php-fpm
-chmod +x /etc/init.d/php-fpm
-fi
+        echo "Copy php-fpm init.d file ......"
+        \cp ${cur_dir}/src/php-${php_version}/sapi/fpm/init.d.php-fpm /etc/init.d/php-fpm
+        chmod +x /etc/init.d/php-fpm
+    fi
 
     lnmp start
     Check_PHP_Upgrade_Files

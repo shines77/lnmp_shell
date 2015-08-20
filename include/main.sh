@@ -8,9 +8,9 @@ MemeoryAllocator_Selection()
     echo ""
     Echo_Yellow "You have 3 options for your Memory Allocator install:"
     echo ""
-    echo "1: Don't install Memory Allocator. (Default)"
-    echo "2: Install Jemalloc"
-    echo "3: Install TCMalloc"
+    echo "1) Don't install Memory Allocator. (Default)"
+    echo "2) Install Jemalloc"
+    echo "3) Install TCMalloc"
     echo ""
     read -p "Enter your choice (1, 2 or 3): " SelectMalloc
 
@@ -26,7 +26,7 @@ MemeoryAllocator_Selection()
             Echo_Cyan "You will Install TCMalloc."
         ;;
         *)
-            Echo_Cyan "No input, You will not install Memory Allocator."
+            Echo_Cyan "Unknown input, You will not install Memory Allocator."
             SelectMalloc="1"
         ;;
     esac
@@ -58,11 +58,11 @@ MySQL_Selection()
     echo ""
     Echo_Yellow "You have 5 options for your DataBase install:"
     echo ""
-    echo "1: Install MySQL 5.1.73"
-    echo "2: Install MySQL 5.5.42 (Default)"
-    echo "3: Install MySQL 5.6.23"
-    echo "4: Install MariaDB 5.5.42"
-    echo "5: Install MariaDB 10.0.17"
+    echo "1) Install MySQL 5.1.73"
+    echo "2) Install MySQL 5.5.42 (Default)"
+    echo "3) Install MySQL 5.6.23"
+    echo "4) Install MariaDB 5.5.42"
+    echo "5) Install MariaDB 10.0.17"
     echo ""
     read -p "Enter your choice (1, 2, 3, 4 or 5): " DBSelect
 
@@ -84,7 +84,7 @@ MySQL_Selection()
             Echo_Cyan "You will install MariaDB 10.0.17."
         ;;
         *)
-            Echo_Cyan "No input, You will install MySQL 5.5.42 (Default)."
+            Echo_Cyan "Unknown input, You will install MySQL 5.5.42 (Default)."
             DBSelect="2"
         ;;
     esac
@@ -120,7 +120,7 @@ InnoDB_StorageEngine_Selection()
             Echo_Cyan "You will disable the InnoDB Storage Engine!"
         ;;
         *)
-            Echo_Cyan "No input, The InnoDB Storage Engine will enable."
+            Echo_Cyan "Unknown input, The InnoDB Storage Engine will enable."
             InstallInnodb="y"
         ;;
     esac
@@ -153,11 +153,11 @@ Input_MySQL_RootPWD()
                 Input_MySQL_RootPWD
             ;;
             *)
-                # Echo_Cyan "No input, You agree to use the default Mysql root password '${MysqlRootDefaultPWD}'."
+                # Echo_Cyan "Unknown input, You agree to use the default Mysql root password '${MysqlRootDefaultPWD}'."
                 # MysqlRootUseDefaultPWD="y"
                 # MysqlRootPWD="${MysqlRootDefaultPWD}"
                 # MysqlRootConfirmPWD="${MysqlRootDefaultPWD}"
-                Echo_Magenta "No input, You do not agree to use the default Mysql root password, please try again."
+                Echo_Magenta "Unknown input, You do not agree to use the default Mysql root password, please try again."
                 MysqlRootUseDefaultPWD='n'
                 echo ""
                 Input_MySQL_RootPWD
@@ -201,11 +201,11 @@ PHP_Selection()
     echo ""
     Echo_Yellow "You have 5 options for your PHP install:"
     echo ""
-    echo "1: Install PHP 5.2.17"
-    echo "2: Install PHP 5.3.29"
-    echo "3: Install PHP 5.4.41"
-    echo "4: Install PHP 5.5.25 (Default)"
-    echo "5: Install PHP 5.6.9"
+    echo "1) Install PHP 5.2.17"
+    echo "2) Install PHP 5.3.29"
+    echo "3) Install PHP 5.4.41"
+    echo "4) Install PHP 5.5.25 (Default)"
+    echo "5) Install PHP 5.6.9"
     echo ""
     read -p "Enter your choice (1, 2, 3, 4 or 5): " PHPSelect
 
@@ -227,7 +227,7 @@ PHP_Selection()
             Echo_Cyan "You will install PHP 5.6.9."
         ;;
         *)
-            Echo_Cyan "No input, You will install PHP 5.5.25 (Default)."
+            Echo_Cyan "Unknown input, You will install PHP 5.5.25 (Default)."
             PHPSelect="4"
         ;;
     esac
@@ -242,9 +242,9 @@ Nginx_Selection()
     echo ""
     Echo_Yellow "You have 3 options for your Nginx install:"
     echo ""
-    echo "1: Install Nginx 1.4.7"
-    echo "2: Install Nginx 1.6.3"
-    echo "3: Install Nginx 1.8.0 (Default)"
+    echo "1) Install Nginx 1.4.7"
+    echo "2) Install Nginx 1.6.3"
+    echo "3) Install Nginx 1.8.0 (Default)"
     echo ""
     read -p "Enter your choice (1, 2 or 3): " NginxSelect
 
@@ -260,7 +260,7 @@ Nginx_Selection()
             Echo_Cyan "You will Install Nginx 1.8.0."
         ;;
         *)
-            Echo_Cyan "No input, You will install Nginx 1.8.0 (Default)."
+            Echo_Cyan "Unknown input, You will install Nginx 1.8.0 (Default)."
             NginxSelect="3"
         ;;
     esac
@@ -275,8 +275,8 @@ Apache_Selection()
     echo ""
     Echo_Yellow "You have 2 options for your Apache install:"
     echo ""
-    echo "1: Install Apache 2.2.29 (Default)"
-    echo "2: Install Apache 2.4.10"
+    echo "1) Install Apache 2.2.29 (Default)"
+    echo "2) Install Apache 2.4.10"
     echo ""
     read -p "Enter your choice (1 or 2): " ApacheSelect
 
@@ -286,7 +286,7 @@ Apache_Selection()
     elif [ "${ApacheSelect}" = "2" ]; then
         Echo_Cyan "You will install Apache 2.4.10."
     else
-        Echo_Cyan "No input, You will install Apache 2.2.29 (Default)."
+        Echo_Cyan "Unknown input, You will install Apache 2.2.29 (Default)."
         ApacheSelect="1"
     fi
     echo ""

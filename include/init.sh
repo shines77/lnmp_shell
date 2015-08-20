@@ -8,28 +8,29 @@ Set_Timezone()
     Echo_Blue " Setting server's timezone ..."
     echo "========================================"
 
-    TimeZoneSelect="9"
+    TimeZoneSelect="0"
     echo ""
-    Echo_Yellow "You have 9 options for your timezone setting:"
+    Echo_Yellow "You have 10 options for your timezone setting:"
     echo ""
-    echo "0: No change - Keep use now timezone setting (Default)."
-    echo "1: Asia      - Shanghai, Chongqing"
-    echo "2: Asia      - HongKong"
-    echo "3: Asia      - Singapore"
-    echo "4: Asia      - Japan"
-    echo "5: America   - New York (East US)"
-    echo "6: America   - Los Angeles (West US)"
-    echo "7: Europe    - London (United Kingdom)"
-    echo "8: Europe    - Paris (France)"
+    echo "0) Don't change  - Keep use now timezone setting (Default)."
+    echo "1) Asia          - Shanghai, Chongqing"
+    echo "2) Asia          - HongKong"
+    echo "3) Asia          - Singapore"
+    echo "4) Asia          - Japan"
+    echo "5) America       - New York (East US)"
+    echo "6) America       - Los Angeles (West US)"
+    echo "7) Europe        - London (United Kingdom)"
+    echo "8) Europe        - Paris (France)"
+    echo "9) Others        - Use system 'tzselect' command."
     echo ""
-    read -p "Enter your choice (0 - 8): " TimeZoneSelect
+    read -p "Enter your choice (0 - 9): " TimeZoneSelect
 
     rm -rf /etc/localtime
 
     echo ""
     case "${TimeZoneSelect}" in
         0)
-            echo "You choice No change - Keep use now timezone setting."
+            echo "You choice don't change - Keep use now timezone setting."
         ;;
         1)
             echo "You choice Asia - Shanghai, Chongqing timezone."
@@ -73,8 +74,14 @@ Set_Timezone()
             # ln -s /usr/share/zoneinfo/Europe/Paris /etc/localtime
             \cp -f /usr/share/zoneinfo/Europe/Paris /etc/localtime
         ;;
+        9)
+            echo ""
+            echo "You choice Manual Select - Use system 'tzselect' command."
+            echo ""
+            tzselect
+        ;;
         *)
-            echo "No input, you choice No change - Keep use now timezone setting (Default)."
+            echo "Unknown input, you choice don't change - Keep use now timezone setting (Default)."
             TimeZoneSelect="0"
         ;;
     esac
@@ -244,7 +251,7 @@ Download_File()
     local URL=$1
     local FileName=$2
     if [ -s "${FileName}" ]; then
-        echo "${FileName} [found]"
+        Echo_Cyan "${FileName} [found]"
     else
         Echo_Red "Error: ${FileName} not found!!! download now ..."
         wget -c ${URL}
