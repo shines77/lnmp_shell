@@ -319,7 +319,7 @@ Upgrade_MySQL()
     if [ -s mysql-${mysql_version}.tar.gz ]; then
         echo "mysql-${mysql_version}.tar.gz [found]"
     else
-        echo "Error: mysql-${mysql_version}.tar.gz not found!!!download now ......"
+        echo "Error: mysql-${mysql_version}.tar.gz not found!!! download now ......"
         wget -c http://cdn.mysql.com/Downloads/MySQL-${mysql_short_version}/mysql-${mysql_version}.tar.gz
         if [ $? -eq 0 ]; then
             echo "Download mysql-${mysql_version}.tar.gz successfully!"

@@ -43,7 +43,7 @@ echo "|                                                                        |
 echo "+------------------------------------------------------------------------+"
 echo "|       A tool to auto-compile & install LNMP/LAMP/LNAMP on Linux        |"
 echo "+------------------------------------------------------------------------+"
-echo "|     For more information please visit http://lnamp.cloudbuses.com      |"
+echo "|     For more information please visit http://lnmp.cloudbuses.com       |"
 echo "+------------------------------------------------------------------------+"
 echo ""
 
@@ -115,17 +115,19 @@ Uninstall_LNAMP()
 Run_Uninstall()
 {
     Check_Stack
-    echo "Current Stack: ${Get_Stack}"
-
     action=""
-    echo "Enter 1 to uninstall LNMP"
-    echo "Enter 2 to uninstall LAMP"
-    echo "Enter 3 to uninstall LNAMP"    
+
+    echo "Current Stack: ${Get_Stack}"
+    echo ""
+    echo "1) Uninstall LNMP"
+    echo "2) Uninstall LAMP"
+    echo "3) Uninstall LNAMP"
+    echo ""
     read -p "(Please input 1, 2 or 3):" action
 
     case "$action" in
         1|[lL][nN][mM][pP])
-            echo "You will uninstall LNMP"
+            echo "You will uninstall LNMP."
             Echo_Red "Please backup your configure files and mysql data !!!!!!"
             Echo_Red "The following directory or files will be remove!"
             cat << EOF
@@ -144,7 +146,7 @@ EOF
             Uninstall_LNMP
         ;;
         2|[lL][aA][mM][pP])
-            echo "You will uninstall LAMP"
+            echo "You will uninstall LAMP."
             Echo_Red "Please backup your configure files and mysql data !!!!!!"
             Echo_Red "The following directory or files will be remove!"
             cat << EOF
@@ -162,7 +164,7 @@ EOF
             Uninstall_LAMP
         ;;
         3|[lL][nN][aA][mM][pP])
-            echo "You will uninstall LNAMP"
+            echo "You will uninstall LNAMP."
             Echo_Red "Please backup your configure files and mysql data !!!!!!"
             Echo_Red "The following directory or files will be remove!"
             cat << EOF

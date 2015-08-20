@@ -4,12 +4,21 @@
 
 # Download mirrors URLs
 
-Download_Mirror='http://mirrors.cloudbuses.com'
+#Download_Mirror='http://mirrors.cloudbuses.com'
+Download_Mirror='http://soft.vpser.net'
 
 Download_Mirror_1='http://mirrors.cloudbuses.com'
 Download_Mirror_2='http://soft.vpser.net'
 
 #############################################################
+
+# Install log file setting
+Install_Log_Dir="/home/lnmp_install/logs/"
+Install_Log_File="lnmp-install.log"
+
+# Uninstall log file setting
+Uninstall_Log_Dir="${Install_Log_Dir}"
+Uninstall_Log_File="lnmp-uninstall.log"
 
 # The path of install package files
 Packages_Dir="/home/lnmp_install/packages"

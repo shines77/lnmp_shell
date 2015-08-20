@@ -100,26 +100,33 @@ PHPMemcache_Ver='memcache-3.0.8'
 
 # Display install version info
 if [ "${Stack}" != "" ]; then
-    echo "You will install ${Stack} stack."
+    echo ""
+    echo "-----------------------------------------------------"
+    Echo_Magenta "You will install ${Stack} stack."
+    echo "-----------------------------------------------------"
+    echo ""
     if [ "${Stack}" != "lamp" ]; then
-        echo ${Nginx_Ver}
+        Echo_Cyan ${Nginx_Ver}
     fi
 
     if [[ "${DBSelect}" = "1" || "${DBSelect}" = "2" || "${DBSelect}" = "3" ]]; then
-        echo "${Mysql_Ver}"
+        Echo_Cyan "${Mysql_Ver}"
     elif [[ "${DBSelect}" = "4" || "${DBSelect}" = "5" ]]; then
-        echo "${Mariadb_Ver}"
+        Echo_Cyan "${Mariadb_Ver}"
     fi
 
-    echo "${Php_Ver}"
+    Echo_Cyan "${Php_Ver}"
 
     if [ "${Stack}" != "lnmp" ]; then
-        echo "${Apache_Version}"
+        Echo_Cyan "${Apache_Version}"
     fi
 
     if [ "${SelectMalloc}" = "2" ]; then
-        echo "${Jemalloc_Ver}"
+        Echo_Cyan "${Jemalloc_Ver}"
     elif [ "${SelectMalloc}" = "3" ]; then
-        echo "${TCMalloc_Ver}"
+        Echo_Cyan "${TCMalloc_Ver}"
     fi
+    echo ""
+    echo "-----------------------------------------------------"
+    echo ""
 fi

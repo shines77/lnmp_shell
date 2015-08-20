@@ -17,36 +17,45 @@ MemeoryAllocator_Selection()
     echo ""
     case "${SelectMalloc}" in
         1)
-            Echo_Cyan "You will install not install Memory Allocator."
-        ;;
+            Echo_Cyan "You will be don't install Memory Allocator. (Default)"
+            ;;
         2)
             Echo_Cyan "You will install JeMalloc."
-        ;;
+            ;;
         3)
             Echo_Cyan "You will Install TCMalloc."
-        ;;
+            ;;
         *)
-            Echo_Cyan "Unknown input, You will not install Memory Allocator."
+            Echo_Cyan "Unknown input, You will be don't install Memory Allocator. (Default)"
             SelectMalloc="1"
-        ;;
+            ;;
     esac
     echo ""
 
     if [ "${SelectMalloc}" = "1" ]; then
-        MySQL51MAOpt=''
-        MySQL55MAOpt=''
-        MariaDBMAOpt=''
-        NginxMAOpt=''
-    elif [ "${SelectMalloc}"="2" ]; then
-        MySQL51MAOpt='--with-mysqld-ldflags=-ljemalloc'
+        # Don't use memory allocator
+        MySQL51MAOpt=""
+        MySQL55MAOpt=""
+        MariaDBMAOpt=""
+        NginxMAOpt=""
+    elif [ "${SelectMalloc}" = "2" ]; then
+        # For jemalloc
+        MySQL51MAOpt="--with-mysqld-ldflags=-ljemalloc"
         MySQL55MAOpt="-DCMAKE_EXE_LINKER_FLAGS='-ljemalloc' -DWITH_SAFEMALLOC=OFF"
-        MariaDBMAOpt=''
+        MariaDBMAOpt=""
         NginxMAOpt="--with-ld-opt='-ljemalloc'"
-    elif [ "${SelectMalloc}"="3" ]; then
-        MySQL51MAOpt='--with-mysqld-ldflags=-ltcmalloc'
+    elif [ "${SelectMalloc}" = "3" ]; then
+        # For tcmalloc
+        MySQL51MAOpt="--with-mysqld-ldflags=-ltcmalloc"
         MySQL55MAOpt="-DCMAKE_EXE_LINKER_FLAGS='-ltcmalloc' -DWITH_SAFEMALLOC=OFF"
         MariaDBMAOpt="-DCMAKE_EXE_LINKER_FLAGS='-ltcmalloc' -DWITH_SAFEMALLOC=OFF"
-        NginxMAOpt='--with-google_perftools_module'
+        NginxMAOpt="--with-google_perftools_module"
+    else
+        # Default choice, don't use memory allocator
+        MySQL51MAOpt=""
+        MySQL55MAOpt=""
+        MariaDBMAOpt=""
+        NginxMAOpt=""
     fi
 }
 
@@ -337,13 +346,14 @@ Display_Selection()
 
 Press_Install()
 {
+    . include/version.sh    
     echo ""
     echo "Press any key to install or Press Ctrl + C to cancel ..."
     OLDCONFIG=`stty -g`
     stty -icanon -echo min 1 time 0
     dd count=1 2>/dev/null
     stty ${OLDCONFIG}
-    . include/version.sh
+    echo ""
 }
 
 Press_Start()
@@ -354,16 +364,24 @@ Press_Start()
     stty -icanon -echo min 1 time 0
     dd count=1 2>/dev/null
     stty ${OLDCONFIG}
+    echo ""
 }
 
 Print_Sys_Info()
 {
+    echo ""
     cat /etc/issue
+    echo ""
     cat /etc/*-release
+    echo ""
     uname -a
+    echo ""
     MemTotal=`free -m | grep Mem | awk '{print  $2}'`
-    echo "Memory is: ${MemTotal} MB "
+    echo ""
+    echo "Memory total is: ${MemTotal} MB "
+    echo ""
     df -h
+    echo ""
 }
 
 # Check arch is 32-bit or 64-bit?

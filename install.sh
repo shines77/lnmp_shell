@@ -53,15 +53,17 @@ Display_Welcome()
     echo "+------------------------------------------------------------------------+"
     echo "|       A tool to auto-compile & install LNMP/LAMP/LNAMP on Linux        |"
     echo "+------------------------------------------------------------------------+"
-    echo "|     For more information please visit http://lnamp.cloudbuses.com      |"
+    echo "|     For more information please visit http://lnmp.cloudbuses.com       |"
     echo "+------------------------------------------------------------------------+"
     echo ""
 }
 
 Init_Install()
 {
-    Press_Install
+    Set_Timezone
+
     Print_Sys_Info
+    Press_Install
     
     if [ "${DISTRO}" = "RHEL" ]; then
         RHEL_Modify_Source
@@ -71,7 +73,6 @@ Init_Install()
         Ubuntu_Modify_Source
     fi
 
-    Set_Timezone
     if [ "$PM" = "yum" ]; then
         CentOS_InstallNTP
         CentOS_RemoveAMP
@@ -148,17 +149,17 @@ case "${Stack}" in
     lnmp)
         Display_Welcome
         Display_Selection
-        LNMP_Stack 2>&1 | tee -a /root/lnamp-install.log
+        LNMP_Stack 2>&1 | tee -a /root/lnmp-shell-install.log
         ;;
     lamp)
         Display_Welcome
         Display_Selection
-        LAMP_Stack 2>&1 | tee -a /root/lnamp-install.log
+        LAMP_Stack 2>&1 | tee -a /root/lnmp-shell-install.log
         ;;
     lnamp)
         Display_Welcome
         Display_Selection
-        LNAMP_Stack 2>&1 | tee -a /root/lnamp-install.log
+        LNAMP_Stack 2>&1 | tee -a /root/lnmp-shell-install.log
         ;;
     test)
         Display_Welcome
@@ -182,6 +183,6 @@ case "${Stack}" in
         ;;
     *)
         Display_Welcome
-        Echo_Red "Usage: $0 {lnmp|lamp|lnamp|test|test_random|test_color|timezone}"
+        Echo_Red "Usage: $0 {lnmp|lamp|lnamp|test|test_random|test_color|test_mkdir|test_checkpath|timezone}"
         ;;
 esac
