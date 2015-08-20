@@ -1,24 +1,5 @@
 #!/bin/bash
 
-Add_LNAMP_Startup()
-{
-    echo "Add Startup and Starting LNAMP ..."
-    \cp ${cur_dir}/conf/lnamp /bin/lnmp
-    chmod +x /bin/lnmp
-    StartUp nginx
-    /etc/init.d/nginx start
-    if [[ "${DBSelect}" = "4" || "${DBSelect}" = "5" ]]; then
-        StartUp mariadb
-        /etc/init.d/mariadb start
-        sed -i 's#/etc/init.d/mysql#/etc/init.d/mariadb#' /bin/lnmp
-    else
-        StartUp mysql
-        /etc/init.d/mysql start
-    fi
-    StartUp httpd
-    /etc/init.d/httpd start
-}
-
 Add_LNMP_Startup()
 {
     echo "Add Startup and Starting LNMP ..."
@@ -56,6 +37,25 @@ Add_LAMP_Startup()
         StartUp mysql
         /etc/init.d/mysql start
     fi
+}
+
+Add_LNAMP_Startup()
+{
+    echo "Add Startup and Starting LNAMP ..."
+    \cp ${cur_dir}/conf/lnamp /bin/lnmp
+    chmod +x /bin/lnmp
+    StartUp nginx
+    /etc/init.d/nginx start
+    if [[ "${DBSelect}" = "4" || "${DBSelect}" = "5" ]]; then
+        StartUp mariadb
+        /etc/init.d/mariadb start
+        sed -i 's#/etc/init.d/mysql#/etc/init.d/mariadb#' /bin/lnmp
+    else
+        StartUp mysql
+        /etc/init.d/mysql start
+    fi
+    StartUp httpd
+    /etc/init.d/httpd start
 }
 
 Check_Nginx_Files()
@@ -151,22 +151,9 @@ Print_Success_Info()
 
 Print_Failed_Info()
 {
-    Echo_Red "Sorry, Failed to install LNAMP!"
+    Echo_Red "Sorry, Failed to install ${Stack} shell!"
     Echo_Red "Please visit http://bbs.vpser.net/forum-25-1.html feedback errors and logs."
-    Echo_Red "You can download /root/lnamp-install.log from your server, and upload lnmp-install.log to LNAMP Forum."
-}
-
-Check_LNAMP_Install()
-{
-    Check_Nginx_Files
-    Check_DB_Files
-    Check_PHP_Files
-    Check_Apache_Files
-    if [[ "$isNginx" = "ok" && "$isDB" = "ok" && "$isPHP" = "ok"  &&"$isApache" = "ok" ]]; then
-        Print_Success_Info
-    else
-        Print_Failed_Info
-    fi
+    Echo_Red "You can download /root/lnmp-install.log from your server, and upload lnmp-install.log to LNMP-Shell Forum."
 }
 
 Check_LNMP_Install()
@@ -187,6 +174,19 @@ Check_LAMP_Install()
     Check_DB_Files
     Check_PHP_Files
     if [[ "$isApache" = "ok" && "$isDB" = "ok" && "$isPHP" = "ok" ]]; then
+        Print_Success_Info
+    else
+        Print_Failed_Info
+    fi
+}
+
+Check_LNAMP_Install()
+{
+    Check_Nginx_Files
+    Check_DB_Files
+    Check_PHP_Files
+    Check_Apache_Files
+    if [[ "$isNginx" = "ok" && "$isDB" = "ok" && "$isPHP" = "ok"  &&"$isApache" = "ok" ]]; then
         Print_Success_Info
     else
         Print_Failed_Info
