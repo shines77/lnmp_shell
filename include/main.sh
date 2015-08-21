@@ -371,7 +371,6 @@ Print_Sys_Info()
 {
     echo ""
     cat /etc/issue
-    echo ""
     cat /etc/*-release
     echo ""
     uname -a
@@ -381,7 +380,6 @@ Print_Sys_Info()
     echo "Memory total is: ${MemTotal} MB "
     echo ""
     df -h
-    echo ""
 }
 
 # Check arch is 32-bit or 64-bit?
