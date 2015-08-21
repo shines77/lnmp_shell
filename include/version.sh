@@ -105,8 +105,11 @@ if [ "${Stack}" != "" ]; then
     Echo_Magenta "You will install ${Stack} stack."
     echo "-----------------------------------------------------"
     echo ""
-    if [ "${Stack}" != "lamp" ]; then
-        Echo_Cyan ${Nginx_Ver}
+
+    if [ "${SelectMalloc}" = "2" ]; then
+        Echo_Cyan "${Jemalloc_Ver}"
+    elif [ "${SelectMalloc}" = "3" ]; then
+        Echo_Cyan "${TCMalloc_Ver}"
     fi
 
     if [[ "${DBSelect}" = "1" || "${DBSelect}" = "2" || "${DBSelect}" = "3" ]]; then
@@ -117,15 +120,14 @@ if [ "${Stack}" != "" ]; then
 
     Echo_Cyan "${Php_Ver}"
 
+    if [ "${Stack}" != "lamp" ]; then
+        Echo_Cyan ${Nginx_Ver}
+    fi
+
     if [ "${Stack}" != "lnmp" ]; then
         Echo_Cyan "${Apache_Version}"
     fi
 
-    if [ "${SelectMalloc}" = "2" ]; then
-        Echo_Cyan "${Jemalloc_Ver}"
-    elif [ "${SelectMalloc}" = "3" ]; then
-        Echo_Cyan "${TCMalloc_Ver}"
-    fi
     echo ""
     echo "-----------------------------------------------------"
     echo ""
