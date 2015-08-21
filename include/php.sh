@@ -254,6 +254,7 @@ Install_PHP_53()
     fi
 
     echo "Write ZendGuardLoader to php.ini ..."
+    # /usr/local/php/etc/php.ini
     cat >>${PHP_Conf_File}<<EOF
 
 ;eaccelerator
@@ -273,6 +274,7 @@ EOF
 
     if [ "${Stack}" = "lnmp" ]; then
         echo "Creating new php-fpm configure file ..."
+        # /usr/local/php/etc/php-fpm.conf
         cat >${PHP_FPM_Conf_File}<<EOF
 [global]
 pid = ${PHP_Dir}/var/run/php-fpm.pid
@@ -295,7 +297,7 @@ pm.min_spare_servers = 1
 pm.max_spare_servers = 6
 request_terminate_timeout = 100
 request_slowlog_timeout = 0
-slowlog = ${PHP_Dir}/var/log/slow.log
+slowlog = var/log/slow.log
 EOF
 
         echo "Copy php-fpm init.d file ..."
@@ -324,7 +326,7 @@ Install_PHP_54()
     \cp php.ini-production /usr/local/php/etc/php.ini
 
     cd ${cur_dir}
-    # php extensions
+    # PHP extensions
     echo "Modify php.ini ......"
     sed -i 's/post_max_size = 8M/post_max_size = 50M/g' /usr/local/php/etc/php.ini
     sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 50M/g' /usr/local/php/etc/php.ini
@@ -422,7 +424,7 @@ Install_PHP_55()
     \cp php.ini-production /usr/local/php/etc/php.ini
 
     cd ${cur_dir}
-    # php extensions
+    # PHP extensions
     echo "Modify php.ini ..."
     sed -i 's/post_max_size = 8M/post_max_size = 50M/g' /usr/local/php/etc/php.ini
     sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 50M/g' /usr/local/php/etc/php.ini
@@ -534,7 +536,7 @@ Install_PHP_56()
     \cp php.ini-production /usr/local/php/etc/php.ini
 
     cd ${cur_dir}
-    # php extensions
+    # PHP extensions
     echo "Modify php.ini ......"
     sed -i 's/post_max_size = 8M/post_max_size = 50M/g' /usr/local/php/etc/php.ini
     sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 50M/g' /usr/local/php/etc/php.ini

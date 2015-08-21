@@ -110,8 +110,8 @@ PhpMyAdmin_Dir=${WWWRoot_Default_Site}"/"${PhpMyAdmin_PathName}
 
 # PHP confiure file
 PHP_Conf_File="/usr/local/php/etc/php.ini"
-# php-fpm confiure file
-PHP_FPM_Conf_File="/usr/local/php/etc/php-fpm.ini"
+# PHP-FPM confiure file
+PHP_FPM_Conf_File="/usr/local/php/etc/php-fpm.conf"
 
 #############################################################
 

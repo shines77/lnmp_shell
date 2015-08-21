@@ -5,8 +5,6 @@ Add_LNMP_Startup()
     echo "Add Startup and Starting LNMP ..."
     \cp ${cur_dir}/conf/lnmp /bin/lnmp
     chmod +x /bin/lnmp
-    StartUp nginx
-    /etc/init.d/nginx start
     if [[ "${DBSelect}" = "4" || "${DBSelect}" = "5" ]]; then
         StartUp mariadb
         /etc/init.d/mariadb start
@@ -20,6 +18,8 @@ Add_LNMP_Startup()
     if [ "${PHPSelect}" = "1" ]; then
         sed -i 's#/usr/local/php/var/run/php-fpm.pid#/usr/local/php/logs/php-fpm.pid#' /bin/lnmp
     fi
+    StartUp nginx
+    /etc/init.d/nginx start    
 }
 
 Add_LAMP_Startup()
@@ -27,8 +27,6 @@ Add_LAMP_Startup()
     echo "Add Startup and Starting LAMP ..."
     \cp ${cur_dir}/conf/lamp /bin/lnmp
     chmod +x /bin/lnmp
-    StartUp httpd
-    /etc/init.d/httpd start
     if [[ "${DBSelect}" = "4" || "${DBSelect}" = "5" ]]; then
         StartUp mariadb
         /etc/init.d/mariadb start
@@ -37,6 +35,8 @@ Add_LAMP_Startup()
         StartUp mysql
         /etc/init.d/mysql start
     fi
+    StartUp httpd
+    /etc/init.d/httpd start    
 }
 
 Add_LNAMP_Startup()
@@ -44,8 +44,6 @@ Add_LNAMP_Startup()
     echo "Add Startup and Starting LNAMP ..."
     \cp ${cur_dir}/conf/lnamp /bin/lnmp
     chmod +x /bin/lnmp
-    StartUp nginx
-    /etc/init.d/nginx start
     if [[ "${DBSelect}" = "4" || "${DBSelect}" = "5" ]]; then
         StartUp mariadb
         /etc/init.d/mariadb start
@@ -54,6 +52,8 @@ Add_LNAMP_Startup()
         StartUp mysql
         /etc/init.d/mysql start
     fi
+    StartUp nginx
+    /etc/init.d/nginx start    
     StartUp httpd
     /etc/init.d/httpd start
 }
@@ -126,7 +126,7 @@ Check_Apache_Files()
 Print_Success_Info()
 {
     echo "+------------------------------------------------------------------------+"
-    echo "|           LNMP Ver ${LNMP_Ver} for ${DISTRO} Linux Server               "
+    echo "|             LNMP Shell Ver ${LNMP_Ver} for ${DISTRO} Linux Server                 |"
     echo "|                           Written by Licess                            |"
     echo "|                         Modified by shines77                           |"
     echo "+------------------------------------------------------------------------+"
@@ -146,7 +146,7 @@ Print_Success_Info()
     echo "+------------------------------------------------------------------------+"
     lnmp status
     netstat -ntl
-    Echo_Green "Install lnmp Ver ${LNMP_Ver} completed! enjoy it."
+    Echo_Green "Install lnmp_shell Ver ${LNMP_Ver} completed! enjoy it."
 }
 
 Print_Failed_Info()
@@ -158,9 +158,9 @@ Print_Failed_Info()
 
 Check_LNMP_Install()
 {
-    Check_Nginx_Files
     Check_DB_Files
     Check_PHP_Files
+    Check_Nginx_Files    
     if [[ "$isNginx" = "ok" && "$isDB" = "ok" && "$isPHP" = "ok" ]]; then
         Print_Success_Info
     else
@@ -170,9 +170,9 @@ Check_LNMP_Install()
 
 Check_LAMP_Install()
 {
-    Check_Apache_Files
     Check_DB_Files
     Check_PHP_Files
+    Check_Apache_Files
     if [[ "$isApache" = "ok" && "$isDB" = "ok" && "$isPHP" = "ok" ]]; then
         Print_Success_Info
     else
@@ -182,9 +182,9 @@ Check_LAMP_Install()
 
 Check_LNAMP_Install()
 {
-    Check_Nginx_Files
     Check_DB_Files
     Check_PHP_Files
+    Check_Nginx_Files
     Check_Apache_Files
     if [[ "$isNginx" = "ok" && "$isDB" = "ok" && "$isPHP" = "ok"  &&"$isApache" = "ok" ]]; then
         Print_Success_Info
