@@ -156,7 +156,7 @@ Print_Success_Info()
     lnmp status
     netstat -ntl
     echo ""
-    Echo_Green "Install lnmp_shell Ver ${LNMP_Ver} completed! enjoy it."
+    Echo_Green "The lnmp_shell ver ${LNMP_Ver} install completed! enjoy it."
     echo ""
 }
 
