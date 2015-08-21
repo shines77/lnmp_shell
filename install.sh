@@ -113,9 +113,10 @@ LNMP_Stack()
     Init_Install
 
     Install_PHP
+    Create_PHP_Tools
 
     Install_Nginx
-    Create_PHP_Tools
+    
     Add_LNMP_Startup
     Check_LNMP_Install
 }
@@ -124,10 +125,11 @@ LAMP_Stack()
 {
     Init_Install
 
-    Install_Apache
     Install_PHP
-
     Create_PHP_Tools
+
+    Install_Apache    
+
     Add_LAMP_Startup
     Check_LAMP_Install
 }
@@ -136,13 +138,37 @@ LNAMP_Stack()
 {
     Init_Install
 
-    Install_Apache
     Install_PHP
+    Create_PHP_Tools
 
     Install_Nginx
-    Create_PHP_Tools
+    Install_Apache
+
     Add_LNAMP_Startup
     Check_LNAMP_Install
+}
+
+Check_LNMP_Shell_Install()
+{
+    local sCheckAction=$2
+    case "${sCheckAction}" in   
+        lnmp)
+            Add_LNMP_Startup
+            Check_LNMP_Install
+            ;;
+        lamp)
+            Add_LAMP_Startup
+            Check_LAMP_Install
+            ;;
+        lnamp)
+            Add_LNAMP_Startup
+            Check_LNAMP_Install
+            ;;
+        *)
+            Display_Welcome
+            Echo_Red "Usage: $0 check {lnmp|lamp|lnamp}"
+            ;;
+    esac
 }
 
 case "${Stack}" in   
@@ -160,6 +186,10 @@ case "${Stack}" in
         Display_Welcome
         Display_Selection
         LNAMP_Stack 2>&1 | tee -a /root/lnmp-shell-install.log
+        ;;
+    check)
+        Display_Welcome
+        Check_LNMP_Shell_Install
         ;;
     test)
         Display_Welcome
@@ -183,6 +213,6 @@ case "${Stack}" in
         ;;
     *)
         Display_Welcome
-        Echo_Red "Usage: $0 {lnmp|lamp|lnamp|test|test_random|test_color|test_mkdir|test_checkpath|timezone}"
+        Echo_Red "Usage: $0 {lnmp|lamp|lnamp|test|check|test_random|test_color|test_mkdir|test_checkpath|timezone}"
         ;;
 esac
