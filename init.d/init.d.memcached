@@ -30,7 +30,7 @@ prog="memcached"
 start () {
     echo -n $"Starting $prog: "
     memcached -d -l $IP -p $PORT -u $USER -m $CACHESIZE -c $MAXCONN -P /var/run/memcached.pid $OPTIONS
-    if [ "$?" != 0 ] ; then
+    if [ "$?" != 0 ]; then
         echo " failed"
         exit 1
     else
@@ -45,7 +45,7 @@ stop () {
         exit 1
     fi
     kill `cat /var/run/memcached.pid`
-    if [ "$?" != 0 ] ; then
+    if [ "$?" != 0 ]; then
         echo " failed"
         exit 1
     else

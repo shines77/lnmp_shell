@@ -77,19 +77,28 @@ fi
 # Check the daemon file is exists?
 #
 if [ ! -x $DAEMON ]; then
-    # echo "\033[0;31mError: Daemon binary file ${DAEMON} does not exist.\033[0m"
     echo_red "Error: Daemon binary file ${DAEMON} does not exist."
     exit 0
 fi
 
 test -x $DAEMON || exit 0
 
-. /lib/init/vars.sh
-. /lib/lsb/init-functions
+# /lib/init/vars.sh
+if [ -r /lib/init/vars.sh ]; then
+    . /lib/init/vars.sh
+fi
+# /lib/lsb/init-functions
+if [ -r /lib/lsb/init-functions ]; then
+    . /lib/lsb/init-functions
+fi
+
+# in RHEL, you can include /etc/rc.d/init.d/functions
+if [ -r /etc/rc.d/init.d/functions ]; then
+    . /etc/rc.d/init.d/functions
+fi
 
 PID=$(awk -F'[ \t;]+' '/[^#]pid/ {print $2}' $CONFIG_FILE)
-if [ -z "$PID" ]
-then
+if [ -z "$PID" ]; then
     PID=PID_FILE
 fi
 
@@ -125,7 +134,7 @@ do_start()
 
     $DAEMON -c $CONFIG_FILE
 
-    if [ "$?" != 0 ] ; then
+    if [ "$?" != 0 ]; then
         echo "[ Failed ]"
         exit 1
     else
@@ -153,7 +162,7 @@ do_stop()
 
     $DAEMON -s stop
 
-    if [ "$?" != 0 ] ; then
+    if [ "$?" != 0 ]; then
         echo "[ Failed ]. Use $NAME force-quit command please."
         exit 1
     else
@@ -219,7 +228,7 @@ do_force_quit()
 
     kill `pidof $NAME`
 
-    if [ "$?" != 0 ] ; then
+    if [ "$?" != 0 ]; then
         echo "[ Failed ]"
         exit 1
     else

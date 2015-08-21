@@ -40,7 +40,7 @@ Install_Redis()
         Tar_Cd ${Redis_Old_Ver}.tar.gz ${Redis_Old_Ver}
     fi
 
-    if [ "${Is_64bit}" = "y" ] ; then
+    if [ "${Is_64bit}" = "y" ]; then
         make PREFIX=/usr/local/redis install
     else
         make CFLAGS="-march=i686" PREFIX=/usr/local/redis install

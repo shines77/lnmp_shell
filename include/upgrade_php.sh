@@ -177,7 +177,7 @@ Upgrade_PHP_52()
     Pear_Pecl_Set
 
     cd ${cur_dir}/src
-    if [ "${Is_64bit}" = "y" ] ; then
+    if [ "${Is_64bit}" = "y" ]; then
         wget -c ${Download_Mirror}/web/zend/ZendOptimizer-3.3.9-linux-glibc23-x86_64.tar.gz
         tar zxf ZendOptimizer-3.3.9-linux-glibc23-x86_64.tar.gz
         mkdir -p /usr/local/zend/
@@ -257,7 +257,7 @@ Upgrade_PHP_53()
 
     echo "Install ZendGuardLoader ..."
     cd ${cur_dir}/src
-    if [ "${Is_64bit}" = "y" ] ; then
+    if [ "${Is_64bit}" = "y" ]; then
         wget -c ${Download_Mirror}/web/zend/ZendGuardLoader-php-5.3-linux-glibc23-x86_64.tar.gz
         tar zxf ZendGuardLoader-php-5.3-linux-glibc23-x86_64.tar.gz
         mkdir -p /usr/local/zend/
@@ -357,7 +357,7 @@ Upgrade_PHP_54()
 
     echo "Install ZendGuardLoader ..."
     cd ${cur_dir}/src
-    if [ "${Is_64bit}" = "y" ] ; then
+    if [ "${Is_64bit}" = "y" ]; then
         wget -c ${Download_Mirror}/web/zend/ZendGuardLoader-70429-PHP-5.4-linux-glibc23-x86_64.tar.gz
         tar zxf ZendGuardLoader-70429-PHP-5.4-linux-glibc23-x86_64.tar.gz
         mkdir -p /usr/local/zend/
@@ -458,7 +458,7 @@ Upgrade_PHP_556()
     if echo "${php_version}" | grep -Eqi '^5.5.';then
         echo "Install ZendGuardLoader for PHP 5.5 ..."
         cd ${cur_dir}/src
-        if [ "${Is_64bit}" = "y" ] ; then
+        if [ "${Is_64bit}" = "y" ]; then
             Download_File ${Download_Mirror}/web/zend/zend-loader-php5.5-linux-x86_64.tar.gz
             tar zxf zend-loader-php5.5-linux-x86_64.tar.gz
             mkdir -p /usr/local/zend/
@@ -472,7 +472,7 @@ Upgrade_PHP_556()
     elif echo "${php_version}" | grep -Eqi '^5.6.';then
         echo "Install ZendGuardLoader for PHP 5.6 ..."
         cd ${cur_dir}/src
-        if [ "${Is_64bit}" = "y" ] ; then
+        if [ "${Is_64bit}" = "y" ]; then
             Download_File ${Download_Mirror}/web/zend/zend-loader-php5.6-linux-x86_64.tar.gz
             tar zxf zend-loader-php5.6-linux-x86_64.tar.gz
             mkdir -p /usr/local/zend/

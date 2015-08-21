@@ -92,7 +92,7 @@ sed -i 's/max_execution_time = 30/max_execution_time = 300/g' /usr/local/php52/e
 sed -i 's/disable_functions =.*/disable_functions = passthru,exec,system,chroot,scandir,chgrp,chown,shell_exec,proc_open,proc_get_status,ini_alter,ini_restore,dl,openlog,syslog,readlink,symlink,popepassthru,stream_socket_server,fsocket/g' /usr/local/php/etc/php.ini
 
 cd ${cur_dir}/src
-if [ "${Is_64bit}" = "y" ] ; then
+if [ "${Is_64bit}" = "y" ]; then
     Download_File ${Download_Mirror}/web/zend/ZendOptimizer-3.3.9-linux-glibc23-x86_64.tar.gz
     tar zxf ZendOptimizer-3.3.9-linux-glibc23-x86_64.tar.gz
     mkdir -p /usr/local/zend52/
@@ -138,9 +138,9 @@ echo "Starting PHP 5.2.17 PHP-FPM ..."
 rm -rf ${cur_dir}/src/php-5.2.17
 
 if [ -s /usr/local/php52/sbin/php-fpm ] && [ -s /usr/local/php52/etc/php.ini ] && [ -s /usr/local/php52/bin/php ]; then
-echo "==================================================="
-Echo_Green "You have successfully install PHP 5.2.17 !"
-echo "==================================================="
+    echo "==================================================="
+    Echo_Green "You have successfully install PHP 5.2.17 !"
+    echo "==================================================="
 else
-Echo_Red "Failed to install PHP 5.2.17! You need try to run ./php5.2.17.sh 2>&1 | tee installphp5.2.17.log to record install logs."
+    Echo_Red "Failed to install PHP 5.2.17! You need try to run ./php5.2.17.sh 2>&1 | tee installphp5.2.17.log to record install logs."
 fi

@@ -72,12 +72,12 @@ ULIMIT_MAX_FILES="ulimit -S -n `ulimit -H -n`"
 # ||||||||||||||||||||   END CONFIGURATION SECTION  ||||||||||||||||||||
 
 # Set the maximum number of file descriptors allowed per child process.
-if [ "x$ULIMIT_MAX_FILES" != "x" ] ; then
+if [ "x$ULIMIT_MAX_FILES" != "x" ]; then
     $ULIMIT_MAX_FILES
 fi
 
 ERROR=0
-if [ "x$ARGV" = "x" ] ; then
+if [ "x$ARGV" = "x" ]; then
     ARGV="-h"
 fi
 
@@ -85,7 +85,7 @@ case $ARGV in
     start|stop|restart|graceful|graceful-stop)
         echo -n "$ARGV apache ... "
         $HTTPD -k $ARGV
-        if [ "$?" != 0 ] ; then
+        if [ "$?" != 0 ]; then
             echo " failed"
         else
             echo " done"
@@ -94,7 +94,7 @@ case $ARGV in
     configtest)
         echo -n "test apache configure ... "
         $HTTPD -t
-        if [ "$?" != 0 ] ; then
+        if [ "$?" != 0 ]; then
             echo " failed"
         else
             echo " done"

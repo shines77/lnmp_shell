@@ -27,7 +27,7 @@ prog="Pure-FTPd"
 start() {
     echo -n $"Starting $prog ... "
     $PURE_PERL $PURE_CONF --daemonize
-    if [ "$?" = 0 ] ; then
+    if [ "$?" = 0 ]; then
         echo " done"
     else
         echo " failed"
@@ -41,7 +41,7 @@ stop() {
         exit 1
     fi
     kill `cat $PURE_PID`
-    if [ "$?" = 0 ] ; then
+    if [ "$?" = 0 ]; then
         echo " done"
     else
         echo " failed"
@@ -76,6 +76,7 @@ case "$1" in
     status)
         status
         ;;
-  *)
+    *)
         echo $"Usage: $0 {start|stop|restart}"
+        ;;
 esac
