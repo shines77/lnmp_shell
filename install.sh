@@ -151,6 +151,9 @@ LNAMP_Stack()
 Check_LNMP_Shell_Install()
 {
     local sCheckAction=$2
+    if [ -z ${sCheckAction} ]; then
+        sCheckAction="${Stack}"
+    fi
     case "${sCheckAction}" in   
         lnmp)
             Add_LNMP_Startup

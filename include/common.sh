@@ -266,18 +266,19 @@ function Check_Is_Root_Account()
 #
 function Mkdir_Recur()
 {
-    if [ -z $1 -o $1 = "/" ]; then
+    local sDirName=$1
+    if [[ -z ${sDirName} || ${sDirName} = "/" ]]; then
         return
     fi
 
-    local sParentDir=`dirname $1`
+    local sParentDir=`dirname ${sDirName}`
     Mkdir_Recur $sParentDir
 
-    if [ ! -d $1 ]; then
-        Echo_Cyan "mkdir $1"
-        mkdir $1 || exit -1
+    if [ ! -d ${sDirName} ]; then
+        Echo_Cyan "mkdir ${sDirName}"
+        mkdir ${sDirName} || exit -1
     else
-        Echo_Magenta "dir [$1] has exists."
+        Echo_Magenta "dir [${sDirName}] has exists."
     fi
 }
 
