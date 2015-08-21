@@ -9,6 +9,7 @@ Check_Is_Root_Account
 
 cur_dir=$(pwd)
 Stack=$1
+Action=$2
 if [ "${Stack}" = "" ]; then
     Stack="lnmp"
 else
@@ -150,9 +151,9 @@ LNAMP_Stack()
 
 Check_LNMP_Shell_Install()
 {
-    local sCheckAction=$2
+    local sCheckAction=$1
     if [[ -z ${sCheckAction} || "${sCheckAction}" = "" ]]; then
-        sCheckAction="${Stack}"
+        sCheckAction="lnmp"
     fi
     echo ""
     echo "sCheckAction = "${sCheckAction}
@@ -194,7 +195,7 @@ case "${Stack}" in
         ;;
     check)
         Display_Welcome
-        Check_LNMP_Shell_Install $2
+        Check_LNMP_Shell_Install ${Action}
         ;;
     test)
         Display_Welcome
