@@ -151,19 +151,19 @@ Print_Success_Info()
     echo "+------------------------------------------------------------------------+"
     echo "|  Default directory: /home/wwwroot/default                              |"
     echo "+------------------------------------------------------------------------+"
-    echo "|  MySQL/MariaDB root password: ${MysqlRootPWD}                          |"
+    echo "|  MySQL/MariaDB root password: ${MysqlRootPWD}                           "
     echo "+------------------------------------------------------------------------+"
     lnmp status
     netstat -ntl
     echo ""
-    Echo_Green "The lnmp_shell ver ${LNMP_Ver} install completed! enjoy it."
+    Echo_Green "The lnmp_shell ver ${LNMP_Ver} install completed, enjoy it!"
     echo ""
 }
 
 Print_Failed_Info()
 {
     echo ""
-    Echo_Red "Sorry, Failed to install ${Stack} shell!"
+    Echo_Red "Sorry, failed to install ${Stack} shell!"
     Echo_Red "Please visit http://bbs.vpser.net/forum-25-1.html feedback errors and logs."
     Echo_Red "You can download /root/lnmp-install.log from your server, and upload lnmp-install.log to LNMP-Shell Forum."
     echo ""
