@@ -153,12 +153,16 @@ Check_LNMP_Shell_Install()
 {
     local sCheckAction=$1
     if [[ -z ${sCheckAction} || "${sCheckAction}" = "" ]]; then
-        sCheckAction="lnmp"
+        Stack="lnmp"
+        sCheckAction=${Stack}
+    else
+        Stack=${sCheckAction}
     fi
     echo ""
+    echo "Stack = "${Stack}
     echo "sCheckAction = "${sCheckAction}
     echo ""
-    case "${sCheckAction}" in   
+    case "${Stack}" in   
         lnmp)
             Add_LNMP_Startup
             Check_LNMP_Install

@@ -61,8 +61,6 @@ Add_LNAMP_Startup()
 Check_Nginx_Files()
 {
     isNginx=""
-    echo "============================== Check install =============================="
-    echo "Checking ..."
     if [[ -s /usr/local/nginx/conf/nginx.conf && -s /usr/local/nginx/sbin/nginx ]]; then
         Echo_Green "Nginx: OK"
         isNginx="ok"
@@ -158,6 +156,9 @@ Print_Failed_Info()
 
 Check_LNMP_Install()
 {
+    echo "============================== Check install =============================="
+    echo "Checking ..."
+
     Check_DB_Files
     Check_PHP_Files
     Check_Nginx_Files    
@@ -166,10 +167,15 @@ Check_LNMP_Install()
     else
         Print_Failed_Info
     fi
+
+    echo "==========================================================================="
 }
 
 Check_LAMP_Install()
 {
+    echo "============================== Check install =============================="
+    echo "Checking ..."
+
     Check_DB_Files
     Check_PHP_Files
     Check_Apache_Files
@@ -178,10 +184,15 @@ Check_LAMP_Install()
     else
         Print_Failed_Info
     fi
+
+    echo "==========================================================================="
 }
 
 Check_LNAMP_Install()
 {
+    echo "============================== Check install =============================="
+    echo "Checking ..."
+
     Check_DB_Files
     Check_PHP_Files
     Check_Nginx_Files
@@ -191,4 +202,6 @@ Check_LNAMP_Install()
     else
         Print_Failed_Info
     fi
+
+    echo "==========================================================================="
 }
