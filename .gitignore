@@ -8,6 +8,12 @@
 # Backup file
 *.bak
 
+# Ingnore some folders
+/install/
+/packages/
+/unzip/
+/logs/
+
 # ZIP, TAR.GZ, TAR.BZ2, RAR files
 *.zip
 *.rar
