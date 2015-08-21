@@ -369,14 +369,12 @@ Press_Start()
 
 Print_Sys_Info()
 {
-    echo ""
     cat /etc/issue
     cat /etc/*-release
     echo ""
     uname -a
     echo ""
     MemTotal=`free -m | grep Mem | awk '{print  $2}'`
-    echo ""
     echo "Memory total is: ${MemTotal} MB "
     echo ""
     df -h
