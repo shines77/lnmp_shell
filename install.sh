@@ -158,10 +158,6 @@ Check_LNMP_Shell_Install()
     else
         Stack=${sCheckAction}
     fi
-    echo ""
-    echo "Stack = "${Stack}
-    echo "sCheckAction = "${sCheckAction}
-    echo ""
     case "${Stack}" in   
         lnmp)
             Add_LNMP_Startup
