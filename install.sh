@@ -151,7 +151,7 @@ LNAMP_Stack()
 Check_LNMP_Shell_Install()
 {
     local sCheckAction=$2
-    if [ -z ${sCheckAction} ]; then
+    if [[ -z ${sCheckAction} || "${sCheckAction}" = "" ]]; then
         sCheckAction="${Stack}"
     fi
     case "${sCheckAction}" in   
@@ -168,7 +168,6 @@ Check_LNMP_Shell_Install()
             Check_LNAMP_Install
             ;;
         *)
-            Display_Welcome
             Echo_Red "Usage: $0 check {lnmp|lamp|lnamp}"
             ;;
     esac
@@ -192,7 +191,7 @@ case "${Stack}" in
         ;;
     check)
         Display_Welcome
-        Check_LNMP_Shell_Install
+        Check_LNMP_Shell_Install $2
         ;;
     test)
         Display_Welcome

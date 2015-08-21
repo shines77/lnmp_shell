@@ -267,7 +267,7 @@ function Check_Is_Root_Account()
 function Mkdir_Recur()
 {
     local sDirName=$1
-    if [[ -z ${sDirName} || ${sDirName} = "/" ]]; then
+    if [[ -z ${sDirName} || "${sDirName}" = "/" ]]; then
         return
     fi
 
@@ -298,7 +298,7 @@ function Test_Mkdir_Recur()
 function Check_PathName()
 {
     local sPathName=$1
-    if [[ -z ${sPathName} || ${sPathName} = "/" ]]; then
+    if [[ -z ${sPathName} || "${sPathName}" = "/" ]]; then
         sPathName="/"
     else
         local sLength=${#sPathName}
@@ -327,7 +327,7 @@ function Check_PathName()
 function Check_PathName2()
 {
     local sPathName=$1
-    if [[ -z ${sPathName} || ${sPathName} = "/" ]]; then
+    if [[ -z ${sPathName} || "${sPathName}" = "/" ]]; then
         sPathName="/"
     else
         local sParentPath=`dirname ${sPathName}`
@@ -349,7 +349,7 @@ function Check_PathName2()
 function Check_PathName_Head()
 {
     local sPathName=$1
-    if [[ -z ${sPathName} || ${sPathName} = "/" ]]; then
+    if [[ -z ${sPathName} || "${sPathName}" = "/" ]]; then
         sPathName="/"
     else
         sPathName=$1
