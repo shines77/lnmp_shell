@@ -82,10 +82,10 @@ Upgrade_MariaDB()
     echo "============================check files=================================="
     cd ${cur_dir}/src
     if [ -s mariadb-${mariadb_version}.tar.gz ]; then
-          echo "mariadb-${mariadb_version}.tar.gz [found]"
+        echo "mariadb-${mariadb_version}.tar.gz [found]"
     else
-            echo "Error: mariadb-${mariadb_version}.tar.gz not found!!!download now... ..."
-            wget -c https://downloads.mariadb.org/interstitial/mariadb-${mariadb_version}/source/mariadb-${mariadb_version}.tar.gz
+        echo "Error: mariadb-${mariadb_version}.tar.gz not found!!!download now... ..."
+        wget -c https://downloads.mariadb.org/interstitial/mariadb-${mariadb_version}/source/mariadb-${mariadb_version}.tar.gz
         if [ $? -eq 0 ]; then
             echo "Download mariadb-${mariadb_version}.tar.gz successfully!"
         else
@@ -119,10 +119,10 @@ Upgrade_MariaDB()
     sed '/skip-external-locking/i\datadir = /usr/local/mariadb/var' -i /etc/my.cnf
     sed '/skip-external-locking/i\user = mariadb' -i /etc/my.cnf
     if [ $installinnodb = "y" ]; then
-    sed -i 's:#innodb:innodb:g' /etc/my.cnf
-    sed -i 's:/usr/local/mariadb/data:/usr/local/mariadb/var:g' /etc/my.cnf
+        sed -i 's:#innodb:innodb:g' /etc/my.cnf
+        sed -i 's:/usr/local/mariadb/data:/usr/local/mariadb/var:g' /etc/my.cnf
     else
-    sed '/skip-external-locking/i\default-storage-engine=MyISAM\nloose-skip-innodb' -i /etc/my.cnf
+        sed '/skip-external-locking/i\default-storage-engine=MyISAM\nloose-skip-innodb' -i /etc/my.cnf
     fi
 
     echo -e "\nexpire_logs_days = 10" >> /etc/my.cnf
@@ -139,7 +139,7 @@ EOF
     cp support-files/mysql.server /etc/init.d/mariadb
     chmod 755 /etc/init.d/mariadb
 
-    if [ -d "/proc/vz" ];then
+    if [ -d "/proc/vz" ]; then
         ulimit -s unlimited
     fi
     /etc/init.d/mariadb start

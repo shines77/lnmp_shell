@@ -8,8 +8,8 @@ Mariadb_Sec_Setting()
 EOF
     ldconfig
 
-    if [ -d "/proc/vz" ];then
-    ulimit -s unlimited
+    if [ -d "/proc/vz" ]; then
+        ulimit -s unlimited
     fi
     /etc/init.d/mariadb start
 
@@ -59,10 +59,10 @@ Install_MariaDB_5()
     sed '/skip-external-locking/i\datadir = /usr/local/mariadb/var' -i /etc/my.cnf
     sed '/skip-external-locking/i\user = mariadb' -i /etc/my.cnf
     if [ "${InstallInnodb}" = "y" ]; then
-    sed -i 's:#innodb:innodb:g' /etc/my.cnf
-    sed -i 's:/usr/local/mariadb/data:/usr/local/mariadb/var:g' /etc/my.cnf
+        sed -i 's:#innodb:innodb:g' /etc/my.cnf
+        sed -i 's:/usr/local/mariadb/data:/usr/local/mariadb/var:g' /etc/my.cnf
     else
-    sed '/skip-external-locking/i\default-storage-engine=MyISAM\nloose-skip-innodb' -i /etc/my.cnf
+        sed '/skip-external-locking/i\default-storage-engine=MyISAM\nloose-skip-innodb' -i /etc/my.cnf
     fi
 
     /usr/local/mariadb/scripts/mysql_install_db --defaults-file=/etc/my.cnf --basedir=/usr/local/mariadb --datadir=/usr/local/mariadb/var --user=mariadb
@@ -92,10 +92,10 @@ Install_MariaDB_10()
     sed '/skip-external-locking/i\datadir = /usr/local/mariadb/var' -i /etc/my.cnf
     sed '/skip-external-locking/i\user = mariadb' -i /etc/my.cnf
     if [ "${InstallInnodb}" = "y" ]; then
-    sed -i 's:#innodb:innodb:g' /etc/my.cnf
-    sed -i 's:/usr/local/mariadb/data:/usr/local/mariadb/var:g' /etc/my.cnf
+        sed -i 's:#innodb:innodb:g' /etc/my.cnf
+        sed -i 's:/usr/local/mariadb/data:/usr/local/mariadb/var:g' /etc/my.cnf
     else
-    sed '/skip-external-locking/i\default-storage-engine=MyISAM\nloose-skip-innodb' -i /etc/my.cnf
+        sed '/skip-external-locking/i\default-storage-engine=MyISAM\nloose-skip-innodb' -i /etc/my.cnf
     fi
 
     /usr/local/mariadb/scripts/mysql_install_db --defaults-file=/etc/my.cnf --basedir=/usr/local/mariadb --datadir=/usr/local/mariadb/var --user=mariadb

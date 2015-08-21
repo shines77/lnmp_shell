@@ -27,19 +27,23 @@ action2=$2
 
 Display_Upgrade_Menu()
 {
+    echo ""
     echo "##### cache / optimizer / accelerator #####"
-    echo "1: eAccelerator"
-    echo "2: XCache"
-    echo "3: Memcached"
-    echo "4: opcache"
-    echo "5: Redis"
+    echo "1) eAccelerator"
+    echo "2) XCache"
+    echo "3) Memcached"
+    echo "4) opcache"
+    echo "5) Redis"
     echo "##### Image Processing #####"
-    echo "6: imageMagick"
+    echo "6) imageMagick"
     echo "##### encryption/decryption utility for PHP #####"
-    echo "7: ionCube Loader"
+    echo "7) ionCube Loader"
     echo "exit: Exit current script"
+    echo ""
     echo "#####################################################"
+    echo ""
     read -p "Enter your choice (1, 2, 3, 4, 5, 6, 7 or exit): " action2
+    echo ""
 }
 
 Restart_PHP()
@@ -59,17 +63,17 @@ echo "+------------------------------------------------------------------------+
 echo "|                                                                        |"
 Echo_Blue_Ex "|" "              LNMP/LAMP/LNAMP Addons Script for Linux Server            " "|"
 echo "|                                                                        |"
-echo "|                           Version: ${LNAMP_Ver}                                 |"
+echo "|                           Version: ${LNMP_Ver}                                 |"
 echo "|                           Host OS: ${DISTRO}                            "
 echo "|                                                                        |"
 echo "|                         Author by: Licess                              |"
 echo "|                       Modified by: shines77                            |"
-echo "|                     Last Modified: ${LNAMP_LastModified}                          |"
+echo "|                     Last Modified: ${LNMP_LastModified}                          |"
 echo "|                                                                        |"
 echo "+------------------------------------------------------------------------+"
-echo "|  A tool to Install cache, optimizer, accelerator ... addons for LNAMP  |"
+echo "|  A tool to Install cache, optimizer, accelerator ... addons for LNMP   |"
 echo "+------------------------------------------------------------------------+"
-echo "|     For more information please visit http://lnamp.cloudbuses.com      |"
+echo "|     For more information please visit http://lnmp.cloudbuses.com       |"
 echo "+------------------------------------------------------------------------+"
 echo ""
 
@@ -82,70 +86,70 @@ Check_OS_Is_64Bit
 Get_Linux_Dist_Name
 
 case "${action}" in
-install)
-    case "${action2}" in
-        1|e[aA]ccelerator)
-            Install_eAccelerator
-            ;;
-        2|[xX][cC]ache)
-            Install_XCache
-            ;;
-        3|[mM]em[cC]ached)
-            Install_Memcached
-            ;;
-        4|[oO]pcache)
-            Install_Opcache
-            ;;
-        5|[rR]edis)
-            Install_Redis
-            ;;
-        6|[iI]mage[mM]agick)
-            Install_ImageMagic
-            ;;
-        7|[iI]on[cC]ube)
-            Install_ionCube
-            ;;
-        [eE][xX][iI][tT])
-            exit 1
-            ;;
-        *)
-            echo "Usage: ./addons.sh {install|uninstall} {eaccelerator|xcache|memcached|opcache|redis|imagemagick|ioncube}"
-            ;;
-    esac
-    ;;
-uninstall)
-    case "${action2}" in
-        e[aA]ccelerator)
-            Uninstall_eAccelerator
-            ;;
-        [xX][cC]ache)
-            Uninstall_XCache
-            ;;
-        [mM]em[cC]ached)
-            Uninstall_Memcached
-            ;;
-        [oO]pcache)
-            Uninstall_Opcache
-            ;;
-        [rR]edis)
-            Uninstall_Redis
-            ;;
-        [iI]mage[mM]agick)
-            Uninstall_ImageMagick
-            ;;
-        [iI]on[cC]ube)
-            Uninstall_ionCube
-            ;;
-        *)
-            echo "Usage: ./addons.sh {install|uninstall} {eaccelerator|xcache|memcached|opcache|redis|imagemagick|ioncube}"
-            ;;
-    esac
-    ;;
-[eE][xX][iI][tT])
-    exit 1
-    ;;
-*)
-    echo "Usage: ./addons.sh {install|uninstall} {eaccelerator|xcache|memcached|opcache|redis|imagemagick|ioncube}"
-    exit 1
-    ;;
+    install)
+        case "${action2}" in
+            1|e[aA]ccelerator)
+                Install_eAccelerator
+                ;;
+            2|[xX][cC]ache)
+                Install_XCache
+                ;;
+            3|[mM]em[cC]ached)
+                Install_Memcached
+                ;;
+            4|[oO]pcache)
+                Install_Opcache
+                ;;
+            5|[rR]edis)
+                Install_Redis
+                ;;
+            6|[iI]mage[mM]agick)
+                Install_ImageMagic
+                ;;
+            7|[iI]on[cC]ube)
+                Install_ionCube
+                ;;
+            [eE][xX][iI][tT])
+                exit 1
+                ;;
+            *)
+                echo "Usage: ./addons.sh {install|uninstall} {eaccelerator|xcache|memcached|opcache|redis|imagemagick|ioncube}"
+                ;;
+        esac
+        ;;
+    uninstall)
+        case "${action2}" in
+            e[aA]ccelerator)
+                Uninstall_eAccelerator
+                ;;
+            [xX][cC]ache)
+                Uninstall_XCache
+                ;;
+            [mM]em[cC]ached)
+                Uninstall_Memcached
+                ;;
+            [oO]pcache)
+                Uninstall_Opcache
+                ;;
+            [rR]edis)
+                Uninstall_Redis
+                ;;
+            [iI]mage[mM]agick)
+                Uninstall_ImageMagick
+                ;;
+            [iI]on[cC]ube)
+                Uninstall_ionCube
+                ;;
+            *)
+                echo "Usage: ./addons.sh {install|uninstall} {eaccelerator|xcache|memcached|opcache|redis|imagemagick|ioncube}"
+                ;;
+        esac
+        ;;
+    [eE][xX][iI][tT])
+        exit 1
+        ;;
+    *)
+        echo "Usage: ./addons.sh {install|uninstall} {eaccelerator|xcache|memcached|opcache|redis|imagemagick|ioncube}"
+        exit 1
+        ;;
 esac

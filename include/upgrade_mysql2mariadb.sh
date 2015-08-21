@@ -140,7 +140,7 @@ EOF
     cp support-files/mysql.server /etc/init.d/mariadb
     chmod 755 /etc/init.d/mariadb
 
-    if [ -d "/proc/vz" ];then
+    if [ -d "/proc/vz" ]; then
         ulimit -s unlimited
     fi
     /etc/init.d/mariadb start

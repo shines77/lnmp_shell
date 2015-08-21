@@ -99,35 +99,39 @@ PHPMemcached_Ver='memcached-2.2.0'
 PHPMemcache_Ver='memcache-3.0.8'
 
 # Display install version info
-if [ "${Stack}" != "" ]; then
-    echo ""
-    echo "-----------------------------------------------------"
-    Echo_Magenta "You will install ${Stack} stack."
-    echo "-----------------------------------------------------"
-    echo ""
 
-    if [ "${SelectMalloc}" = "2" ]; then
-        Echo_Cyan "${Jemalloc_Ver}"
-    elif [ "${SelectMalloc}" = "3" ]; then
-        Echo_Cyan "${TCMalloc_Ver}"
+function Display_Install_Version_Info()
+{
+    if [ "${Stack}" != "" ]; then
+        echo ""
+        echo "-----------------------------------------------------"
+        Echo_Magenta "You will install ${Stack} stack."
+        echo "-----------------------------------------------------"
+        echo ""
+
+        if [ "${SelectMalloc}" = "2" ]; then
+            Echo_Cyan "${Jemalloc_Ver}"
+        elif [ "${SelectMalloc}" = "3" ]; then
+            Echo_Cyan "${TCMalloc_Ver}"
+        fi
+
+        if [[ "${DBSelect}" = "1" || "${DBSelect}" = "2" || "${DBSelect}" = "3" ]]; then
+            Echo_Cyan "${Mysql_Ver}"
+        elif [[ "${DBSelect}" = "4" || "${DBSelect}" = "5" ]]; then
+            Echo_Cyan "${Mariadb_Ver}"
+        fi
+
+        Echo_Cyan "${Php_Ver}"
+
+        if [ "${Stack}" != "lamp" ]; then
+            Echo_Cyan ${Nginx_Ver}
+        fi
+
+        if [ "${Stack}" != "lnmp" ]; then
+            Echo_Cyan "${Apache_Version}"
+        fi
+
+        echo ""
+        echo "-----------------------------------------------------"
     fi
-
-    if [[ "${DBSelect}" = "1" || "${DBSelect}" = "2" || "${DBSelect}" = "3" ]]; then
-        Echo_Cyan "${Mysql_Ver}"
-    elif [[ "${DBSelect}" = "4" || "${DBSelect}" = "5" ]]; then
-        Echo_Cyan "${Mariadb_Ver}"
-    fi
-
-    Echo_Cyan "${Php_Ver}"
-
-    if [ "${Stack}" != "lamp" ]; then
-        Echo_Cyan ${Nginx_Ver}
-    fi
-
-    if [ "${Stack}" != "lnmp" ]; then
-        Echo_Cyan "${Apache_Version}"
-    fi
-
-    echo ""
-    echo "-----------------------------------------------------"
-fi
+}

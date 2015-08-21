@@ -75,7 +75,7 @@ Check_Curl()
 
 Check_PHP53_Curl()
 {
-    if [ "${DISTRO}" = "Fedora" ];then
+    if [ "${DISTRO}" = "Fedora" ]; then
         PHP53_With_Curl='y'
     elif echo "${Ubuntu_Version}" | grep -Eqi '^14.1';then
         PHP53_With_Curl='y'

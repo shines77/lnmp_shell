@@ -33,12 +33,12 @@ echo "+------------------------------------------------------------------------+
 echo "|                                                                        |"
 Echo_Blue_Ex "|" "              LNMP/LAMP/LNAMP Shell Script for Linux Server             " "|"
 echo "|                                                                        |"
-echo "|                           Version: ${LNAMP_Ver}                                 |"
+echo "|                           Version: ${LNMP_Ver}                                 |"
 echo "|                           Host OS: ${DISTRO}                            "
 echo "|                                                                        |"
 echo "|                         Author by: Licess                              |"
 echo "|                       Modified by: shines77                            |"
-echo "|                     Last Modified: ${LNAMP_LastModified}                          |"
+echo "|                     Last Modified: ${LNMP_LastModified}                          |"
 echo "|                                                                        |"
 echo "+------------------------------------------------------------------------+"
 echo "|       A tool to auto-compile & install LNMP/LAMP/LNAMP on Linux        |"
@@ -117,6 +117,7 @@ Run_Uninstall()
     Check_Stack
     action=""
 
+    echo ""
     echo "Current Stack: ${Get_Stack}"
     echo ""
     echo "1) Uninstall LNMP"
@@ -124,6 +125,7 @@ Run_Uninstall()
     echo "3) Uninstall LNAMP"
     echo ""
     read -p "(Please input 1, 2 or 3):" action
+    echo ""
 
     case "$action" in
         1|[lL][nN][mM][pP])
@@ -144,7 +146,7 @@ EOF
             sleep 3
             Press_Start
             Uninstall_LNMP
-        ;;
+            ;;
         2|[lL][aA][mM][pP])
             echo "You will uninstall LAMP."
             Echo_Red "Please backup your configure files and mysql data !!!!!!"
@@ -162,7 +164,7 @@ EOF
             sleep 3
             Press_Start
             Uninstall_LAMP
-        ;;
+            ;;
         3|[lL][nN][aA][mM][pP])
             echo "You will uninstall LNAMP."
             Echo_Red "Please backup your configure files and mysql data !!!!!!"
@@ -182,7 +184,7 @@ EOF
             sleep 3
             Press_Start
             Uninstall_LNAMP
-        ;;    
+            ;;    
     esac
 }
 

@@ -254,7 +254,7 @@ Download_File()
     local FileName=$2
     if [ -z "${FileName}" ]; then
         FileName=`basename $1`
-    fi    
+    fi
     if [ -s "${FileName}" ]; then
         Echo_Cyan "${FileName} [found]."
     else
@@ -299,7 +299,7 @@ Check_Download_Files()
     else
         Download_File ${Download_Mirror}/datebase/mysql/${Mysql_Ver}.tar.gz ${Mysql_Ver}.tar.gz
     fi
-    
+
     # PHP
     Download_File ${Download_Mirror}/web/php/${Php_Ver}.tar.gz ${Php_Ver}.tar.gz
     if [ ${PHPSelect} = "1" ]; then

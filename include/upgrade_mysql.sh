@@ -33,9 +33,9 @@ Upgrade_MySQL51()
 {
     Tar_Cd mysql-${mysql_version}.tar.gz mysql-${mysql_version}
     if [ $installinnodb = "y" ]; then
-    ./configure --prefix=/usr/local/mysql --with-extra-charsets=complex --enable-thread-safe-client --enable-assembler --with-mysqld-ldflags=-all-static --with-charset=utf8 --enable-thread-safe-client --with-big-tables --with-readline --with-ssl --with-embedded-server --enable-local-infile --with-plugins=innobase
+        ./configure --prefix=/usr/local/mysql --with-extra-charsets=complex --enable-thread-safe-client --enable-assembler --with-mysqld-ldflags=-all-static --with-charset=utf8 --enable-thread-safe-client --with-big-tables --with-readline --with-ssl --with-embedded-server --enable-local-infile --with-plugins=innobase
     else
-    ./configure --prefix=/usr/local/mysql --with-extra-charsets=complex --enable-thread-safe-client --enable-assembler --with-mysqld-ldflags=-all-static --with-charset=utf8 --enable-thread-safe-client --with-big-tables --with-readline --with-ssl --with-embedded-server --enable-local-infile
+        ./configure --prefix=/usr/local/mysql --with-extra-charsets=complex --enable-thread-safe-client --enable-assembler --with-mysqld-ldflags=-all-static --with-charset=utf8 --enable-thread-safe-client --with-big-tables --with-readline --with-ssl --with-embedded-server --enable-local-infile
     fi
     sed -i '/set -ex;/,/done/d' Makefile
     make && make install
@@ -234,7 +234,7 @@ StartAll()
 
     ldconfig
 
-    if [ -d "/proc/vz" ];then
+    if [ -d "/proc/vz" ]; then
         ulimit -s unlimited
     fi
 

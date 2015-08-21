@@ -130,13 +130,13 @@ Print_Success_Info()
     echo "|                           Written by Licess                            |"
     echo "|                         Modified by shines77                           |"
     echo "+------------------------------------------------------------------------+"
-    echo "|         For more information please visit http://www.lnmp.org          |"
+    echo "|     For more information please visit http://lnmp.cloudbuses.com       |"
     echo "+------------------------------------------------------------------------+"
     echo "|    lnmp status manage: lnmp {start|stop|reload|restart|kill|status}    |"
     echo "+------------------------------------------------------------------------+"
     echo "|  phpMyAdmin: http://YourIP/phpmyadmin/                                 |"
-    echo "|  phpinfo: http://YourIP/phpinfo.php                                    |"
-    echo "|  Prober:  http://YourIP/p.php                                          |"
+    echo "|  phpinfo:    http://YourIP/phpinfo.php                                 |"
+    echo "|  Prober:     http://YourIP/p.php                                       |"
     echo "+------------------------------------------------------------------------+"
     echo "|  Add VirtualHost: lnmp vhost add                                       |"
     echo "+------------------------------------------------------------------------+"
@@ -145,7 +145,7 @@ Print_Success_Info()
     echo "|  MySQL/MariaDB root password: ${MysqlRootPWD}                          |"
     echo "+------------------------------------------------------------------------+"
     lnmp status
-    netstat -ntl  
+    netstat -ntl
     Echo_Green "Install lnmp Ver ${LNMP_Ver} completed! enjoy it."
 }
 

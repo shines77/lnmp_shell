@@ -79,23 +79,23 @@ MySQL_Selection()
     case "${DBSelect}" in
         1)
             Echo_Cyan "You will install MySQL 5.1.73."
-        ;;
+            ;;
         2)
             Echo_Cyan "You will install MySQL 5.5.42."
-        ;;
+            ;;
         3)
             Echo_Cyan "You will Install MySQL 5.6.23."
-        ;;
+            ;;
         4)
             Echo_Cyan "You will install MariaDB 5.5.42."
-        ;;
+            ;;
         5)
             Echo_Cyan "You will install MariaDB 10.0.17."
-        ;;
+            ;;
         *)
             Echo_Cyan "Unknown input, You will install MySQL 5.5.42 (Default)."
             DBSelect="2"
-        ;;
+            ;;
     esac
     echo ""
 
@@ -124,14 +124,14 @@ InnoDB_StorageEngine_Selection()
     case "${InstallInnodb}" in
         [yY][eE][sS]|[yY])
             Echo_Cyan "You will enable the InnoDB Storage Engine."
-        ;;
+            ;;
         [nN][oO]|[nN])
             Echo_Cyan "You will disable the InnoDB Storage Engine!"
-        ;;
+            ;;
         *)
             Echo_Cyan "Unknown input, The InnoDB Storage Engine will enable."
             InstallInnodb="y"
-        ;;
+            ;;
     esac
     echo ""
 }
@@ -154,13 +154,13 @@ Input_MySQL_RootPWD()
                 MysqlRootUseDefaultPWD='y'
                 MysqlRootPWD="${MysqlRootDefaultPWD}"
                 MysqlRootConfirmPWD="${MysqlRootDefaultPWD}"
-            ;;
+                ;;
             [nN][oO]|[nN])
                 Echo_Red "Info: You do not agree to use the default Mysql root password, please try again."
                 MysqlRootUseDefaultPWD='n'
                 echo ""
                 Input_MySQL_RootPWD
-            ;;
+                ;;
             *)
                 # Echo_Cyan "Unknown input, You agree to use the default Mysql root password '${MysqlRootDefaultPWD}'."
                 # MysqlRootUseDefaultPWD="y"
@@ -170,7 +170,7 @@ Input_MySQL_RootPWD()
                 MysqlRootUseDefaultPWD='n'
                 echo ""
                 Input_MySQL_RootPWD
-            ;;
+                ;;
         esac
     else
         read -p "     Confirm the password: " MysqlRootConfirmPWD
@@ -222,23 +222,23 @@ PHP_Selection()
     case "${PHPSelect}" in
         1)
             Echo_Cyan "You will install PHP 5.2.17."
-        ;;
+            ;;
         2)
             Echo_Cyan "You will install PHP 5.3.29."
-        ;;
+            ;;
         3)
             Echo_Cyan "You will Install PHP 5.4.41."
-        ;;
+            ;;
         4)
             Echo_Cyan "You will install PHP 5.5.25."
-        ;;
+            ;;
         5)
             Echo_Cyan "You will install PHP 5.6.9."
-        ;;
+            ;;
         *)
             Echo_Cyan "Unknown input, You will install PHP 5.5.25 (Default)."
             PHPSelect="4"
-        ;;
+            ;;
     esac
     echo ""
 }
@@ -261,17 +261,17 @@ Nginx_Selection()
     case "${NginxSelect}" in
         1)
             Echo_Cyan "You will install Nginx 1.4.7."
-        ;;
+            ;;
         2)
             Echo_Cyan "You will install Nginx 1.6.3."
-        ;;
+            ;;
         3)
             Echo_Cyan "You will Install Nginx 1.8.0."
-        ;;
+            ;;
         *)
             Echo_Cyan "Unknown input, You will install Nginx 1.8.0 (Default)."
             NginxSelect="3"
-        ;;
+            ;;
     esac
     echo ""
 }
@@ -346,7 +346,10 @@ Display_Selection()
 
 Press_Install()
 {
-    . include/version.sh    
+    . include/version.sh
+    # Display install version info, this function in "include/version.sh"
+    Display_Install_Version_Info
+
     echo ""
     echo "Press any key to install or Press Ctrl + C to cancel ..."
     OLDCONFIG=`stty -g`
