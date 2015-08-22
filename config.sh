@@ -1,19 +1,19 @@
 #!/bin/bash
 
-#############################################################
+#################### Download mirrors ########################
 
 # Download mirrors URLs
 
-#Download_Mirror='http://mirrors.cloudbuses.com'
+# Download_Mirror='http://mirrors.cloudbuses.com'
 Download_Mirror='http://soft.vpser.net'
 
 Download_Mirror_1='http://mirrors.cloudbuses.com'
 Download_Mirror_2='http://soft.vpser.net'
 
-#############################################################
+######################### Install ############################
 
 # Install log file setting
-Install_Log_Dir="/home/lnmp_install/logs/"
+Install_Log_Dir="/root/lnmp_install/logs"
 Install_Log_File="lnmp-install.log"
 
 # Uninstall log file setting
@@ -21,14 +21,14 @@ Uninstall_Log_Dir="${Install_Log_Dir}"
 Uninstall_Log_File="lnmp-uninstall.log"
 
 # The path of install package files
-Packages_Dir="/home/lnmp_install/packages"
+Packages_Dir="/root/lnmp_install/packages"
 # The temp path of unzip the package files
-Unzip_Dir="/home/lnmp_install/unzip"
+Unzip_Dir="/root/lnmp_install/unzip"
 
 # The path of download mirrors install package files
 Mirrors_Packages_Dir="/home/wwwroot/mirrors/lnmp_shell"
 
-####################################################
+#-------------------------------------------------------------
 #
 # File tree example:
 #
@@ -52,15 +52,15 @@ Mirrors_Packages_Dir="/home/wwwroot/mirrors/lnmp_shell"
 #
 # /ftp/pureftpd/pureftpd-3.4.1-x86_64.tar.gz
 #
-####################################################
+#-------------------------------------------------------------
 
-#############################################################
+########################### [Note] ###########################
 
 ### Install paths and configure files ###
 
 ## Note: All the path must be not end of "/". ##
 
-#############################################################
+########################### wwwroot ##########################
 
 # WwWRoot: VHOST default site folder
 WWWRoot_Default_Site="/home/wwwroot/default"
@@ -70,7 +70,7 @@ PhpMyAdmin_PathName="phpmyadmin_JI1R7E5G3PY8VQ"
 # The PHP Prober filename
 PHP_Prober_FileName="tanzhen_HI2WU3E7Y67U2R.php"
 
-#############################################################
+########################### Nginx ############################
 
 # Nginx install path
 Nginx_Dir="/usr/local/nginx"
@@ -78,9 +78,9 @@ Nginx_Dir="/usr/local/nginx"
 Nginx_Logs_Dir="/home/wwwlogs"
 
 # Nginx confiure file
-Nginx_Conf_File="/usr/local/nginx/conf/nginx.conf"
+Nginx_Conf_File="${Nginx_Dir}/conf/nginx.conf"
 
-#############################################################
+########################### Apache ###########################
 
 # Apache install path
 Apache_Dir="/usr/local/apache"
@@ -88,9 +88,9 @@ Apache_Dir="/usr/local/apache"
 Apache_Logs_Dir="/home/wwwlogs"
 
 # Apache confiure file
-Apache_Conf_File="/usr/local/apache/conf/httpd.conf"
+Apache_Conf_File="${Apache_Dir}/conf/httpd.conf"
 
-#############################################################
+########################### MySQL ############################
 
 # MySQL install path
 MySQL_Dir="/usr/local/mysql"
@@ -101,28 +101,31 @@ MariaDB_Dir="/usr/local/mariadb"
 MySQL_Conf_File="/etc/my.cnf"
 MariaDB_Conf_File="/etc/my.cnf"
 
-#############################################################
+########################### PHP ##############################
 
 # PHP install path
 PHP_Dir="/usr/local/php"
 # PhpMyAdmin install path
 PhpMyAdmin_Dir=${WWWRoot_Default_Site}"/"${PhpMyAdmin_PathName}
 
-# PHP confiure file
-PHP_Conf_File="/usr/local/php/etc/php.ini"
-# PHP-FPM confiure file
-PHP_FPM_Conf_File="/usr/local/php/etc/php-fpm.conf"
+# PHP confiure file, don't edit this value
+PHP_Conf_File="${PHP_Dir}/etc/php.ini"
+# PHP-FPM confiure file, don't edit this value
+PHP_FPM_Conf_File="${PHP_Dir}/etc/php-fpm.conf"
 
-#############################################################
+####################### PHP extensions #######################
 
 # PHP extensions
 ZendOptimizer_Dir="/usr/local/zend"
 
-#############################################################
+####################### PureFtpd #############################
 
-# PureFtpd confiure file
-PureFtpd_Conf_File="/usr/local/pureftpd/pureftpd.conf"
-# PureFtpd MySQL confiure file
-PureFtpd_MySQL_Conf_File="/usr/local/pureftpd/pureftpd-mysql.conf"
+# PureFtpd install path
+PureFtpd_Dir="/usr/local/pureftpd"
 
-#############################################################
+# PureFtpd confiure file, don't edit this value
+PureFtpd_Conf_File="${PureFtpd_Dir}/pureftpd.conf"
+# PureFtpd MySQL confiure file, don't edit this value
+PureFtpd_MySQL_Conf_File="${PureFtpd_Dir}/pureftpd-mysql.conf"
+
+##############################################################
