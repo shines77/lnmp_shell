@@ -61,8 +61,6 @@ Display_Welcome()
 
 Init_Install()
 {
-    Set_Timezone
-
     Print_Sys_Info
     Press_Install
     
@@ -149,7 +147,7 @@ LNAMP_Stack()
     Check_LNAMP_Install
 }
 
-Check_LNMP_Shell_Install()
+Do_Check_Install()
 {
     local sCheckAction=$1
     if [[ -z ${sCheckAction} || "${sCheckAction}" = "" ]]; then
@@ -195,7 +193,7 @@ case "${Stack}" in
         ;;
     check)
         Display_Welcome
-        Check_LNMP_Shell_Install ${Action}
+        Do_Check_Install ${Action}
         ;;
     test)
         Display_Welcome

@@ -320,6 +320,96 @@ Admin_Email_Setting()
     echo ""
 }
 
+# Setting your server's timezone.
+
+Set_Timezone()
+{
+    echo "========================================"
+    Echo_Yellow " Setting server's timezone ..."
+    echo "========================================"
+
+    TimeZoneSelect="0"
+    echo ""
+    Echo_Yellow "You have 10 options for your timezone setting:"
+    echo ""
+    echo "0) Don't change  - Keep use now timezone setting (Default)."
+    echo "1) Asia          - Shanghai, Chongqing"
+    echo "2) Asia          - HongKong"
+    echo "3) Asia          - Singapore"
+    echo "4) Asia          - Japan"
+    echo "5) America       - New York (East US)"
+    echo "6) America       - Los Angeles (West US)"
+    echo "7) Europe        - London (United Kingdom)"
+    echo "8) Europe        - Paris (France)"
+    echo "9) Others        - Use system 'tzselect' command."
+    echo ""
+    read -p "Enter your choice (0 - 9): " TimeZoneSelect
+
+    rm -rf /etc/localtime
+
+    echo ""
+    case "${TimeZoneSelect}" in
+        0)
+            Echo_Cyan "You choice don't change - Keep use now timezone setting."
+            ;;
+        1)
+            Echo_Cyan "You choice Asia - Shanghai, Chongqing timezone."
+            # ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+            \cp -f /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+            ;;
+        2)
+            Echo_Cyan "You choice Asia - HongKong timezone."
+            # ln -s /usr/share/zoneinfo/Asia/Hong_Kong /etc/localtime
+            \cp -f /usr/share/zoneinfo/Asia/Hong_Kong /etc/localtime
+            ;;
+        3)
+            Echo_Cyan "You choice Asia - Singapore timezone."
+            # ln -s /usr/share/zoneinfo/Asia/Singapore /etc/localtime
+            \cp -f /usr/share/zoneinfo/Asia/Singapore /etc/localtime
+            ;;
+        4)
+            Echo_Cyan "You choice Asia - Japan timezone."
+            # ln -s /usr/share/zoneinfo/Japan /etc/localtime
+            \cp -f /usr/share/zoneinfo/Japan /etc/localtime
+            ;;
+        5)
+            Echo_Cyan "You choice Amemrican - New York (East US) timezone."
+            # ln -s /usr/share/zoneinfo/US/Eastern /etc/localtime
+            # ln -s /usr/share/zoneinfo/America/New_York /etc/localtime
+            \cp -f /usr/share/zoneinfo/America/New_York /etc/localtime
+            ;;
+        6)
+            Echo_Cyan "You choice Amemrican - Los Angeles (West US) timezone."
+            # ln -s /usr/share/zoneinfo/US/Pacific /etc/localtime
+            # ln -s /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
+            \cp -f /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
+            ;;
+        7)
+            Echo_Cyan "You choice Europe - London (United Kingdom) timezone."
+           ln -s /usr/share/zoneinfo/Europe/London /etc/localtime
+            \cp -f /usr/share/zoneinfo/Europe/London /etc/localtime
+        ;;
+        8)
+            Echo_Cyan "You choice Europe - Paris (France) timezone."
+            # ln -s /usr/share/zoneinfo/Europe/Paris /etc/localtime
+            \cp -f /usr/share/zoneinfo/Europe/Paris /etc/localtime
+            ;;
+        9)
+            echo ""
+            Echo_Cyan "You choice Manual Select - Use system 'tzselect' command."
+            echo ""
+            tzselect
+            ;;
+        *)
+            Echo_Cyan "Unknown input, you choice don't change - Keep use now timezone setting (Default)."
+            TimeZoneSelect="0"
+            ;;
+    esac
+    echo ""
+    echo "=========================================================="
+    echo ""
+}
+
 # Get the selections about install
 
 Display_Selection()
@@ -342,11 +432,14 @@ Display_Selection()
         echo "=========================================================="
         Admin_Email_Setting
     fi
+
+    Set_Timezone
 }
 
 Press_Install()
 {
     . include/version.sh
+    
     # Display install version info, this function in "include/version.sh"
     Display_Install_Version_Info
 
