@@ -90,6 +90,7 @@ EOF
 
 Check_PHP53_Curl()
 {
+    PHP53_With_Curl='n'
     if [ "${DISTRO}" = "Fedora" ]; then
         PHP53_With_Curl='y'
     elif echo "${Ubuntu_Version}" | grep -Eqi '^14.1'; then
@@ -116,9 +117,9 @@ Install_PHP_52()
     patch -p1 < ${cur_dir}/src/patch/php-5.2-multipart-form-data.patch
     ./buildconf --force
     if [ "${Stack}" = "lnmp" ]; then
-        ./configure --prefix=/usr/local/php --with-config-file-path=/usr/local/php/etc --with-mysql=${MySQL_Dir} --with-mysqli=${MySQL_Config} --with-pdo-mysql=${MySQL_Dir} --with-iconv-dir --with-freetype-dir=/usr/local/freetype --with-jpeg-dir --with-png-dir --with-zlib --with-libxml-dir=/usr --enable-xml --enable-discard-path --enable-magic-quotes --enable-safe-mode --enable-bcmath --enable-shmop --enable-sysvsem --enable-inline-optimization --with-curl=/usr/local/curl --enable-mbregex --enable-fastcgi --enable-fpm --enable-force-cgi-redirect --enable-mbstring --with-mcrypt --enable-ftp --with-gd --enable-gd-native-ttf --with-openssl --with-mhash --enable-pcntl --enable-sockets --with-xmlrpc --enable-zip --enable-soap --with-gettext --with-mime-magic
+        ./configure --prefix=/usr/local/php --with-config-file-path=/usr/local/php/etc --with-mysql=${MySQL_Dir} --with-mysqli=${MySQL_Bin_Config} --with-pdo-mysql=${MySQL_Dir} --with-iconv-dir --with-freetype-dir=/usr/local/freetype --with-jpeg-dir --with-png-dir --with-zlib --with-libxml-dir=/usr --enable-xml --enable-discard-path --enable-magic-quotes --enable-safe-mode --enable-bcmath --enable-shmop --enable-sysvsem --enable-inline-optimization --with-curl=/usr/local/curl --enable-mbregex --enable-fastcgi --enable-fpm --enable-force-cgi-redirect --enable-mbstring --with-mcrypt --enable-ftp --with-gd --enable-gd-native-ttf --with-openssl --with-mhash --enable-pcntl --enable-sockets --with-xmlrpc --enable-zip --enable-soap --with-gettext --with-mime-magic
     else
-        ./configure --prefix=/usr/local/php --with-config-file-path=/usr/local/php/etc --with-apxs2=/usr/local/apache/bin/apxs --with-mysql=${MySQL_Dir} --with-mysqli=${MySQL_Config} --with-pdo-mysql=${MySQL_Dir} --with-iconv-dir --with-freetype-dir=/usr/local/freetype --with-jpeg-dir --with-png-dir --with-zlib --with-libxml-dir=/usr --enable-xml --enable-discard-path --enable-magic-quotes --enable-safe-mode --enable-bcmath --enable-shmop --enable-sysvsem --enable-inline-optimization --with-curl=/usr/local/curl --enable-mbregex --enable-mbstring --with-mcrypt --enable-ftp --with-gd --enable-gd-native-ttf --with-openssl --with-mhash --enable-pcntl --enable-sockets --with-xmlrpc --enable-zip --enable-soap --with-gettext --with-mime-magic
+        ./configure --prefix=/usr/local/php --with-config-file-path=/usr/local/php/etc --with-apxs2=/usr/local/apache/bin/apxs --with-mysql=${MySQL_Dir} --with-mysqli=${MySQL_Bin_Config} --with-pdo-mysql=${MySQL_Dir} --with-iconv-dir --with-freetype-dir=/usr/local/freetype --with-jpeg-dir --with-png-dir --with-zlib --with-libxml-dir=/usr --enable-xml --enable-discard-path --enable-magic-quotes --enable-safe-mode --enable-bcmath --enable-shmop --enable-sysvsem --enable-inline-optimization --with-curl=/usr/local/curl --enable-mbregex --enable-mbstring --with-mcrypt --enable-ftp --with-gd --enable-gd-native-ttf --with-openssl --with-mhash --enable-pcntl --enable-sockets --with-xmlrpc --enable-zip --enable-soap --with-gettext --with-mime-magic
     fi
     make ZEND_EXTRA_LIBS='-liconv'
     make install
@@ -194,12 +195,27 @@ EOF
 
 Configure_PHP_53()
 {
+    # --with-iconv-dir=/usr/local or --with-iconv-dir
+    #
+    # --enable-fastcgi, this option only for PHP 5.2.
+    # --enable-safe-mode, this option deprecated from PHP 5.3.0, removed from PHP 5.4.0.
+    # --with-exec-dir, default is /usr/local/php/bin, this option deprecated from PHP 5.3.0, removed from PHP 5.4.0.
+    # --enable-magic-quotes, this option deprecated from PHP 5.3.0, removed from PHP 5.4.0.
+    # --enable-zend-multibyte, this option deprecated from PHP 5.3.0, removed from PHP 5.4.0.
+    #
+    # --disable-cgi, Disable building CGI version of PHP. Available with PHP 4.3.0. As of PHP 5.3.0 this argument enables FastCGI which previously had to be enabled using --enable-fastcgi.
+    # --enable-force-cgi-redirect, Enable the security check for internal server redirects. You should use this if you are running the CGI version with Apache. As of PHP 5.3.0 this argument is enabled by default and no longer exists. To disable this, the cgi.force_redirect ini directive should be set to 0. 
+    # --enable-discard-path, As of PHP 5.3.0 this argument is disabled by default and no longer exists. To enable this feature the cgi.discard_path ini directive must be set to 1. 
+    # --enable-fastcgi, If this is enabled, the CGI module will be built with support for FastCGI also. As of PHP 5.3.0 this argument no longer exists and is enabled by --enable-cgi instead.
+    #
+    # --enable-force-cgi-redirect, --enable-discard-path has been removed.
+    #
     ./configure --prefix=${PHP_Dir} \
 --with-config-file-path=${PHP_Dir}/etc \
 --with-apxs2=${Apache_Dir}/bin/apxs \
 --with-mysql=${MySQL_Dir} \
 --with-mysqli=${MySQL_Dir}/bin/mysql_config \
---with-pdo-mysql=mysqlnd \
+--with-pdo-mysql=${MySQL_Dir}/bin/mysql_config \
 --enable-fpm \
 --with-fpm-user=www \
 --with-fpm-group=www \
@@ -212,10 +228,9 @@ Configure_PHP_53()
 --with-mcrypt \
 --with-ldap \
 --with-ldap-sasl \
---with-curl \
+--with-curl=/usr/local/curl \
 --with-curlwrappers \
 --with-gettext \
---enable-discard-path \
 --enable-magic-quotes \
 --enable-safe-mode \
 --enable-bcmath \
@@ -223,10 +238,12 @@ Configure_PHP_53()
 --enable-exif \
 --enable-sysvsem \
 --enable-sysvshm \
+--enable-sysvmsg \
 --enable-inline-optimization \
---enable-force-cgi-redirect \
 --enable-mbregex \
+--enable-intl \
 --enable-mbstring \
+--enable-zend-multibyte \
 --with-gd \
 --enable-gd-native-ttf \
 --enable-pcntl \
@@ -237,12 +254,17 @@ Configure_PHP_53()
 --enable-json \
 --with-zlib \
 --enable-zip \
+--with-bz2 \
 --enable-bz2 \
 --enable-ftp \
 --enable-soap \
 --enable-ipv6 \
 --enable-cli \
 --enable-cgi \
+--with-pcre-regex=/usr \
+--enable-calendar \
+--with-pear \
+--with-gmp \
 --disable-rpath \
 --disable-fileinfo \
 --disable-debug
@@ -254,7 +276,10 @@ Install_PHP_53()
     Tar_Cd ${Php_Ver}.tar.gz ${Php_Ver}
     Check_PHP53_Curl
     patch -p1 < ${cur_dir}/src/patch/php-5.3-multipart-form-data.patch
-    if false; then
+    if true; then
+        # New configure setting for PHP 5.3
+        Configure_PHP_53
+    else
         # This part code have been commentted.
         if [ "${PHP53_With_Curl}" = "y" ]; then
             if [ "${Stack}" = "lnmp" ]; then
@@ -269,8 +294,6 @@ Install_PHP_53()
                 ./configure --prefix=${PHP_Dir} --with-config-file-path=${PHP_Dir}/etc --with-apxs2=${Apache_Dir}/bin/apxs --with-mysql=mysqlnd --with-mysqli=mysqlnd --with-pdo-mysql=mysqlnd --with-iconv-dir --with-freetype-dir=/usr/local/freetype --with-jpeg-dir --with-png-dir --with-zlib --with-libxml-dir=/usr --enable-xml --disable-rpath --enable-magic-quotes --enable-safe-mode --enable-bcmath --enable-shmop --enable-sysvsem --enable-inline-optimization --with-curl --enable-mbregex --enable-mbstring --with-mcrypt --enable-ftp --with-gd --enable-gd-native-ttf --with-openssl --with-mhash --enable-pcntl --enable-sockets --with-xmlrpc --enable-zip --enable-soap --with-gettext --disable-fileinfo
             fi
         fi
-    else
-        Configure_PHP_53
     fi
 
     make ZEND_EXTRA_LIBS='-liconv'
@@ -340,6 +363,12 @@ zend_loader.license_path=
 ;xcache end
 EOF
 
+    #
+    # max_children = max_memory_size * 0.5 / 30MB, = 1024 * 0.5 / 30 = 17.06 ~~ 17
+    # min_spare_servers = max_children * 0.1, = 17 * 0.1 = 1.7  ~~ 2
+    # max_spare_servers = max_children * 0.6, = 17 * 0.6 = 10.2 ~~ 10
+    # start_servers = min_spare_servers + (max_spare_servers - min_spare_servers) * 0.2, = 2 + (10 - 2) * 0.2 = 3.6 ~~ 4
+    #
     if [ "${Stack}" = "lnmp" ]; then
         echo "Creating new php-fpm configure file ..."
         # /usr/local/php/etc/php-fpm.conf

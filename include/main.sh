@@ -99,14 +99,22 @@ MySQL_Selection()
     esac
     echo ""
 
-    if [ "${DBSelect}"="4" ] || [ "${DBSelect}"="5" ]; then
-        MySQL_Bin="/usr/local/mariadb/bin/mysql"
-        MySQL_Config="/usr/local/mariadb/bin/mysql_config"
-        MySQL_Dir="/usr/local/mariadb"
+    if [[ "${DBSelect}" = "4" ] || [ "${DBSelect}" = "5" ]]; then
+        # /usr/local/mariadb
+        MySQL_Dir="${MariaDB_Dir}"
+        # /usr/local/mariadb/bin/mysql
+        MySQL_Bin="${MariaDB_Dir}/bin/mysql"
+        # /usr/local/mariadb/bin/mysql_config
+        MySQL_Bin_Config="${MariaDB_Dir}/bin/mysql_config"
+        
     else
-        MySQL_Bin="/usr/local/mysql/bin/mysql"
-        MySQL_Config="/usr/local/mysql/bin/mysql_config"
-        MySQL_Dir="/usr/local/mysql"
+        # /usr/local/mysql
+        MySQL_Dir="${MySQL_Dir}"
+        # /usr/local/mysql/bin/mysql
+        MySQL_Bin="${MySQL_Dir}/bin/mysql"
+        # /usr/local/mysql/bin/mysql_config
+        MySQL_Bin_Config="${MySQL_Dir}/bin/mysql_config"
+        
     fi
 }
 
@@ -345,8 +353,6 @@ Set_Timezone()
     echo ""
     read -p "Enter your choice (0 - 9): " TimeZoneSelect
 
-    rm -rf /etc/localtime
-
     echo ""
     case "${TimeZoneSelect}" in
         0)
@@ -354,43 +360,51 @@ Set_Timezone()
             ;;
         1)
             Echo_Cyan "You choice Asia - Shanghai, Chongqing timezone."
+            rm -rf /etc/localtime
             # ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
             \cp -f /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
             ;;
         2)
             Echo_Cyan "You choice Asia - HongKong timezone."
+            rm -rf /etc/localtime
             # ln -s /usr/share/zoneinfo/Asia/Hong_Kong /etc/localtime
             \cp -f /usr/share/zoneinfo/Asia/Hong_Kong /etc/localtime
             ;;
         3)
             Echo_Cyan "You choice Asia - Singapore timezone."
+            rm -rf /etc/localtime
             # ln -s /usr/share/zoneinfo/Asia/Singapore /etc/localtime
             \cp -f /usr/share/zoneinfo/Asia/Singapore /etc/localtime
             ;;
         4)
             Echo_Cyan "You choice Asia - Japan timezone."
+            rm -rf /etc/localtime
             # ln -s /usr/share/zoneinfo/Japan /etc/localtime
             \cp -f /usr/share/zoneinfo/Japan /etc/localtime
             ;;
         5)
             Echo_Cyan "You choice Amemrican - New York (East US) timezone."
+            rm -rf /etc/localtime
             # ln -s /usr/share/zoneinfo/US/Eastern /etc/localtime
             # ln -s /usr/share/zoneinfo/America/New_York /etc/localtime
             \cp -f /usr/share/zoneinfo/America/New_York /etc/localtime
             ;;
         6)
             Echo_Cyan "You choice Amemrican - Los Angeles (West US) timezone."
+            rm -rf /etc/localtime
             # ln -s /usr/share/zoneinfo/US/Pacific /etc/localtime
             # ln -s /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
             \cp -f /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
             ;;
         7)
             Echo_Cyan "You choice Europe - London (United Kingdom) timezone."
-           ln -s /usr/share/zoneinfo/Europe/London /etc/localtime
+            rm -rf /etc/localtime
+            # ln -s /usr/share/zoneinfo/Europe/London /etc/localtime
             \cp -f /usr/share/zoneinfo/Europe/London /etc/localtime
-        ;;
+            ;;
         8)
             Echo_Cyan "You choice Europe - Paris (France) timezone."
+            rm -rf /etc/localtime
             # ln -s /usr/share/zoneinfo/Europe/Paris /etc/localtime
             \cp -f /usr/share/zoneinfo/Europe/Paris /etc/localtime
             ;;
@@ -439,7 +453,7 @@ Display_Selection()
 Press_Install()
 {
     . include/version.sh
-    
+
     # Display install version info, this function in "include/version.sh"
     Display_Install_Version_Info
 
@@ -657,16 +671,24 @@ Check_Stack()
 
 Check_DB()
 {
-    if [[ -s /usr/local/mariadb/bin/mysql && -s /usr/local/mariadb/bin/mysqld_safe && -s /etc/my.cnf ]]; then
-        MySQL_Bin="/usr/local/mariadb/bin/mysql"
-        MySQL_Config="/usr/local/mariadb/bin/mysql_config"
-        MySQL_Dir="/usr/local/mariadb"
+    if [[ -s ${MariaDB_Dir}/bin/mysql && -s ${MariaDB_Dir}/bin/mysqld_safe && -s /etc/my.cnf ]]; then
+        # /usr/local/mariadb
+        MySQL_Dir="${MariaDB_Dir}"
+        # /usr/local/mariadb/bin/mysql
+        MySQL_Bin="${MariaDB_Dir}/bin/mysql"
+        # /usr/local/mariadb/bin/mysql_config
+        MySQL_Bin_Config="${MariaDB_Dir}/bin/mysql_config"
+        
         Is_MySQL="n"
         DB_Name="mariadb"
     else
-        MySQL_Bin="/usr/local/mysql/bin/mysql"
-        MySQL_Config="/usr/local/mysql/bin/mysql_config"
-        MySQL_Dir="/usr/local/mysql"
+        # /usr/local/mysql
+        MySQL_Dir="${MySQL_Dir}"
+        # /usr/local/mysql/bin/mysql
+        MySQL_Bin="${MySQL_Dir}/bin/mysql"
+        # /usr/local/mysql/bin/mysql_config
+        MySQL_Bin_Config="${MySQL_Dir}/bin/mysql_config"
+        
         Is_MySQL="y"
         DB_Name="mysql"
     fi

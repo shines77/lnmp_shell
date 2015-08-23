@@ -4,7 +4,7 @@ Check_Stack_Choose()
 {
     Check_Stack
     if [[ "${Get_Stack}" = "lnmp" && "${Stack}" = "" ]]; then
-        echo "Current Stack: ${Get_Stack},please run: ./upgrade.sh php"
+        echo "Current Stack: ${Get_Stack}, please run: ./upgrade.sh php"
         sleep 3
         exit 1
     elif [[ "${Get_Stack}" = "lnamp" || "${Get_Stack}" = "lamp" ]] && [[ "${Stack}" = "lnmp" ]]; then
@@ -20,7 +20,7 @@ Start_Upgrade_PHP()
     Check_DB
     php_version=""
     Get_PHP_Ext_Dir
-    echo "Current PHP Version:${Cur_PHP_Version}"
+    echo "Current PHP Version: ${Cur_PHP_Version}"
     echo "You can get version number from http://www.php.net/"
     read -p "Please enter a PHP Version you want: " php_version
     if [ "${php_version}" = "" ]; then
@@ -75,13 +75,14 @@ Check_Curl()
 
 Check_PHP53_Curl()
 {
+    PHP53_With_Curl='n'
     if [ "${DISTRO}" = "Fedora" ]; then
         PHP53_With_Curl='y'
-    elif echo "${Ubuntu_Version}" | grep -Eqi '^14.1';then
+    elif echo "${Ubuntu_Version}" | grep -Eqi '^14.1'; then
         PHP53_With_Curl='y'
-    elif echo "${Ubuntu_Version}" | grep -Eqi '^15.';then 
+    elif echo "${Ubuntu_Version}" | grep -Eqi '^15.'; then 
         PHP53_With_Curl='y'
-    elif echo "${Debian_Version}" | grep -Eqi '^8.';then
+    elif echo "${Debian_Version}" | grep -Eqi '^8.'; then
         PHP53_With_Curl='y'
     fi
 }
@@ -151,9 +152,9 @@ Upgrade_PHP_52()
     patch -p1 < ${cur_dir}/src/patch/php-5.2-multipart-form-data.patch
     ./buildconf --force
     if [ "${Stack}" = "lnmp" ]; then
-        ./configure --prefix=/usr/local/php --with-config-file-path=/usr/local/php/etc --with-mysql=${MySQL_Dir} --with-mysqli=${MySQL_Config} --with-pdo-mysql=${MySQL_Dir} --with-iconv-dir --with-freetype-dir=/usr/local/freetype --with-jpeg-dir --with-png-dir --with-zlib --with-libxml-dir=/usr --enable-xml --enable-discard-path --enable-magic-quotes --enable-safe-mode --enable-bcmath --enable-shmop --enable-sysvsem --enable-inline-optimization --with-curl=/usr/local/curl --enable-mbregex --enable-fastcgi --enable-fpm --enable-force-cgi-redirect --enable-mbstring --with-mcrypt --enable-ftp --with-gd --enable-gd-native-ttf --with-openssl --with-mhash --enable-pcntl --enable-sockets --with-xmlrpc --enable-zip --enable-soap --with-gettext --with-mime-magic
+        ./configure --prefix=/usr/local/php --with-config-file-path=/usr/local/php/etc --with-mysql=${MySQL_Dir} --with-mysqli=${MySQL_Bin_Config} --with-pdo-mysql=${MySQL_Dir} --with-iconv-dir --with-freetype-dir=/usr/local/freetype --with-jpeg-dir --with-png-dir --with-zlib --with-libxml-dir=/usr --enable-xml --enable-discard-path --enable-magic-quotes --enable-safe-mode --enable-bcmath --enable-shmop --enable-sysvsem --enable-inline-optimization --with-curl=/usr/local/curl --enable-mbregex --enable-fastcgi --enable-fpm --enable-force-cgi-redirect --enable-mbstring --with-mcrypt --enable-ftp --with-gd --enable-gd-native-ttf --with-openssl --with-mhash --enable-pcntl --enable-sockets --with-xmlrpc --enable-zip --enable-soap --with-gettext --with-mime-magic
     else
-        ./configure --prefix=/usr/local/php --with-config-file-path=/usr/local/php/etc --with-apxs2=/usr/local/apache/bin/apxs --with-mysql=${MySQL_Dir} --with-mysqli=${MySQL_Config} --with-pdo-mysql=${MySQL_Dir} --with-iconv-dir --with-freetype-dir=/usr/local/freetype --with-jpeg-dir --with-png-dir --with-zlib --with-libxml-dir=/usr --enable-xml --enable-discard-path --enable-magic-quotes --enable-safe-mode --enable-bcmath --enable-shmop --enable-sysvsem --enable-inline-optimization --with-curl=/usr/local/curl --enable-mbregex --enable-mbstring --with-mcrypt --enable-ftp --with-gd --enable-gd-native-ttf --with-openssl --with-mhash --enable-pcntl --enable-sockets --with-xmlrpc --enable-zip --enable-soap --with-gettext --with-mime-magic
+        ./configure --prefix=/usr/local/php --with-config-file-path=/usr/local/php/etc --with-apxs2=/usr/local/apache/bin/apxs --with-mysql=${MySQL_Dir} --with-mysqli=${MySQL_Bin_Config} --with-pdo-mysql=${MySQL_Dir} --with-iconv-dir --with-freetype-dir=/usr/local/freetype --with-jpeg-dir --with-png-dir --with-zlib --with-libxml-dir=/usr --enable-xml --enable-discard-path --enable-magic-quotes --enable-safe-mode --enable-bcmath --enable-shmop --enable-sysvsem --enable-inline-optimization --with-curl=/usr/local/curl --enable-mbregex --enable-mbstring --with-mcrypt --enable-ftp --with-gd --enable-gd-native-ttf --with-openssl --with-mhash --enable-pcntl --enable-sockets --with-xmlrpc --enable-zip --enable-soap --with-gettext --with-mime-magic
     fi
     make ZEND_EXTRA_LIBS='-liconv'
     make install

@@ -240,6 +240,8 @@ Install_Libiconv()
     Echo_Blue "[+] Installing ${Libiconv_Ver} ..."
     Tar_Cd ${Libiconv_Ver}.tar.gz ${Libiconv_Ver}
     patch -p0 < ${cur_dir}/src/patch/libiconv-glibc-2.16.patch
+    # See: http://www.yundaiwei.com/post/375.html
+    #./configure --prefix=/usr/local --enable-static
     ./configure --enable-static
     make && make install
 }
@@ -250,10 +252,12 @@ Install_Libmcrypt()
     Tar_Cd ${LibMcrypt_Ver}.tar.gz ${LibMcrypt_Ver}
     ./configure
     make && make install
+
     /sbin/ldconfig
     cd libltdl/
     ./configure --enable-ltdl-install
     make && make install
+
     ln -s /usr/local/lib/libmcrypt.la /usr/lib/libmcrypt.la
     ln -s /usr/local/lib/libmcrypt.so /usr/lib/libmcrypt.so
     ln -s /usr/local/lib/libmcrypt.so.4 /usr/lib/libmcrypt.so.4
