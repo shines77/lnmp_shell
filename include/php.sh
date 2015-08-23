@@ -312,6 +312,9 @@ Install_PHP_53()
 
     # PHP extensions
     # For /usr/local/php/etc/php.ini
+    #
+    # See: http://php.net/manual/zh/install.unix.nginx.php
+    #
     echo "Modify php.ini ......"
     sed -i 's/post_max_size = 8M/post_max_size = 50M/g' ${PHP_Conf_File}
     sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 50M/g' ${PHP_Conf_File}
@@ -368,6 +371,8 @@ EOF
     # min_spare_servers = max_children * 0.1, = 17 * 0.1 = 1.7  ~~ 2
     # max_spare_servers = max_children * 0.6, = 17 * 0.6 = 10.2 ~~ 10
     # start_servers = min_spare_servers + (max_spare_servers - min_spare_servers) * 0.2, = 2 + (10 - 2) * 0.2 = 3.6 ~~ 4
+    #
+    # See: http://php.net/manual/zh/install.fpm.configuration.php
     #
     if [ "${Stack}" = "lnmp" ]; then
         echo "Creating new php-fpm configure file ..."

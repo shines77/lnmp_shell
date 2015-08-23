@@ -250,6 +250,7 @@ Install_Libmcrypt()
 {
     Echo_Blue "[+] Installing ${LibMcrypt_Ver} ..."
     Tar_Cd ${LibMcrypt_Ver}.tar.gz ${LibMcrypt_Ver}
+    
     ./configure
     make && make install
 
