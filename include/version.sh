@@ -99,7 +99,6 @@ PHPMemcached_Ver='memcached-2.2.0'
 PHPMemcache_Ver='memcache-3.0.8'
 
 # Display install version info
-
 function Display_Install_Version_Info()
 {
     if [ "${Stack}" != "" ]; then
@@ -124,7 +123,7 @@ function Display_Install_Version_Info()
         Echo_Cyan "${Php_Ver}"
 
         if [ "${Stack}" != "lamp" ]; then
-            Echo_Cyan ${Nginx_Ver}
+            Echo_Cyan "${Nginx_Ver}"
         fi
 
         if [ "${Stack}" != "lnmp" ]; then

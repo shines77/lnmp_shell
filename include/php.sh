@@ -583,7 +583,8 @@ opcache.enable_cli=1
 EOF
 
     echo "Download Opcache Control Panel ..."
-    \cp ${cur_dir}/conf/ocp.php /home/wwwroot/default/ocp.php
+    # /home/wwwroot/default/ocp.php
+    \cp ${cur_dir}/conf/ocp.php ${WWWRoot_Default_Site}/ocp.php
 
     if [ "${Stack}" = "lnmp" ]; then
         echo "Creating new php-fpm configure file ..."
@@ -730,8 +731,7 @@ EOF
     fi
 }
 
-# Default choice is PHP 5.5.25
-
+# Default install is PHP 5.5.25.
 Install_PHP()
 {
     if [ "${PHPSelect}" = "1" ]; then
